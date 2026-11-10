@@ -1,426 +1,665 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BuildCalc Pro | Construction Estimator</title>
+<title>BuildCalc Pro | Construction Planning Studio</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
 <style>
+:root {
+  --ink:#202a32;
+  --muted:#74808a;
+  --line:#e5e8e9;
+  --paper:#f4f5f3;
+  --white:#ffffff;
+  --accent:#b47c4b;
+}
 *{box-sizing:border-box}
-body{background:#080d18;color:#e5e7eb;font-family:Inter,system-ui,sans-serif}
-.panel{background:#111827;border:1px solid #263244;border-radius:15px}
-.field{width:100%;background:#080f1d;border:1px solid #344256;border-radius:9px;padding:11px;color:white;outline:none}
-.field:focus{border-color:#38bdf8}
-.btn{background:#0284c7;color:white;padding:11px 17px;border-radius:9px;font-weight:700}
-.btn:hover{background:#0369a1}
-.secondary{background:#253247;color:#e5e7eb;padding:10px 15px;border-radius:9px}
-.muted{color:#94a3b8}
-.tab.active{background:#075985;color:white}
-#scene{height:440px;width:100%;border-radius:12px;overflow:hidden;background:#0b1423}
-.stat{background:#0b1423;border:1px solid #253247;border-radius:12px;padding:15px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.serif{font-family:Georgia,'Times New Roman',serif}
+.muted{color:var(--muted)}
+.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.btn-primary{background:#26343c;color:white;padding:13px 21px;border-radius:4px;font-size:13px;font-weight:700;transition:.2s}
+.btn-primary:hover{background:#40525c}
+.btn-outline{border:1px solid #cbd1d2;padding:12px 19px;border-radius:4px;font-size:13px;font-weight:700}
+.btn-outline:hover{background:#f0f1ef}
+.photo-hero{background-image:linear-gradient(90deg,rgba(13,23,29,.78),rgba(13,23,29,.23)),url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=90');background-position:center;background-size:cover}
+.photo-strip{background-image:linear-gradient(0deg,rgba(10,18,23,.25),rgba(10,18,23,.05)),url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85');background-size:cover;background-position:center}
+.photo-card{background-size:cover;background-position:center}
+.sidebar{background:#202b32;color:#d9e0e2}
+.sidebar-link{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border-radius:4px;text-align:left;color:#c5cdd0;font-size:13px}
+.sidebar-link:hover,.sidebar-link.active{background:#34444d;color:white}
+.panel{background:white;border:1px solid var(--line);border-radius:7px}
+.field{width:100%;border:1px solid #dce1e2;background:white;border-radius:4px;padding:11px 12px;outline:none;color:#24323a}
+.field:focus{border-color:#ad8059;box-shadow:0 0 0 2px #ad805922}
+.label{display:block;font-size:12px;font-weight:700;color:#59666d;margin-bottom:7px}
+.stat{padding:17px;background:#fff;border:1px solid var(--line);border-radius:6px}
+.stat small{color:#849097;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.stat strong{display:block;font-size:23px;margin-top:9px;font-weight:700;letter-spacing:-.5px}
 table{width:100%;border-collapse:collapse}
-th,td{padding:11px 8px;border-bottom:1px solid #293548;text-align:left;font-size:13px}
-th{color:#94a3b8}
-input[type=number]{min-width:0}
-@media(max-width:640px){#scene{height:340px}th,td{font-size:11px;padding:8px 4px}}
+th,td{padding:13px 11px;text-align:left;border-bottom:1px solid #edf0ef;font-size:12px}
+th{font-size:10px;color:#829097;text-transform:uppercase;letter-spacing:1px}
+#threeCanvas{width:100%;height:500px;display:block}
+.model-wrap{background:#e9ecea;border-radius:5px;overflow:hidden;position:relative}
+.model-toolbar{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;gap:8px;z-index:3;pointer-events:none}
+.model-toolbar>*{pointer-events:auto}
+.model-chip{background:#fff;border:1px solid #e0e4e1;padding:8px 11px;border-radius:4px;font-size:11px;color:#33434b}
+.app-header{height:67px;background:white;border-bottom:1px solid var(--line)}
+.section-title{font-size:26px;font-weight:600;letter-spacing:-.7px}
+@media(max-width:700px){
+ #threeCanvas{height:370px}
+ .photo-hero{background-position:60% center}
+ .section-title{font-size:22px}
+}
+@media print{
+ body{background:white}
+ .no-print,header,.sidebar,nav,.btn-primary,.btn-outline{display:none!important}
+ .panel,.stat{border:1px solid #ddd;break-inside:avoid}
+ #reportPage{display:block!important}
+ main{padding:0!important}
+}
 </style>
 </head>
+
 <body>
-<header class="border-b border-slate-800 bg-slate-950">
- <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center gap-3">
-  <div>
-   <div class="text-2xl font-black tracking-tight">BUILD<span class="text-sky-400">CALC</span> PRO</div>
-   <p class="text-xs muted">Smart Construction Estimation Studio</p>
+
+<!-- LANDING PAGE -->
+<div id="landing">
+ <header class="absolute z-20 top-0 left-0 right-0 text-white">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 h-20 flex items-center justify-between border-b border-white/20">
+   <a href="#" class="font-bold tracking-wider text-xl">BUILD<span style="color:#d5a77e">CALC</span></a>
+   <nav class="hidden md:flex items-center gap-8 text-xs tracking-widest uppercase">
+    <a href="#features" class="hover:text-amber-200">Features</a>
+    <a href="#how" class="hover:text-amber-200">How it works</a>
+    <a href="#about" class="hover:text-amber-200">About</a>
+   </nav>
+   <button onclick="openStudio()" class="border border-white/70 px-5 py-3 text-xs font-bold tracking-wide hover:bg-white hover:text-slate-900 transition">OPEN STUDIO ↗</button>
   </div>
-  <button class="secondary text-sm" onclick="toggleTheme()">☀ / ☾ Theme</button>
- </div>
-</header>
+ </header>
 
-<main class="max-w-7xl mx-auto px-4 py-6">
- <section class="mb-6">
-  <p class="text-sky-400 text-xs font-bold tracking-widest">BUILD SMARTER</p>
-  <h1 class="text-3xl md:text-4xl font-black mt-2">Plan. Estimate. Visualize.</h1>
-  <p class="muted mt-2 max-w-2xl">Estimate construction materials, customize market rates, calculate your budget and explore a live 3D house concept.</p>
- </section>
-
- <nav class="flex flex-wrap gap-2 mb-6">
-  <button class="tab active rounded-lg px-4 py-3 text-sm" onclick="showTab('estimate',this)">01 · Estimator</button>
-  <button class="tab rounded-lg px-4 py-3 text-sm" onclick="showTab('prices',this)">02 · Material Prices</button>
-  <button class="tab rounded-lg px-4 py-3 text-sm" onclick="showTab('model',this)">03 · 3D House Model</button>
-  <button class="tab rounded-lg px-4 py-3 text-sm" onclick="showTab('report',this)">04 · Cost Report</button>
- </nav>
-
- <!-- ESTIMATOR -->
- <section id="estimate" class="tabcontent">
-  <div class="grid lg:grid-cols-3 gap-5">
-   <div class="panel p-5 lg:col-span-1">
-    <h2 class="font-bold text-xl mb-1">Project measurements</h2>
-    <p class="muted text-xs mb-5">Enter your building dimensions.</p>
-    <div class="space-y-4">
-     <div>
-      <label class="text-sm muted">Measurement unit</label>
-      <select id="unit" class="field mt-1" onchange="calculate()">
-       <option value="m">Metric (metres)</option>
-       <option value="ft">Imperial (feet)</option>
-      </select>
-     </div>
-     <div>
-      <label class="text-sm muted">House length</label>
-      <input id="length" class="field mt-1" type="number" min="1" value="12" oninput="calculate()">
-     </div>
-     <div>
-      <label class="text-sm muted">House width</label>
-      <input id="width" class="field mt-1" type="number" min="1" value="10" oninput="calculate()">
-     </div>
-     <div>
-      <label class="text-sm muted">Wall / floor height</label>
-      <input id="height" class="field mt-1" type="number" min="1" step=".1" value="3" oninput="calculate()">
-     </div>
-     <div>
-      <label class="text-sm muted">Number of floors</label>
-      <input id="floors" class="field mt-1" type="number" min="1" max="5" value="1" oninput="calculate()">
-     </div>
-     <div>
-      <label class="text-sm muted">Internal room divisions</label>
-      <select id="layout" class="field mt-1" onchange="calculate()">
-       <option value="0">Open layout</option>
-       <option value="1">1 partition (2 rooms)</option>
-       <option value="2" selected>2 partitions (4 rooms)</option>
-       <option value="3">3 partitions (6 rooms)</option>
-      </select>
-     </div>
-     <div>
-      <label class="text-sm muted">Wall thickness (inches)</label>
-      <input id="wall" class="field mt-1" type="number" min="4" max="18" value="9" oninput="calculate()">
-     </div>
-     <div>
-      <label class="text-sm muted">Floor slab thickness (inches)</label>
-      <input id="slab" class="field mt-1" type="number" min="3" max="12" value="5" oninput="calculate()">
-     </div>
-     <div>
-      <label class="text-sm muted">Soil filling depth (inches)</label>
-      <input id="fill" class="field mt-1" type="number" min="0" value="6" oninput="calculate()">
-     </div>
-     <div>
-      <label class="text-sm muted">Waste allowance (%)</label>
-      <input id="waste" class="field mt-1" type="number" min="0" max="30" value="5" oninput="calculate()">
-     </div>
-     <button class="btn w-full" onclick="calculate()">Calculate Estimate ↗</button>
-    </div>
-   </div>
-
-   <div class="lg:col-span-2 space-y-5">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-     <div class="stat"><p class="muted text-xs">Floor area</p><p id="areaStat" class="text-xl font-bold mt-2">—</p></div>
-     <div class="stat"><p class="muted text-xs">Built volume</p><p id="volumeStat" class="text-xl font-bold mt-2">—</p></div>
-     <div class="stat"><p class="muted text-xs">Floors</p><p id="floorStat" class="text-xl font-bold mt-2">—</p></div>
-     <div class="stat"><p class="muted text-xs">Rooms</p><p id="roomStat" class="text-xl font-bold mt-2">—</p></div>
-    </div>
-
-    <div class="panel p-5">
-     <div class="flex justify-between items-center gap-2 mb-4">
-      <div><h2 class="text-lg font-bold">Material quantities</h2><p class="muted text-xs">Approximate planning estimates</p></div>
-      <span class="text-xs text-sky-400">Live calculation</span>
-     </div>
-     <div class="overflow-x-auto">
-      <table>
-       <thead><tr><th>Material</th><th>Estimated quantity</th><th>Unit</th></tr></thead>
-       <tbody id="quantityRows"></tbody>
-      </table>
-     </div>
-     <p class="muted text-xs mt-4">Quantities are indicative estimates. Structural steel, foundations, beams, columns, openings and local construction methods require separate professional calculations.</p>
-    </div>
-
-    <div class="panel p-5">
-     <h2 class="font-bold text-lg mb-3">Estimated project budget</h2>
-     <p class="muted text-sm">Current total using your saved material rates:</p>
-     <p id="quickTotal" class="text-3xl font-black text-sky-400 mt-2">PKR 0</p>
-     <button class="secondary mt-4 text-sm" onclick="showTab('prices',document.querySelectorAll('.tab')[1])">Edit material rates →</button>
+ <section class="photo-hero min-h-[690px] md:min-h-[780px] flex items-center text-white">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 w-full pt-24">
+   <div class="max-w-2xl">
+    <p class="text-xs tracking-[4px] uppercase mb-7 text-amber-200">Construction planning, reimagined</p>
+    <h1 class="serif text-5xl md:text-7xl leading-[1.08] font-normal">Build with<br>clarity. Plan with<br><i>confidence.</i></h1>
+    <p class="text-slate-200 text-sm md:text-base leading-7 mt-7 max-w-lg">A practical workspace to estimate construction materials, calculate project costs and visualize your building in an interactive 3D environment.</p>
+    <div class="flex flex-wrap gap-3 mt-9">
+     <button onclick="openStudio()" class="bg-white text-slate-900 px-7 py-4 text-xs font-bold tracking-wider hover:bg-amber-100 transition">START YOUR PROJECT ↗</button>
+     <a href="#features" class="border border-white/60 px-7 py-4 text-xs font-bold tracking-wider hover:bg-white/10">EXPLORE FEATURES</a>
     </div>
    </div>
   </div>
  </section>
 
- <!-- PRICES -->
- <section id="prices" class="tabcontent hidden">
-  <div class="panel p-5">
-   <div class="flex flex-wrap justify-between gap-3 items-center mb-4">
-    <div><h2 class="text-xl font-bold">Material price settings</h2><p class="muted text-sm">Enter your local supplier rates in PKR.</p></div>
-    <button class="secondary text-sm" onclick="resetPrices()">Reset example rates</button>
-   </div>
-   <div class="overflow-x-auto">
-    <table>
-     <thead><tr><th>Material</th><th>Unit</th><th>Rate (PKR)</th></tr></thead>
-     <tbody id="priceRows"></tbody>
-    </table>
-   </div>
-   <div class="mt-5 flex flex-wrap gap-3">
-    <button class="btn" onclick="savePrices()">Save material prices</button>
-    <span id="saveMessage" class="text-sm text-emerald-400 self-center"></span>
-   </div>
-   <p class="muted text-xs mt-4">Rates are editable sample values, not verified live market prices. Update them using current supplier quotations.</p>
+ <section class="bg-white py-8 border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+   <div><p class="eyebrow">01 / Estimate</p><p class="font-semibold mt-2">Material quantities</p></div>
+   <div><p class="eyebrow">02 / Budget</p><p class="font-semibold mt-2">Cost breakdown</p></div>
+   <div><p class="eyebrow">03 / Visualize</p><p class="font-semibold mt-2">Interactive 3D model</p></div>
+   <div><p class="eyebrow">04 / Export</p><p class="font-semibold mt-2">Project reports</p></div>
   </div>
  </section>
 
- <!-- 3D MODEL -->
- <section id="model" class="tabcontent hidden">
-  <div class="panel p-4 md:p-5">
-   <div class="flex flex-wrap justify-between gap-3 items-center mb-4">
-    <div><h2 class="text-xl font-bold">Interactive 3D house model</h2><p class="muted text-sm">Generated from your current measurements.</p></div>
-    <div class="flex gap-2">
-     <button class="secondary text-xs" onclick="setView('outside')">Exterior</button>
-     <button class="secondary text-xs" onclick="setView('top')">Top view</button>
-     <button class="secondary text-xs" onclick="setView('inside')">Interior</button>
+ <section id="features" class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+  <div class="grid md:grid-cols-2 gap-12 items-end mb-12">
+   <div><p class="eyebrow">A better way to plan</p><h2 class="serif text-4xl md:text-5xl mt-4 leading-tight">Everything your project needs, in one place.</h2></div>
+   <p class="muted text-sm leading-7 max-w-lg">From early measurements to a practical cost overview, BuildCalc Pro brings the important planning steps into one straightforward workspace.</p>
+  </div>
+  <div class="grid md:grid-cols-3 gap-5">
+   <article class="panel overflow-hidden">
+    <div class="h-56 photo-card" style="background-image:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=85')"></div>
+    <div class="p-6"><p class="eyebrow">01 / Materials</p><h3 class="text-xl font-semibold mt-3">Know what you need.</h3><p class="muted text-sm leading-6 mt-3">Get preliminary quantities for cement, sand, aggregate, bricks, tiles and more.</p></div>
+   </article>
+   <article class="panel overflow-hidden">
+    <div class="h-56 photo-card" style="background-image:url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85')"></div>
+    <div class="p-6"><p class="eyebrow">02 / Budget</p><h3 class="text-xl font-semibold mt-3">Understand the cost.</h3><p class="muted text-sm leading-6 mt-3">Set your own local material rates and see the estimated project total.</p></div>
+   </article>
+   <article class="panel overflow-hidden">
+    <div class="h-56 photo-card" style="background-image:url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=85')"></div>
+    <div class="p-6"><p class="eyebrow">03 / Design</p><h3 class="text-xl font-semibold mt-3">See the structure.</h3><p class="muted text-sm leading-6 mt-3">Explore a live conceptual 3D model based on your building dimensions.</p></div>
+   </article>
+  </div>
+ </section>
+
+ <section id="how" class="bg-[#26343b] text-white py-20">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+   <div>
+    <p class="eyebrow">Simple workflow</p>
+    <h2 class="serif text-4xl md:text-5xl mt-4">From a few measurements to a clearer plan.</h2>
+    <div class="space-y-6 mt-9">
+     <div class="flex gap-4"><span class="text-amber-300">01</span><div><h3 class="font-semibold">Enter your dimensions</h3><p class="text-slate-300 text-sm mt-1">Choose metric or imperial units and set the building size.</p></div></div>
+     <div class="flex gap-4"><span class="text-amber-300">02</span><div><h3 class="font-semibold">Set local prices</h3><p class="text-slate-300 text-sm mt-1">Enter your supplier rates and labour costs.</p></div></div>
+     <div class="flex gap-4"><span class="text-amber-300">03</span><div><h3 class="font-semibold">Review and export</h3><p class="text-slate-300 text-sm mt-1">Explore the 3D concept and print your estimate.</p></div></div>
     </div>
+    <button onclick="openStudio()" class="bg-white text-slate-900 px-7 py-4 text-xs font-bold mt-9">OPEN BUILD CALCULATOR ↗</button>
    </div>
-   <div id="scene"></div>
-   <div class="flex flex-wrap gap-4 mt-4 text-xs muted">
-    <span>🖱 Drag to rotate</span><span>Scroll to zoom</span><span>Right-drag to pan</span>
-   </div>
-   <p class="muted text-xs mt-4">Concept visualization only. This simplified model shows the outer structure and evenly spaced room partitions; it is not an architectural drawing or construction-ready plan.</p>
+   <div class="photo-strip min-h-[430px] rounded-sm"></div>
   </div>
  </section>
 
- <!-- REPORT -->
- <section id="report" class="tabcontent hidden">
-  <div class="panel p-5">
-   <div class="flex flex-wrap justify-between gap-3 items-center mb-5">
-    <div><h2 class="text-xl font-bold">Construction cost report</h2><p class="muted text-sm">Estimated costs based on entered rates.</p></div>
-    <button class="btn" onclick="window.print()">Print / Save PDF</button>
-   </div>
-   <div id="reportContent"></div>
-  </div>
+ <section id="about" class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row justify-between gap-8">
+  <div><p class="eyebrow">BuildCalc Pro</p><h2 class="serif text-4xl mt-3">Better planning starts here.</h2></div>
+  <p class="muted text-sm leading-7 max-w-xl">BuildCalc Pro is a preliminary planning tool. It helps organize quantities and budgets, but it does not replace professional architectural drawings, structural calculations or on-site quotations.</p>
  </section>
 
- <footer class="text-center muted text-xs py-8">
-  BUILDCalc Pro · Construction planning made simple<br>
-  <span class="mt-2 inline-block">Estimates are not a substitute for a qualified engineer, architect or contractor.</span>
+ <footer class="bg-[#202b32] text-slate-300 px-6 py-8">
+  <div class="max-w-7xl mx-auto flex flex-wrap justify-between gap-4 text-xs">
+   <span>© 2026 BuildCalc Pro</span><span>Construction planning studio</span>
+  </div>
  </footer>
-</main>
+</div>
 
-<script>
+<!-- APPLICATION -->
+<div id="studio" class="hidden min-h-screen">
+ <header class="app-header sticky top-0 z-30 flex items-center justify-between px-4 md:px-7">
+  <div class="flex items-center gap-3">
+   <button class="lg:hidden text-xl" onclick="toggleSidebar()">☰</button>
+   <a href="#" onclick="backHome();return false" class="font-bold tracking-wide text-lg">BUILD<span style="color:#b47c4b">CALC</span></a>
+   <span class="hidden sm:block text-xs muted border-l pl-3 ml-1">PROJECT STUDIO</span>
+  </div>
+  <div class="flex items-center gap-3">
+   <span class="hidden sm:block text-xs muted">LOCAL PROJECT · PKR</span>
+   <button onclick="backHome()" class="text-xs font-bold border px-3 py-2 rounded">HOME ↗</button>
+  </div>
+ </header>
+
+ <div class="flex min-h-[calc(100vh-67px)]">
+  <aside id="sidebar" class="sidebar w-64 shrink-0 p-4 hidden lg:block">
+   <p class="text-[10px] tracking-[2px] text-slate-400 uppercase px-3 pt-4 pb-3">Workspace</p>
+   <button class="sidebar-link active" data-page="overview" onclick="goPage('overview',this)"><span>▦</span> Project overview</button>
+   <button class="sidebar-link" data-page="estimator" onclick="goPage('estimator',this)"><span>⌗</span> Measurements</button>
+   <button class="sidebar-link" data-page="prices" onclick="goPage('prices',this)"><span>₨</span> Material pricing</button>
+   <button class="sidebar-link" data-page="model" onclick="goPage('model',this)"><span>◇</span> 3D visualization</button>
+   <button class="sidebar-link" data-page="report" onclick="goPage('report',this)"><span>▤</span> Cost report</button>
+   <div class="border-t border-slate-600 mt-8 pt-5 px-3">
+    <p class="text-[10px] uppercase tracking-widest text-slate-400">Project status</p>
+    <p class="text-sm mt-3">Preliminary estimate</p>
+    <p class="text-xs text-slate-400 mt-1">Rates are user editable</p>
+   </div>
+  </aside>
+
+  <main class="flex-1 min-w-0 p-4 md:p-7 lg:p-9">
+   <!-- OVERVIEW -->
+   <section id="page-overview" class="page">
+    <div class="flex flex-wrap justify-between gap-4 items-end mb-7">
+     <div><p class="eyebrow">Your workspace</p><h1 class="section-title mt-2">Project overview</h1><p class="muted text-sm mt-2">A clear view of your construction plan.</p></div>
+     <button onclick="goPage('estimator')" class="btn-primary">EDIT PROJECT DIMENSIONS ↗</button>
+    </div>
+    <div class="grid grid-cols-2 xl:grid-cols-4 gap-3 mb-6">
+     <div class="stat"><small>Estimated project cost</small><strong id="overviewTotal">PKR 0</strong></div>
+     <div class="stat"><small>Total floor area</small><strong id="overviewArea">0 m²</strong></div>
+     <div class="stat"><small>Number of floors</small><strong id="overviewFloors">1</strong></div>
+     <div class="stat"><small>Material categories</small><strong>8</strong></div>
+    </div>
+    <div class="grid xl:grid-cols-5 gap-5">
+     <div class="panel p-5 xl:col-span-3">
+      <div class="flex justify-between items-center mb-5"><div><h2 class="font-semibold">Cost overview</h2><p class="muted text-xs mt-1">Based on current rates</p></div><button onclick="goPage('report')" class="text-xs font-bold text-amber-800">VIEW REPORT →</button></div>
+      <div id="overviewCosts" class="space-y-4"></div>
+     </div>
+     <div class="panel overflow-hidden xl:col-span-2">
+      <div class="h-48 photo-card" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85')"></div>
+      <div class="p-5"><p class="eyebrow">Project visualization</p><h3 class="font-semibold text-lg mt-2">Explore your building in 3D</h3><p class="muted text-sm leading-6 mt-2">View a live concept model using the measurements in your project.</p><button onclick="goPage('model')" class="btn-primary mt-4">OPEN 3D VIEW ↗</button></div>
+     </div>
+    </div>
+   </section>
+
+   <!-- ESTIMATOR -->
+   <section id="page-estimator" class="page hidden">
+    <div class="mb-7"><p class="eyebrow">Project configuration</p><h1 class="section-title mt-2">Building measurements</h1><p class="muted text-sm mt-2">Update dimensions to refresh the material estimate and 3D concept.</p></div>
+    <div class="grid xl:grid-cols-3 gap-5">
+     <div class="panel p-5 xl:col-span-2">
+      <h2 class="font-semibold mb-5">Building dimensions</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+       <div><label class="label">Measurement system</label><select id="unit" class="field" onchange="recalculate()"><option value="m">Metric · Metres</option><option value="ft">Imperial · Feet</option></select></div>
+       <div><label class="label">Number of floors</label><input id="floors" type="number" min="1" max="5" value="1" class="field" oninput="recalculate()"></div>
+       <div><label class="label">Building length</label><input id="length" type="number" min="1" step=".1" value="12" class="field" oninput="recalculate()"></div>
+       <div><label class="label">Building width</label><input id="width" type="number" min="1" step=".1" value="10" class="field" oninput="recalculate()"></div>
+       <div><label class="label">Floor-to-ceiling height</label><input id="height" type="number" min="1" step=".1" value="3" class="field" oninput="recalculate()"></div>
+       <div><label class="label">Exterior wall thickness (inches)</label><input id="wall" type="number" min="4" max="18" value="9" class="field" oninput="recalculate()"></div>
+       <div><label class="label">Slab thickness (inches)</label><input id="slab" type="number" min="3" max="12" value="5" class="field" oninput="recalculate()"></div>
+       <div><label class="label">Soil filling depth (inches)</label><input id="fill" type="number" min="0" value="6" class="field" oninput="recalculate()"></div>
+       <div><label class="label">Internal partitions</label><select id="layout" class="field" onchange="recalculate()"><option value="0">Open plan</option><option value="1">1 partition</option><option value="2" selected>2 partitions</option><option value="3">3 partitions</option></select></div>
+       <div><label class="label">Waste allowance (%)</label><input id="waste" type="number" min="0" max="30" value="5" class="field" oninput="recalculate()"></div>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-3"><button onclick="recalculate()" class="btn-primary">UPDATE ESTIMATE</button><button onclick="goPage('model')" class="btn-outline">VIEW 3D MODEL ↗</button></div>
+     </div>
+     <div class="panel p-5">
+      <h2 class="font-semibold mb-4">Project summary</h2>
+      <div class="space-y-4 text-sm">
+       <div class="flex justify-between"><span class="muted">Floor area</span><strong id="sumArea">—</strong></div>
+       <div class="flex justify-between"><span class="muted">Building volume</span><strong id="sumVolume">—</strong></div>
+       <div class="flex justify-between"><span class="muted">Floors</span><strong id="sumFloors">—</strong></div>
+       <div class="flex justify-between"><span class="muted">Concept rooms</span><strong id="sumRooms">—</strong></div>
+       <hr>
+       <p class="eyebrow">Estimated cost</p><p id="sumTotal" class="text-3xl font-bold">PKR 0</p>
+       <p class="muted text-xs leading-5">This is an indicative estimate, not a construction-ready bill of quantities.</p>
+      </div>
+     </div>
+    </div>
+    <div class="panel p-5 mt-5">
+     <h2 class="font-semibold mb-4">Estimated material quantities</h2>
+     <div class="overflow-x-auto"><table><thead><tr><th>Material</th><th>Estimated quantity</th><th>Unit</th><th>Estimated cost</th></tr></thead><tbody id="quantityRows"></tbody></table></div>
+    </div>
+   </section>
+
+   <!-- PRICES -->
+   <section id="page-prices" class="page hidden">
+    <div class="mb-7"><p class="eyebrow">Local supplier rates</p><h1 class="section-title mt-2">Material pricing</h1><p class="muted text-sm mt-2">Set your own market rates. Your budget updates automatically.</p></div>
+    <div class="panel p-5">
+     <div class="flex justify-between items-center flex-wrap gap-3 mb-5"><div><h2 class="font-semibold">Rate configuration</h2><p class="muted text-xs mt-1">Currency: Pakistani Rupee (PKR)</p></div><button class="btn-outline" onclick="resetRates()">RESET EXAMPLE RATES</button></div>
+     <div class="overflow-x-auto"><table><thead><tr><th>Material</th><th>Pricing unit</th><th>Rate in PKR</th></tr></thead><tbody id="priceRows"></tbody></table></div>
+     <div class="mt-5 flex items-center gap-4 flex-wrap"><button class="btn-primary" onclick="saveRates()">SAVE ALL RATES</button><span id="rateSaved" class="text-xs text-green-700"></span></div>
+     <p class="muted text-xs mt-5 leading-5">Example values are placeholders only. Prices vary by city, quality, supplier and date. Confirm current quotations before budgeting.</p>
+    </div>
+   </section>
+
+   <!-- MODEL -->
+   <section id="page-model" class="page hidden">
+    <div class="mb-6"><p class="eyebrow">Architectural visualization</p><h1 class="section-title mt-2">3D building explorer</h1><p class="muted text-sm mt-2">Rotate, zoom and inspect a conceptual model generated from your measurements.</p></div>
+    <div class="panel p-3 md:p-5">
+     <div class="model-wrap">
+      <div class="model-toolbar">
+       <span class="model-chip">LIVE MODEL · <span id="modelFloorLabel">1 FLOOR</span></span>
+       <div class="flex gap-2">
+        <button class="model-chip" onclick="changeView('outside')">Exterior</button>
+        <button class="model-chip" onclick="changeView('top')">Top</button>
+        <button class="model-chip" onclick="changeView('inside')">Interior</button>
+       </div>
+      </div>
+      <canvas id="threeCanvas"></canvas>
+      <div id="modelLoading" class="absolute inset-0 flex items-center justify-center bg-[#e9ecea] text-slate-600 text-sm">Preparing 3D model…</div>
+     </div>
+     <div class="flex flex-wrap justify-between gap-3 mt-4 text-xs muted"><span>Drag: rotate · Scroll: zoom · Right-drag: pan</span><button onclick="resetCamera()" class="font-bold text-slate-700">RESET CAMERA ↺</button></div>
+     <p class="muted text-xs mt-4 leading-5">This is a conceptual shell model. The partition layout is schematic; it does not infer actual room dimensions, stairs, structural supports or construction details.</p>
+    </div>
+   </section>
+
+   <!-- REPORT -->
+   <section id="page-report" class="page hidden">
+    <div class="flex flex-wrap justify-between gap-4 items-end mb-7">
+     <div><p class="eyebrow">Project finances</p><h1 class="section-title mt-2">Cost report</h1><p class="muted text-sm mt-2">Review your material and labour cost summary.</p></div>
+     <button onclick="window.print()" class="btn-primary">PRINT / SAVE PDF ↗</button>
+    </div>
+    <div class="panel p-5 md:p-7" id="printReport">
+     <div class="flex justify-between gap-4 flex-wrap border-b pb-5 mb-5">
+      <div><p class="font-bold tracking-wider text-xl">BUILD<span style="color:#b47c4b">CALC</span> PRO</p><p class="muted text-xs mt-1">Construction estimate summary</p></div>
+      <div class="text-right"><p class="eyebrow">Prepared estimate</p><p id="reportDate" class="text-sm mt-2"></p></div>
+     </div>
+     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+      <div class="stat"><small>Grand total</small><strong id="reportTotal">PKR 0</strong></div>
+      <div class="stat"><small>Floor area</small><strong id="reportArea">—</strong></div>
+      <div class="stat"><small>Floors</small><strong id="reportFloors">—</strong></div>
+     </div>
+     <h3 class="font-semibold mb-3">Cost breakdown</h3>
+     <div class="overflow-x-auto"><table><thead><tr><th>Material / service</th><th>Quantity</th><th>Rate</th><th>Amount</th></tr></thead><tbody id="reportRows"></tbody></table></div>
+     <div class="flex justify-between border-t pt-5 mt-5 font-bold text-lg"><span>Estimated project total</span><span id="reportGrand" class="text-xl">PKR 0</span></div>
+     <p class="muted text-xs mt-6 leading-5">Disclaimer: Preliminary estimate only. Actual quantities and costs depend on site conditions, design, specifications, wastage, local rates and professional engineering calculations. Not valid as a structural design or contractor quotation.</p>
+    </div>
+   </section>
+
+   <footer class="muted text-xs pt-10 pb-5">BUILDCalc Pro · Professional construction planning workspace</footer>
+  </main>
+ </div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const $ = id => document.getElementById(id);
 const materials = [
- {id:"cement",name:"Cement",unit:"50 kg bag",rate:1450},
- {id:"sand",name:"Sand",unit:"Cubic ft",rate:90},
- {id:"crush",name:"Crush / Aggregate",unit:"Cubic ft",rate:130},
- {id:"bricks",name:"Bricks",unit:"Per 1,000",rate:18000},
- {id:"steel",name:"Steel",unit:"Kg",rate:270},
- {id:"tiles",name:"Floor tiles",unit:"Square ft",rate:180},
- {id:"paint",name:"Paint",unit:"Litre",rate:850},
- {id:"labour",name:"Labour",unit:"Square ft",rate:350},
- {id:"other",name:"Other expenses",unit:"Fixed amount",rate:0}
+ {id:'cement',name:'Cement',unit:'50 kg bag',rate:1450},
+ {id:'sand',name:'Sand',unit:'Cubic ft',rate:90},
+ {id:'crush',name:'Crush / aggregate',unit:'Cubic ft',rate:130},
+ {id:'bricks',name:'Bricks',unit:'Per 1,000',rate:18000},
+ {id:'steel',name:'Steel',unit:'Kg',rate:270},
+ {id:'tiles',name:'Floor tiles',unit:'Square ft',rate:180},
+ {id:'paint',name:'Paint',unit:'Litre',rate:850},
+ {id:'labour',name:'Labour',unit:'Square ft',rate:350},
+ {id:'other',name:'Other expenses',unit:'Fixed amount',rate:0}
 ];
 
-let quantities = {};
-let costs = {};
-let totalCost = 0;
-let scene, camera, renderer, controls, houseGroup;
-let currentView = "outside";
+let quantities={},costs={},grandTotal=0;
+let scene,camera,renderer,controls,building;
+let threeReady=false;
 
-function val(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
-function fmt(n){return Math.round(n).toLocaleString("en-PK")}
-function money(n){return "PKR "+fmt(n)}
-function meters(v){return document.getElementById("unit").value==="ft"?v*.3048:v}
-function displayArea(v){return (document.getElementById("unit").value==="ft"?v*10.7639:v).toFixed(1)}
-function showTab(id,btn){
- document.querySelectorAll(".tabcontent").forEach(x=>x.classList.add("hidden"));
- document.getElementById(id).classList.remove("hidden");
- document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
- if(btn)btn.classList.add("active");
- if(id==="model")setTimeout(()=>{init3D();resize3D();buildHouse()},100);
- if(id==="report")renderReport();
+function n(id){return Math.max(0,Number($(id)?.value)||0)}
+function fmt(v){return Math.round(v).toLocaleString('en-PK')}
+function cash(v){return 'PKR '+fmt(v)}
+function unit(){return $('unit').value}
+function toMetres(v){return unit()==='ft'?v*.3048:v}
+function areaText(m2){return (unit()==='ft'?m2*10.7639:m2).toFixed(1)+' '+(unit()==='ft'?'sq ft':'m²')}
+function currentDimensions(){
+ return {
+  L:toMetres(n('length'))||12,
+  W:toMetres(n('width'))||10,
+  H:toMetres(n('height'))||3,
+  floors:Math.max(1,Math.min(5,n('floors')||1)),
+  wall:Math.max(.1,n('wall')*.0254),
+  slab:Math.max(.08,n('slab')*.0254),
+  fill:n('fill')*.0254,
+  partitions:Math.min(3,n('layout')),
+  waste:1+Math.min(30,n('waste'))/100
+ };
 }
-function toggleTheme(){
- document.body.classList.toggle("light");
- if(document.body.classList.contains("light")){
-  document.body.style.background="#e8eef5";document.body.style.color="#172033";
-  document.querySelectorAll(".panel").forEach(x=>x.style.background="#fff");
- }else{
-  document.body.style.background="#080d18";document.body.style.color="#e5e7eb";
-  document.querySelectorAll(".panel").forEach(x=>x.style.background="#111827");
- }
-}
-function renderPrices(){
- const body=document.getElementById("priceRows");
- body.innerHTML="";
- materials.forEach(m=>{
-  body.innerHTML+=`<tr><td class="font-semibold">${m.name}</td><td>${m.unit}</td><td><input class="field rateInput" data-id="${m.id}" type="number" min="0" value="${m.rate}"></td></tr>`;
- });
-}
-function savePrices(){
- document.querySelectorAll(".rateInput").forEach(input=>{
-  const m=materials.find(x=>x.id===input.dataset.id);
-  m.rate=Math.max(0,Number(input.value)||0);
- });
- try{localStorage.setItem("buildcalcPrices",JSON.stringify(materials.map(m=>({id:m.id,rate:m.rate}))));}catch(e){}
- document.getElementById("saveMessage").textContent="Prices saved successfully.";
+
+window.openStudio=()=>{
+ $('landing').classList.add('hidden');
+ $('studio').classList.remove('hidden');
+ goPage('overview');
+};
+window.backHome=()=>{
+ $('studio').classList.add('hidden');
+ $('landing').classList.remove('hidden');
+};
+window.toggleSidebar=()=>{
+ $('sidebar').classList.toggle('hidden');
+ $('sidebar').classList.toggle('fixed');
+ $('sidebar').classList.toggle('z-40');
+ $('sidebar').classList.toggle('top-[67px]');
+ $('sidebar').classList.toggle('bottom-0');
+};
+window.goPage=(page,btn)=>{
+ document.querySelectorAll('.page').forEach(el=>el.classList.add('hidden'));
+ $('page-'+page).classList.remove('hidden');
+ document.querySelectorAll('.sidebar-link').forEach(el=>el.classList.remove('active'));
+ if(btn)btn.classList.add('active');
+ else document.querySelector(`[data-page="${page}"]`)?.classList.add('active');
+ if(page==='model')setTimeout(()=>start3D(),100);
+ if(page==='report')updateReport();
+ if(page==='prices')renderPrices();
+ if(window.innerWidth<1024)$('sidebar').classList.add('hidden');
+};
+window.recalculate=()=>{
  calculate();
+ if(threeReady)buildModel();
+};
+window.resetRates=()=>{
+ const defaults={cement:1450,sand:90,crush:130,bricks:18000,steel:270,tiles:180,paint:850,labour:350,other:0};
+ materials.forEach(m=>m.rate=defaults[m.id]);
+ renderPrices();saveRates();
+};
+function renderPrices(){
+ $('priceRows').innerHTML=materials.map(m=>`
+ <tr>
+  <td class="font-semibold">${m.name}</td>
+  <td>${m.unit}</td>
+  <td><input class="field rate-entry" type="number" min="0" step="any" data-id="${m.id}" value="${m.rate}" style="max-width:190px"></td>
+ </tr>`).join('');
 }
-function loadPrices(){
+window.saveRates=()=>{
+ document.querySelectorAll('.rate-entry').forEach(input=>{
+  const item=materials.find(m=>m.id===input.dataset.id);
+  if(item)item.rate=Math.max(0,Number(input.value)||0);
+ });
+ try{localStorage.setItem('buildcalc-pro-rates',JSON.stringify(materials.map(m=>({id:m.id,rate:m.rate}))));}catch(e){}
+ $('rateSaved').textContent='Rates saved successfully.';
+ calculate();
+};
+function loadRates(){
  try{
-  const saved=JSON.parse(localStorage.getItem("buildcalcPrices")||"[]");
-  saved.forEach(x=>{const m=materials.find(y=>y.id===x.id);if(m)m.rate=Math.max(0,Number(x.rate)||0)});
+  const saved=JSON.parse(localStorage.getItem('buildcalc-pro-rates')||'[]');
+  saved.forEach(s=>{const item=materials.find(m=>m.id===s.id);if(item)item.rate=Math.max(0,Number(s.rate)||0)});
  }catch(e){}
  renderPrices();
 }
-function resetPrices(){
- materials.forEach(m=>m.rate=({cement:1450,sand:90,crush:130,bricks:18000,steel:270,tiles:180,paint:850,labour:350,other:0})[m.id]);
- renderPrices();savePrices();
-}
-function calculate(){
- const L=meters(val("length")), W=meters(val("width")), H=meters(val("height"));
- const floors=Math.max(1,Math.min(5,val("floors")||1));
- const wall=val("wall")*.0254, slab=val("slab")*.0254, fill=val("fill")*.0254;
- const waste=1+Math.min(30,val("waste"))/100;
- if(!L||!W||!H){return}
- const area=L*W*floors;
- const perimeter=2*(L+W);
- const partitionCount=val("layout");
- const partitionLength=partitionCount===0?0:(partitionCount===1?L:partitionCount===2?L+W:2*L+W);
- const externalWallVol=perimeter*H*floors*wall;
- const internalWallVol=partitionLength*H*floors*.115;
- const masonry=externalWallVol+internalWallVol;
- const brickCount=masonry*500;
- const mortar=masonry*.23;
- const concrete=area*slab;
- const filling= L*W*fill;
- const plaster=(perimeter*H*floors+partitionLength*H*floors*2)*1.8;
- const cementBags=(mortar*.32+concrete*.22+plaster*.035)*1440/50;
- const sand=(mortar*.68+concrete*.44+plaster*.09)*35.3147;
- const crush=concrete*.78*35.3147;
- const tileArea=area*10.7639;
- const paintLitres=plaster*10.7639/100*1.2;
- const steelKg=concrete*80;
- const labourArea=area*10.7639;
 
- const factor=waste;
+/* Preliminary material estimate. Not a structural BOQ. */
+function calculate(){
+ const d=currentDimensions();
+ const {L,W,H,floors,wall,slab,fill,partitions,waste}=d;
+ const floorArea=L*W*floors;
+ const perimeter=2*(L+W);
+ const partitionLength=partitions===0?0:partitions===1?L:partitions===2?L+W:2*L+W;
+ const externalMasonry=perimeter*H*floors*wall;
+ const internalMasonry=partitionLength*H*floors*.115;
+ const masonryVolume=externalMasonry+internalMasonry;
+ const brickUnits=masonryVolume*500;
+ const mortarVolume=masonryVolume*.23;
+ const concreteVolume=floorArea*slab;
+ const fillVolume=L*W*fill;
+ const plasterArea=(perimeter*H*floors+partitionLength*H*floors*2);
+ const cement=(mortarVolume*.32+concreteVolume*.22+plasterArea*.003)*1440/50;
+ const sand=(mortarVolume*.68+concreteVolume*.44+plasterArea*.003)*35.3147;
+ const crush=concreteVolume*.78*35.3147;
+ const steel=concreteVolume*80;
+ const tiles=floorArea*10.7639;
+ const paint=plasterArea*10.7639/100*1.2;
+ const labour=floorArea*10.7639;
+
  quantities={
-  cement:cementBags*factor,
-  sand:sand*factor,
-  crush:crush*factor,
-  bricks:brickCount*factor/1000,
-  steel:steelKg*factor,
-  tiles:tileArea*factor,
-  paint:paintLitres*factor,
-  labour:labourArea,
+  cement:cement*waste,
+  sand:sand*waste,
+  crush:crush*waste,
+  bricks:brickUnits*waste/1000,
+  steel:steel*waste,
+  tiles:tiles*waste,
+  paint:paint*waste,
+  labour,
   other:1
  };
- costs={};
- totalCost=0;
- materials.forEach(m=>{
-  costs[m.id]=quantities[m.id]*m.rate;
-  totalCost+=costs[m.id];
- });
- document.getElementById("areaStat").textContent=displayArea(area)+" "+(document.getElementById("unit").value==="ft"?"sq ft":"sq m");
- document.getElementById("volumeStat").textContent=(L*W*H*floors).toFixed(1)+" m³";
- document.getElementById("floorStat").textContent=floors;
- document.getElementById("roomStat").textContent=partitionCount===0?1:partitionCount===1?2:partitionCount===2?4:6;
- document.getElementById("quickTotal").textContent=money(totalCost);
+ grandTotal=0;costs={};
+ materials.forEach(m=>{costs[m.id]=quantities[m.id]*m.rate;grandTotal+=costs[m.id]});
+
+ $('overviewTotal').textContent=cash(grandTotal);
+ $('overviewArea').textContent=areaText(floorArea);
+ $('overviewFloors').textContent=floors;
+ $('sumArea').textContent=areaText(floorArea);
+ $('sumVolume').textContent=(L*W*H*floors).toFixed(1)+' m³';
+ $('sumFloors').textContent=floors;
+ $('sumRooms').textContent=partitions===0?1:partitions===1?2:partitions===2?4:6;
+ $('sumTotal').textContent=cash(grandTotal);
+ $('reportDate').textContent=new Date().toLocaleDateString('en-PK');
  renderQuantities();
- renderReport();
- if(houseGroup)buildHouse();
+ renderOverviewCosts();
+ updateReport();
 }
 function renderQuantities(){
- document.getElementById("quantityRows").innerHTML=materials.filter(m=>m.id!=="other").map(m=>
- `<tr><td class="font-semibold">${m.name}</td><td>${fmt(quantities[m.id]||0)}</td><td>${m.unit}</td></tr>`
- ).join("");
+ $('quantityRows').innerHTML=materials.map(m=>`
+ <tr><td class="font-semibold">${m.name}</td><td>${fmt(quantities[m.id]||0)}</td><td>${m.unit}</td><td>${cash(costs[m.id]||0)}</td></tr>
+ `).join('');
 }
-function renderReport(){
- const rows=materials.map(m=>`<tr><td>${m.name}</td><td>${fmt(quantities[m.id]||0)} ${m.unit}</td><td>${money(costs[m.id]||0)}</td></tr>`).join("");
- document.getElementById("reportContent").innerHTML=`
- <div class="grid grid-cols-2 gap-3 mb-5">
-  <div class="stat"><p class="muted text-xs">Total estimated cost</p><p class="text-2xl font-black text-sky-400">${money(totalCost)}</p></div>
-  <div class="stat"><p class="muted text-xs">Floor area</p><p class="text-2xl font-bold">${displayArea(meters(val("length"))*meters(val("width"))*Math.max(1,val("floors")))} ${document.getElementById("unit").value==="ft"?"sq ft":"sq m"}</p></div>
- </div>
- <div class="overflow-x-auto"><table><thead><tr><th>Item</th><th>Quantity</th><th>Estimated cost</th></tr></thead><tbody>${rows}</tbody></table></div>
- <div class="flex justify-between text-lg font-black mt-5 pt-4 border-t border-slate-700"><span>Grand Total</span><span class="text-sky-400">${money(totalCost)}</span></div>
- <p class="muted text-xs mt-4">Generated by BuildCalc Pro. Rates are user-entered. This is a preliminary estimate, not a bill of quantities or structural design.</p>`;
+function renderOverviewCosts(){
+ $('overviewCosts').innerHTML=materials.filter(m=>m.id!=='other').map(m=>{
+  const pct=grandTotal?Math.max(0,costs[m.id]/grandTotal*100):0;
+  return `<div><div class="flex justify-between gap-3 text-xs mb-2"><span>${m.name}</span><strong>${cash(costs[m.id]||0)}</strong></div><div class="h-1.5 bg-slate-100 rounded"><div class="h-1.5 rounded" style="width:${Math.min(100,pct)}%;background:#b47c4b"></div></div></div>`;
+ }).join('');
+}
+function updateReport(){
+ if(!$('reportRows'))return;
+ $('reportTotal').textContent=cash(grandTotal);
+ $('reportGrand').textContent=cash(grandTotal);
+ $('reportArea').textContent=areaText(currentDimensions().L*currentDimensions().W*currentDimensions().floors);
+ $('reportFloors').textContent=currentDimensions().floors;
+ $('reportRows').innerHTML=materials.map(m=>`
+ <tr><td>${m.name}</td><td>${fmt(quantities[m.id]||0)} ${m.unit}</td><td>${cash(m.rate)}</td><td>${cash(costs[m.id]||0)}</td></tr>
+ `).join('');
 }
 
-/* 3D MODEL */
-function init3D(){
- const container=document.getElementById("scene");
- if(renderer){return}
- if(!window.THREE){container.innerHTML="<p class='p-5'>3D library could not load. Check your internet connection.</p>";return}
- scene=new THREE.Scene();scene.background=new THREE.Color(0x0b1423);
- camera=new THREE.PerspectiveCamera(45,container.clientWidth/container.clientHeight,.1,1000);
- camera.position.set(18,15,20);
- renderer=new THREE.WebGLRenderer({antialias:true});
- renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
- renderer.setSize(container.clientWidth,container.clientHeight);
- container.appendChild(renderer.domElement);
- controls=new THREE.OrbitControls(camera,renderer.domElement);
- controls.enableDamping=true;
- scene.add(new THREE.HemisphereLight(0xffffff,0x334155,2));
- const light=new THREE.DirectionalLight(0xffffff,2);light.position.set(10,20,10);scene.add(light);
- const grid=new THREE.GridHelper(40,40,0x334155,0x1e293b);scene.add(grid);
- houseGroup=new THREE.Group();scene.add(houseGroup);
- function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)}
- animate();
-}
-function box(parent,x,y,z,sx,sy,sz,color,opacity=1){
- const geo=new THREE.BoxGeometry(sx,sy,sz);
- const mat=new THREE.MeshStandardMaterial({color,transparent:opacity<1,opacity});
- const mesh=new THREE.Mesh(geo,mat);
- mesh.position.set(x,y,z);parent.add(mesh);return mesh;
-}
-function buildHouse(){
- if(!scene||!houseGroup)return;
- while(houseGroup.children.length)houseGroup.remove(houseGroup.children[0]);
- const L=meters(val("length"))||12,W=meters(val("width"))||10;
- const H=meters(val("height"))||3;
- const floors=Math.max(1,Math.min(5,val("floors")||1));
- const t=Math.max(.12,val("wall")*.0254);
- const partitions=val("layout");
- const floorMat=0x94a3b8,wallMat=0xd5e1ed;
- // Floor slabs and exterior walls
- for(let f=0;f<floors;f++){
-  const y=f*(H+.12);
-  box(houseGroup,0,y,L,W,.12,floorMat,.85);
-  // Back and side walls
-  box(houseGroup,0,y+H/2,-W/2,L,H,t,wallMat,.9);
-  box(houseGroup,-L/2,y+H/2,0,t,H,W,wallMat,.9);
-  box(houseGroup,L/2,y+H/2,0,t,H,W,wallMat,.9);
-  // Front wall sections leave a doorway opening
-  box(houseGroup,-L*.30,y+H/2,W/2,L*.40,H,t,wallMat,.9);
-  box(houseGroup,L*.30,y+H/2,W/2,L*.40,H,t,wallMat,.9);
-  box(houseGroup,0,y+H*.88,W/2,L*.20,H*.24,t,wallMat,.9);
-  // Door
-  box(houseGroup,0,y+.95,W/2+.03,.85,1.9,.07,0x8b5a36);
-  // Windows
-  box(houseGroup,-L*.3,y+H*.55,W/2+.03,1.2,1,.07,0x38bdf8,.55);
-  box(houseGroup,L*.3,y+H*.55,W/2+.03,1.2,1,.07,0x38bdf8,.55);
-  // Internal partitions: simple concept layout
-  if(partitions>=1)box(houseGroup,0,y+H/2,0,t,H,W*.94,wallMat,.85);
-  if(partitions>=2)box(houseGroup,0,y+H/2,0,L*.94,H,t,wallMat,.85);
-  if(partitions>=3)box(houseGroup,-L*.25,y+H/2,0,t,H,W*.94,wallMat,.85);
-  // Roof / upper slab
-  if(f===floors-1)box(houseGroup,0,y+H+.06,0,L,W,.12,0x64748b,.55);
+/* THREE.JS SCENE */
+function start3D(){
+ if(threeReady){resize3D();buildModel();return}
+ const canvas=$('threeCanvas');
+ try{
+  scene=new THREE.Scene();
+  scene.background=new THREE.Color('#e9ecea');
+  scene.fog=new THREE.Fog('#e9ecea',45,100);
+  camera=new THREE.PerspectiveCamera(42,canvas.clientWidth/canvas.clientHeight,.1,500);
+  renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.shadowMap.enabled=true;
+  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.outputColorSpace=THREE.SRGBColorSpace;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.15;
+  controls=new OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true;
+  controls.dampingFactor=.06;
+  controls.maxPolarAngle=Math.PI*.49;
+  controls.minDistance=3;
+  controls.maxDistance=100;
+
+  scene.add(new THREE.HemisphereLight(0xffffff,0x8b9690,2.0));
+  const sun=new THREE.DirectionalLight(0xffffff,3.1);
+  sun.position.set(15,25,18);sun.castShadow=true;
+  sun.shadow.mapSize.set(2048,2048);
+  sun.shadow.camera.left=-30;sun.shadow.camera.right=30;
+  sun.shadow.camera.top=30;sun.shadow.camera.bottom=-30;
+  scene.add(sun);
+
+  const ground=new THREE.Mesh(
+   new THREE.PlaneGeometry(200,200),
+   new THREE.MeshStandardMaterial({color:0xd5d9d6,roughness:1})
+  );
+  ground.rotation.x=-Math.PI/2;ground.position.y=-.08;ground.receiveShadow=true;scene.add(ground);
+
+  const grid=new THREE.GridHelper(100,100,0xb5bfba,0xd0d6d2);
+  grid.position.y=-.06;scene.add(grid);
+  building=new THREE.Group();scene.add(building);
+  threeReady=true;
+  $('modelLoading').classList.add('hidden');
+  buildModel();
+  animate();
+ }catch(error){
+  $('modelLoading').textContent='3D viewer could not start. Please try a modern browser.';
+  console.error(error);
  }
+}
+function mat(color,roughness=.8,metalness=0){
+ return new THREE.MeshStandardMaterial({color,roughness,metalness});
+}
+function block(parent,x,y,z,w,h,depth,material){
+ const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,depth),material);
+ mesh.position.set(x,y,z);
+ mesh.castShadow=true;mesh.receiveShadow=true;
+ parent.add(mesh);return mesh;
+}
+function buildModel(){
+ if(!threeReady||!building)return;
+ while(building.children.length){
+  const obj=building.children.pop();
+  if(obj.geometry)obj.geometry.dispose();
+ }
+ const d=currentDimensions();
+ const L=d.L,W=d.W,H=d.H,floors=d.floors;
+ const wall=d.wall;
+ const wallMat=mat('#e5e1d9',.88);
+ const floorMat=mat('#b8b6af',.85);
+ const roofMat=mat('#505c61',.8);
+ const glassMat=new THREE.MeshPhysicalMaterial({
+  color:'#8eb7c2',roughness:.13,metalness:.15,
+  transparent:true,opacity:.65
+ });
+ const frameMat=mat('#454e50',.5);
+ const doorMat=mat('#77563f',.8);
+ const baseY=0;
+ const floorGap=.13;
+
+ for(let f=0;f<floors;f++){
+  const y=baseY+f*(H+floorGap);
+  // Floor slab
+  block(building,0,y,L,W,.16,floorMat);
+
+  // Rear wall
+  block(building,0,y+H/2,-W/2,L,H,wall,wallMat);
+  // Left and right side walls
+  block(building,-L/2,y+H/2,0,wall,H,W,wallMat);
+  block(building,L/2,y+H/2,0,wall,H,W,wallMat);
+
+  // Front wall with a central entrance opening
+  const doorWidth=Math.min(1.05,L*.18);
+  const sideWidth=(L-doorWidth)/2;
+  block(building,-(doorWidth/2+sideWidth/2),y+H/2,W/2,sideWidth,H,wall,wallMat);
+  block(building,(doorWidth/2+sideWidth/2),y+H/2,W/2,sideWidth,H,wall,wallMat);
+  block(building,0,y+H-.12,W/2,doorWidth,.24,wall,wallMat);
+
+  // Entrance door
+  block(building,0,y+Math.min(1.05,H*.38),W/2+.04,doorWidth*.85,Math.min(2.1,H*.72),.07,doorMat);
+
+  // Front windows with frames
+  const windowWidth=Math.min(1.5,L*.19);
+  const windowHeight=Math.min(1.15,H*.42);
+  const windowY=y+H*.58;
+  [-L*.29,L*.29].forEach(x=>{
+   block(building,x,windowY,W/2+.035,windowWidth,windowHeight,.045,glassMat);
+   block(building,x,windowY-windowHeight/2,W/2+.07,windowWidth+.08,.055,.07,frameMat);
+   block(building,x,windowY+windowHeight/2,W/2+.07,windowWidth+.08,.055,.07,frameMat);
+   block(building,x-windowWidth/2,windowY,W/2+.07,.055,windowHeight,.07,frameMat);
+   block(building,x+windowWidth/2,windowY,W/2+.07,.055,windowHeight,.07,frameMat);
+  });
+
+  // Interior partition walls: simplified schematic arrangement
+  const t=Math.max(.10,wall*.72);
+  if(d.partitions>=1){
+   block(building,0,y+H/2,0,t,H,W*.96,wallMat);
+  }
+  if(d.partitions>=2){
+   block(building,0,y+H/2,0,L*.96,H,t,wallMat);
+  }
+  if(d.partitions>=3){
+   block(building,-L*.24,y+H/2,0,t,H,W*.96,wallMat);
+  }
+
+  // Floor finish inset
+  const finish=mat('#c9c5bc',.65);
+  block(building,0,y+.09,0,L-.18,.025,W-.18,finish);
+
+  // Roof on the top floor
+  if(f===floors-1){
+   block(building,0,y+H+.10,0,L+.15,.20,W+.15,roofMat);
+  }
+ }
+ // Building plinth
+ block(building,0,-.08,0,L+.35,.16,W+.35,mat('#7d8582'));
  const maxDim=Math.max(L,W,H*floors);
- camera.position.set(maxDim*1.6,maxDim*1.3,maxDim*1.8);
- controls.target.set(0,H*floors/2,0);
+ camera.position.set(maxDim*1.5,maxDim*1.2,maxDim*1.7);
+ controls.target.set(0,H*floors*.48,0);
  controls.update();
+ $('modelFloorLabel').textContent=floors+' FLOOR'+(floors>1?'S':'');
+}
+function animate(){
+ requestAnimationFrame(animate);
+ if(controls)controls.update();
+ if(renderer&&scene&&camera)renderer.render(scene,camera);
 }
 function resize3D(){
  if(!renderer)return;
- const el=document.getElementById("scene");
- camera.aspect=el.clientWidth/el.clientHeight;camera.updateProjectionMatrix();
- renderer.setSize(el.clientWidth,el.clientHeight);
+ const canvas=$('threeCanvas');
+ const w=canvas.clientWidth,h=canvas.clientHeight;
+ if(!w||!h)return;
+ camera.aspect=w/h;camera.updateProjectionMatrix();
+ renderer.setSize(w,h,false);
 }
-function setView(v){
- if(!camera||!controls)return;
- const L=meters(val("length"))||12,W=meters(val("width"))||10,H=meters(val("height"))||3;
- const d=Math.max(L,W,H*val("floors"))*1.8;
- if(v==="top")camera.position.set(0,d*1.7,.01);
- else if(v==="inside")camera.position.set(d*.55,d*.45,d*.5);
- else camera.position.set(d,d*.85,d);
- controls.target.set(0,H*Math.max(1,val("floors"))/2,0);controls.update();
-}
-window.addEventListener("resize",resize3D);
-loadPrices();
+window.changeView=(view)=>{
+ if(!threeReady)return;
+ const d=currentDimensions();
+ const maxDim=Math.max(d.L,d.W,d.H*d.floors);
+ if(view==='top')camera.position.set(0,maxDim*2.1,.001);
+ else if(view==='inside')camera.position.set(maxDim*.55,maxDim*.55,maxDim*.55);
+ else camera.position.set(maxDim*1.5,maxDim*1.2,maxDim*1.7);
+ controls.target.set(0,d.H*d.floors*.48,0);
+ controls.update();
+};
+window.resetCamera=()=>changeView('outside');
+window.addEventListener('resize',resize3D);
+
+/* Startup */
+loadRates();
 calculate();
 </script>
 </body>
