@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="BuildCalc Pro — construction measurements, material quantities and cost planning.">
 <title>BuildCalc Pro | Construction Studio</title>
 <link rel="preconnect" href="https://images.unsplash.com">
@@ -95,6 +94,10 @@ td input{width:105px;padding:8px;border:1px solid var(--line);background:var(--s
 .currency b{display:block;font:700 18px Manrope;margin-top:7px;overflow-wrap:anywhere}
 #model{height:420px;background:linear-gradient(135deg,#e1e7e1,#bac7be);border-radius:3px;overflow:hidden}
 #model canvas{width:100%;height:100%;display:block}
+.rate-input{width:120px!important}
+.item-name{min-width:135px}
+.tiny-btn{padding:7px 9px;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:3px;font-size:10px}
+.include-check{width:17px;height:17px;accent-color:var(--gold)}
 .note{font-size:10px;line-height:1.7;color:var(--muted);margin-top:14px}
 footer{padding:25px 0;color:var(--muted);font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer button{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:10px;padding:0 7px}
@@ -103,65 +106,20 @@ footer button{background:none;border:0;color:var(--muted);text-decoration:underl
 .modalbox{max-width:600px;width:100%;background:var(--paper);padding:28px;max-height:85vh;overflow:auto}
 .modalbox p{font-size:12px;line-height:1.8;color:var(--muted)}
 .toast{display:none;position:fixed;bottom:20px;right:20px;background:var(--dark);color:white;padding:13px 17px;z-index:30;font-size:11px}
-@media(max-width:850px){
-.app-layout{grid-template-columns:1fr}
-aside{position:sticky;top:70px;z-index:4;flex-direction:row;overflow:auto;padding:7px}
-.navlabel,.sidehint{display:none}
-.nav{white-space:nowrap;padding:10px}
-.stats{grid-template-columns:repeat(2,1fr)}
-.two{grid-template-columns:1fr}
-.photos{grid-template-columns:1fr 1fr}
-.photo:first-child{grid-row:auto;height:245px}
-}
-@media(max-width:560px){
-.top{padding:0 17px}
-.top nav{gap:8px}
-.top nav a{display:none}
-.hero{min-height:640px}
-.hero-content{padding:125px 23px 55px}
-.metrics{gap:20px;margin-top:48px}
-.intro{padding:55px 20px}
-.intro-head,.cta{display:block}
-.photos{grid-template-columns:1fr}
-.photo,.photo:first-child{height:225px}
-.cta{padding:38px 22px}
-.cta button{margin-top:15px}
-.appbar{padding:0 12px}
-.appbar .brand{font-size:12px}
-.main{padding:23px 12px}
-.head{align-items:start;flex-direction:column}
-.panel{padding:15px}
-.form{grid-template-columns:1fr}
-.full{grid-column:auto}
-.currencies{grid-template-columns:repeat(2,1fr)}
-#model{height:310px}
-.nav{font-size:10px}
-.stats{gap:9px}
-.stat{font-size:20px}
-}
-@media print{
-.appbar,aside,.noprint,footer{display:none!important}
-.app-layout{display:block}
-.main{padding:0}
-.page{display:none!important}
-#report{display:block!important}
-.panel,.totalbox{box-shadow:none;break-inside:avoid}
-body{background:white;color:#111}
-}
+@media(max-width:850px){.app-layout{grid-template-columns:1fr}aside{position:sticky;top:70px;z-index:4;flex-direction:row;overflow:auto;padding:7px}.navlabel,.sidehint{display:none}.nav{white-space:nowrap;padding:10px}.stats{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.photos{grid-template-columns:1fr 1fr}.photo:first-child{grid-row:auto;height:245px}}
+@media(max-width:560px){.top{padding:0 17px}.top nav{gap:8px}.top nav a{display:none}.hero{min-height:640px}.hero-content{padding:125px 23px 55px}.metrics{gap:20px;margin-top:48px}.intro{padding:55px 20px}.intro-head,.cta{display:block}.photos{grid-template-columns:1fr}.photo,.photo:first-child{height:225px}.cta{padding:38px 22px}.cta button{margin-top:15px}.appbar{padding:0 12px}.appbar .brand{font-size:12px}.main{padding:23px 12px}.head{align-items:start;flex-direction:column}.panel{padding:15px}.form{grid-template-columns:1fr}.full{grid-column:auto}.currencies{grid-template-columns:repeat(2,1fr)}#model{height:310px}.nav{font-size:10px}.stats{gap:9px}.stat{font-size:20px}}
+@media print{.appbar,aside,.noprint,footer{display:none!important}.app-layout{display:block}.main{padding:0}.page{display:none!important}#report{display:block!important}.panel,.totalbox{box-shadow:none;break-inside:avoid}body{background:white;color:#111}}
 </style>
 </head>
 <body>
-
 <section id="landing">
 <header class="top">
 <div class="brand"><span class="mark">BC</span> BUILDCALC PRO</div>
 <nav>
-<a href="#features">CAPABILITIES</a>
-<a href="#approach">APPROACH</a>
+<a href="#features">CAPABILITIES</a><a href="#approach">APPROACH</a>
 <button class="btn primary" onclick="openApp()">OPEN STUDIO ↗</button>
 </nav>
 </header>
-
 <div class="hero">
 <div class="hero-content">
 <div class="eyebrow">CONSTRUCTION PLANNING STUDIO</div>
@@ -172,20 +130,14 @@ body{background:white;color:#111}
 <a class="btn outline" href="#features" style="text-decoration:none">EXPLORE THE PLATFORM</a>
 </div>
 <div class="metrics">
-<div><b>01</b><span>Measure</span></div>
-<div><b>02</b><span>Estimate</span></div>
-<div><b>03</b><span>Visualize</span></div>
-<div><b>04</b><span>Review</span></div>
+<div><b>01</b><span>Measure</span></div><div><b>02</b><span>Estimate</span></div>
+<div><b>03</b><span>Visualize</span></div><div><b>04</b><span>Review</span></div>
 </div>
 </div>
 </div>
-
 <section class="intro" id="features">
 <div class="intro-head">
-<div>
-<div class="eyebrow">A CLEARER WAY TO PLAN</div>
-<h2>From site dimensions<br>to a considered budget.</h2>
-</div>
+<div><div class="eyebrow">A CLEARER WAY TO PLAN</div><h2>From site dimensions<br>to a considered budget.</h2></div>
 <p>Organize early project planning with editable local rates, preliminary quantity estimates and a visual building concept.</p>
 </div>
 <div class="photos">
@@ -196,26 +148,19 @@ body{background:white;color:#111}
 <div class="photo"><img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=900&q=85" alt="Modern building exterior"><label>Design perspective</label></div>
 </div>
 </section>
-
 <div class="cta" id="approach">
-<div>
-<div class="eyebrow">BUILDCALC PRO WORKSPACE</div>
-<h2>Plan with more confidence.</h2>
-<p>Set your own material prices, compare estimates in four currencies and prepare a clear preliminary report. The calculator is for planning—not a substitute for professional engineering or supplier quotations.</p>
-</div>
+<div><div class="eyebrow">BUILDCALC PRO WORKSPACE</div><h2>Plan with more confidence.</h2>
+<p>Set your own material prices, compare estimates in four currencies and prepare a clear preliminary report. The calculator is for planning—not a substitute for professional engineering or supplier quotations.</p></div>
 <button class="btn primary" onclick="openApp()">OPEN CONSTRUCTION STUDIO ↗</button>
 </div>
 </section>
-
 <section id="app">
 <header class="appbar">
 <div class="brand"><span class="mark" style="border-color:var(--line)">BC</span> BUILDCALC <span style="color:var(--gold)">PRO</span></div>
 <div style="display:flex;gap:8px;align-items:center">
-<button class="btn outline" onclick="toggleTheme()">◐ THEME</button>
-<button class="btn outline" onclick="showLanding()">← HOME</button>
+<button class="btn outline" onclick="toggleTheme()">◐ THEME</button><button class="btn outline" onclick="showLanding()">← HOME</button>
 </div>
 </header>
-
 <div class="app-layout">
 <aside>
 <div class="navlabel">PROJECT WORKSPACE</div>
@@ -226,46 +171,25 @@ body{background:white;color:#111}
 <button class="nav" data-page="report" onclick="go('report')">▤ &nbsp; Cost report</button>
 <div class="sidehint">PRELIMINARY PLANNING TOOL<br>All material prices are editable. Confirm all measurements and supplier rates before purchasing.</div>
 </aside>
-
 <main class="main">
-
 <section class="page active" id="overview">
-<div class="head">
-<div><div class="eyebrow">PROJECT DASHBOARD</div><h1>Project overview</h1><p>Your construction plan, at a glance.</p></div>
-<button class="btn primary" onclick="go('measurements')">EDIT DIMENSIONS ↗</button>
-</div>
+<div class="head"><div><div class="eyebrow">PROJECT DASHBOARD</div><h1>Project overview</h1><p>Your construction plan, at a glance.</p></div>
+<button class="btn primary" onclick="go('measurements')">EDIT DIMENSIONS ↗</button></div>
 <div class="grid stats">
 <div class="panel"><div class="statlabel">Estimated project cost</div><div class="stat" id="statCost">PKR 0</div><p class="sub">Based on your current rates</p></div>
 <div class="panel"><div class="statlabel">Total floor area</div><div class="stat" id="statArea">0 m²</div><p class="sub">All floors combined</p></div>
 <div class="panel"><div class="statlabel">Building floors</div><div class="stat" id="statFloors">1</div><p class="sub">Configured levels</p></div>
-<div class="panel"><div class="statlabel">Material categories</div><div class="stat">11</div><p class="sub">Editable rate schedule</p></div>
+<div class="panel"><div class="statlabel">Included items</div><div class="stat" id="statItems">6</div><p class="sub">Only selected items are counted</p></div>
 </div>
 <div class="grid two">
-<div class="panel photo-panel">
-<div class="eyebrow" style="color:#edc49e">PROJECT VISUALIZATION</div>
-<h2>See your project take shape.</h2>
-<p>Explore a conceptual 3D building view generated from the dimensions you enter.</p>
-<button class="btn primary" onclick="go('visual')">OPEN 3D EXPLORER ↗</button>
-</div>
-<div class="panel">
-<h3>Cost snapshot</h3>
-<p class="sub">Current estimated material and service costs.</p>
-<div id="snapshot"></div>
-<button class="btn outline" style="margin-top:15px" onclick="go('report')">VIEW FULL REPORT →</button>
-</div>
+<div class="panel photo-panel"><div class="eyebrow" style="color:#edc49e">PROJECT VISUALIZATION</div><h2>See your project take shape.</h2><p>Explore a conceptual 3D building view generated from the dimensions you enter.</p><button class="btn primary" onclick="go('visual')">OPEN 3D EXPLORER ↗</button></div>
+<div class="panel"><h3>Cost snapshot</h3><p class="sub">Current estimated material and service costs.</p><div id="snapshot"></div><button class="btn outline" style="margin-top:15px" onclick="go('report')">VIEW FULL REPORT →</button></div>
 </div>
 </section>
-
 <section class="page" id="measurements">
-<div class="head">
-<div><div class="eyebrow">PROJECT CONFIGURATION</div><h1>Building measurements</h1><p>Enter dimensions to calculate preliminary quantities.</p></div>
-<span class="eyebrow">LIVE ESTIMATE</span>
-</div>
-
+<div class="head"><div><div class="eyebrow">PROJECT CONFIGURATION</div><h1>Building measurements</h1><p>Enter dimensions to calculate preliminary quantities.</p></div><span class="eyebrow">LIVE ESTIMATE</span></div>
 <div class="grid two">
-<div class="panel">
-<h3>Building dimensions</h3>
-<p class="sub">Use one measurement system throughout the project.</p>
+<div class="panel"><h3>Building dimensions</h3><p class="sub">Use one measurement system throughout the project.</p>
 <div class="form">
 <div class="field"><label>Measurement system</label><select id="unit" onchange="recalc()"><option value="m">Metric · metres</option><option value="ft">Imperial · feet</option></select></div>
 <div class="field"><label>Number of floors</label><input id="floors" type="number" min="1" max="20" value="1" oninput="recalc()"></div>
@@ -279,501 +203,271 @@ body{background:white;color:#111}
 <div class="field"><label>Waste allowance (%)</label><input id="waste" type="number" min="0" max="30" value="7" oninput="recalc()"></div>
 <div class="field full"><label>Project / client name</label><input id="project" type="text" placeholder="e.g. Family Residence — Phase 1" oninput="report()"></div>
 </div>
-<div class="actions">
-<button class="btn primary" onclick="recalc();notify('Estimate updated')">UPDATE ESTIMATE</button>
-<button class="btn outline" onclick="go('visual')">VIEW 3D MODEL ↗</button>
+<div class="actions"><button class="btn primary" onclick="recalc();notify('Estimate updated')">UPDATE ESTIMATE</button><button class="btn outline" onclick="go('visual')">VIEW 3D MODEL ↗</button></div>
 </div>
+<div class="panel"><h3>Measurement summary</h3><p class="sub">Calculated from the dimensions above.</p><div id="measureSummary"></div><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><div class="statlabel">Estimated material cost</div><div class="stat" id="measureCost">PKR 0</div><p class="note">Indicative planning allowances only. Actual quantities depend on drawings, openings, foundations, structural design and site conditions.</p></div>
 </div>
-
-<div class="panel">
-<h3>Measurement summary</h3>
-<p class="sub">Calculated from the dimensions above.</p>
-<div id="measureSummary"></div>
-<hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
-<div class="statlabel">Estimated material cost</div>
-<div class="stat" id="measureCost">PKR 0</div>
-<p class="note">Indicative planning allowances only. Actual quantities depend on drawings, openings, foundations, structural design and site conditions.</p>
-</div>
-</div>
-
-<div class="panel" style="margin-top:16px">
-<h3>Estimated material quantities</h3>
-<p class="sub">Quantity and cost update when dimensions or rates change.</p>
-<div class="tablewrap" id="quantityTable"></div>
-</div>
+<div class="panel" style="margin-top:16px"><h3>Estimated material quantities</h3><p class="sub">Quantity and cost update when dimensions or rates change.</p><div class="tablewrap" id="quantityTable"></div></div>
 </section>
-
 <section class="page" id="pricing">
-<div class="head">
-<div><div class="eyebrow">LOCAL SUPPLIER RATES</div><h1>Material pricing</h1><p>Set the prices you receive from your own suppliers.</p></div>
-<button class="btn outline" onclick="resetRates()">RESET SAMPLE RATES</button>
-</div>
+<div class="head"><div><div class="eyebrow">FLEXIBLE MATERIAL & SERVICE LIST</div><h1>Material pricing</h1><p>Choose what your project needs, add your own items and enter rates in your preferred currency.</p></div><button class="btn outline" onclick="resetRates()">RESET SAMPLE ITEMS</button></div>
 <div class="panel">
-<h3>Custom rate schedule</h3>
-<p class="sub">Enter local rates in PKR. Changes update your estimate automatically.</p>
-<div class="tablewrap" id="rateTable"></div>
-<p class="note">Sample values are placeholders, not live market quotations. Replace them with current rates from your supplier. Values are saved in this browser on this device.</p>
-<button class="btn primary" style="margin-top:14px" onclick="save()">SAVE ALL RATES</button>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap"><div><h3>Project currency</h3><p class="sub">Rates are entered and displayed in this currency.</p></div>
+<div class="field" style="min-width:190px"><label>PRICE INPUT CURRENCY</label><select id="currencySelect" onchange="setCurrency(this.value)"><option value="PKR">PKR · Pakistani Rupee</option><option value="USD">USD · US Dollar</option><option value="EUR">EUR · Euro</option><option value="GBP">GBP · British Pound</option></select></div>
 </div>
-<div class="panel" style="margin-top:16px">
-<h3>Currency conversion settings</h3>
-<p class="sub">Editable examples, not live foreign-exchange rates.</p>
-<div class="form" id="fxFields"></div>
+<div class="tablewrap" id="rateTable" style="margin-top:16px"></div>
+<div class="actions"><button class="btn primary" onclick="addItem()">+ ADD CUSTOM ITEM</button><button class="btn outline" onclick="save()">SAVE PROJECT RATES</button></div>
+<p class="note">Untick Include to exclude an item from the total. You can rename, change its unit, quantity and price, or delete custom items. Default optional finishes and services start excluded. Example rates and FX values are placeholders; enter your own current supplier prices.</p>
 </div>
+<div class="panel" style="margin-top:16px"><h3>Exchange-rate settings</h3><p class="sub">Used only to convert between currencies. Set rates that match your preferred exchange source.</p><div class="form" id="fxFields"></div></div>
 </section>
-
 <section class="page" id="visual">
-<div class="head">
-<div><div class="eyebrow">ARCHITECTURAL VISUALIZATION</div><h1>3D building explorer</h1><p>Rotate and inspect a conceptual model based on your measurements.</p></div>
-<button class="btn outline" onclick="view3d('exterior')">RESET CAMERA ↺</button>
-</div>
+<div class="head"><div><div class="eyebrow">ARCHITECTURAL VISUALIZATION</div><h1>3D building explorer</h1><p>Rotate and inspect a conceptual model based on your measurements.</p></div><button class="btn outline" onclick="view3d('exterior')">RESET CAMERA ↺</button></div>
 <div class="panel">
-<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
-<div><h3>Building massing model</h3><p class="sub">Interactive concept · linked to your dimensions</p></div>
-<div><button class="btn outline" onclick="view3d('exterior')">EXTERIOR</button> <button class="btn outline" onclick="view3d('top')">TOP VIEW</button></div>
-</div>
-<div id="model"><div style="padding:25px;color:#24352c">Loading interactive model…</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px"><div><h3>Building massing model</h3><p class="sub">Interactive concept · linked to your dimensions</p></div><div><button class="btn outline" onclick="view3d('exterior')">EXTERIOR</button> <button class="btn outline" onclick="view3d('top')">TOP VIEW</button></div></div>
+<div id="model"><div style="padding:25px;color:#24352c">Open this tab to load the interactive model.</div></div>
+<div class="actions" style="margin-top:12px"><button class="btn outline" onclick="init3D(true)">RETRY 3D LOAD ↻</button><button class="btn outline" onclick="drawModel()">UPDATE MODEL</button></div>
 <p class="note">Conceptual visualization only—not architectural drawings or structural design. If the 3D library cannot load, the measurement and cost tools remain available.</p>
 </div>
 </section>
-
 <section class="page" id="report">
-<div class="head">
-<div><div class="eyebrow">PROJECT FINANCES</div><h1>Construction cost report</h1><p>Material quantities, custom rates and multi-currency totals.</p></div>
-<button class="btn primary noprint" onclick="print()">PRINT / SAVE PDF ↗</button>
-</div>
-<div class="totalbox">
-<div class="eyebrow" style="color:#e9bd96">ESTIMATED PROJECT TOTAL · PKR</div>
-<strong id="reportPKR">PKR 0</strong>
-<span id="reportName" style="color:#aebbb2;font-size:11px">Preliminary construction estimate</span>
-</div>
-<div class="panel" style="margin-top:16px">
-<h3>Converted project totals</h3>
-<p class="sub">Calculated using your editable exchange rates.</p>
-<div class="currencies" id="currencyTotals"></div>
-</div>
-<div class="panel" style="margin-top:16px">
-<h3>Material and service breakdown</h3>
-<p class="sub">Estimated quantity × your custom unit rate.</p>
-<div class="tablewrap" id="reportTable"></div>
-<div style="text-align:right;font:700 17px Manrope;margin-top:17px" id="grand"></div>
-</div>
-<div class="panel" style="margin-top:16px">
-<h3>Project measurement summary</h3>
-<div id="reportDims"></div>
-</div>
+<div class="head"><div><div class="eyebrow">PROJECT FINANCES</div><h1>Construction cost report</h1><p>Material quantities, custom rates and multi-currency totals.</p></div><button class="btn primary noprint" onclick="print()">PRINT / SAVE PDF ↗</button></div>
+<div class="totalbox"><div class="eyebrow" style="color:#e9bd96">ESTIMATED PROJECT TOTAL · PKR</div><strong id="reportPKR">PKR 0</strong><span id="reportName" style="color:#aebbb2;font-size:11px">Preliminary construction estimate</span></div>
+<div class="panel" style="margin-top:16px"><h3>Converted project totals</h3><p class="sub">Calculated using your editable exchange rates.</p><div class="currencies" id="currencyTotals"></div></div>
+<div class="panel" style="margin-top:16px"><h3>Material and service breakdown</h3><p class="sub">Estimated quantity × your custom unit rate.</p><div class="tablewrap" id="reportTable"></div><div style="text-align:right;font:700 17px Manrope;margin-top:17px" id="grand"></div></div>
+<div class="panel" style="margin-top:16px"><h3>Project measurement summary</h3><div id="reportDims"></div></div>
 </section>
-
-<footer>
-<span>© 2026 BuildCalc Pro · Construction planning workspace</span>
-<span>
-<button onclick="modal('terms')">Terms of Use</button>
-<button onclick="modal('privacy')">Privacy Policy</button>
-<button onclick="modal('contact')">Contact Us</button>
-</span>
-</footer>
+<footer><span>© 2026 BuildCalc Pro · Construction planning workspace</span><span><button onclick="modal('terms')">Terms of Use</button><button onclick="modal('privacy')">Privacy Policy</button><button onclick="modal('contact')">Contact Us</button></span></footer>
 </main>
 </div>
 </section>
-
-<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
-<div class="modalbox">
-<button class="btn outline" style="float:right" onclick="closeModal()">CLOSE ×</button>
-<div id="modalText"></div>
-</div>
-</div>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="modalbox"><button class="btn outline" style="float:right" onclick="closeModal()">CLOSE ×</button><div id="modalText"></div></div></div>
 <div class="toast" id="toast"></div>
-
 <script>
-const items=[
-['cement','Cement','50 kg bag',1250],
-['bricks','Bricks','piece',18],
-['sand','Sand','cubic ft',65],
-['crush','Crush / aggregate','cubic ft',95],
-['steel','Reinforcement steel','kg',285],
-['tiles','Floor tiles','sq ft',180],
-['paint','Paint','litre',650],
-['plumbing','Plumbing allowance','project',45000],
-['electrical','Electrical allowance','project',55000],
-['labour','Labour','sq ft',350],
-['misc','Miscellaneous','project',25000]
-].map(([id,name,unit,rate])=>({id,name,unit,rate,qty:1}));
-
-const baseRates=items.map(x=>x.rate);
-let fx={USD:278,EUR:300,GBP:360},total=0,THREE=null,scene,camera,renderer,controls,group;
-
+// BuildCalc Pro — client-side construction planning calculator.
+// Money values are stored internally in PKR. Display/input currency is selectable.
 const $=id=>document.getElementById(id);
-const n=id=>Math.max(0,Number($(id).value)||0);
-const fmt=x=>new Intl.NumberFormat('en-US',{maximumFractionDigits:0}).format(x||0);
-
+const n=id=>Math.max(0,Number($(id)?.value)||0);
+const fmt=x=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(Number(x)||0);
+const money=(c,v)=>`${c} ${fmt(v)}`;
+let fx={USD:278,EUR:300,GBP:360};
+let currency='PKR',total=0,nextId=1;
+const defaults=[
+{id:'cement',name:'Cement',unit:'50 kg bag',ratePKR:1250,qty:1,enabled:true,kind:'auto'},
+{id:'bricks',name:'Bricks',unit:'piece',ratePKR:18,qty:1,enabled:true,kind:'auto'},
+{id:'sand',name:'Sand',unit:'cubic ft',ratePKR:65,qty:1,enabled:true,kind:'auto'},
+{id:'crush',name:'Crush / aggregate',unit:'cubic ft',ratePKR:95,qty:1,enabled:true,kind:'auto'},
+{id:'steel',name:'Reinforcement steel',unit:'kg',ratePKR:285,qty:1,enabled:true,kind:'auto'},
+{id:'tiles',name:'Floor tiles',unit:'sq ft',ratePKR:180,qty:1,enabled:false,kind:'auto'},
+{id:'paint',name:'Paint',unit:'litre',ratePKR:650,qty:1,enabled:false,kind:'auto'},
+{id:'plumbing',name:'Plumbing allowance',unit:'project',ratePKR:45000,qty:1,enabled:false,kind:'auto'},
+{id:'electrical',name:'Electrical allowance',unit:'project',ratePKR:55000,qty:1,enabled:false,kind:'auto'},
+{id:'labour',name:'Labour',unit:'sq ft',ratePKR:350,qty:1,enabled:true,kind:'auto'},
+{id:'misc',name:'Miscellaneous',unit:'project',ratePKR:25000,qty:1,enabled:false,kind:'auto'}
+];
+let items=defaults.map(x=>({...x}));
+let THREE=null,scene=null,camera=null,renderer=null,controls=null,group=null,resizeObserver=null,animationId=null,loading3d=false;
+const rateToPKR=()=>currency==='PKR'?1:(fx[currency]||1);
+const fromPKR=v=>v/rateToPKR();
 function dimensions(){
-let f=$('unit').value==='ft'?.3048:1;
-return{
-L:n('length')*f,
-W:n('width')*f,
-H:n('height')*f,
-F:Math.max(1,Math.round(n('floors'))),
-wall:n('wall')*.0254,
-slab:n('slab')*.0254,
-fill:n('fill')*.0254,
-part:n('partitions'),
-waste:n('waste')/100
-};
+ const f=$('unit').value==='ft'?0.3048:1;
+ return{L:n('length')*f,W:n('width')*f,H:n('height')*f,F:Math.max(1,Math.round(n('floors'))),wall:n('wall')*.0254,slab:n('slab')*.0254,fill:n('fill')*.0254,part:Number($('partitions').value)||.8,waste:n('waste')/100};
 }
-
-function compute(){
-let d=dimensions(),
-area=d.L*d.W*d.F,
-per=2*(d.L+d.W),
-wallArea=per*d.H*d.F+d.L*d.W*.8*d.F,
-wallVol=wallArea*d.wall,
-slabVol=d.L*d.W*d.slab*d.F,
-fillVol=d.L*d.W*d.fill;
-
-let q={
-cement:(wallVol+slabVol)*7.2*1.02,
-bricks:wallVol*13.5*d.part/.8,
-sand:(wallVol+slabVol+fillVol)*.42*35.3147,
-crush:slabVol*.85*35.3147,
-steel:slabVol*85+wallVol*45,
-tiles:area*10.7639,
-paint:wallArea*2.5/10,
-plumbing:1,
-electrical:1,
-labour:area*10.7639,
-misc:1
-};
-
-items.forEach(x=>{
-x.qty=q[x.id]??1;
-if(!['plumbing','electrical','misc'].includes(x.id))x.qty*=1+d.waste;
-});
-
-total=items.reduce((s,x)=>s+x.qty*x.rate,0);
-return{d,area,per,wallArea,wallVol,slabVol,fillVol};
+function calculateQuantities(){
+ const d=dimensions(),area=d.L*d.W*d.F,per=2*(d.L+d.W);
+ const wallArea=per*d.H*d.F+d.L*d.W*.8*d.F;
+ const wallVol=wallArea*d.wall,slabVol=d.L*d.W*d.slab*d.F,fillVol=d.L*d.W*d.fill;
+ const q={cement:(wallVol+slabVol)*7.2*1.02,bricks:wallVol*13.5*d.part/.8,sand:(wallVol+slabVol+fillVol)*.42*35.3147,crush:slabVol*.85*35.3147,steel:slabVol*85+wallVol*45,tiles:area*10.7639,paint:wallArea*2.5/10,plumbing:1,electrical:1,labour:area*10.7639,misc:1};
+ items.forEach(x=>{if(x.kind==='auto'&&!x.qtyOverride&&Object.prototype.hasOwnProperty.call(q,x.id)){x.qty=q[x.id];if(!['plumbing','electrical','misc'].includes(x.id))x.qty*=1+d.waste;}});
+ total=items.filter(x=>x.enabled).reduce((sum,x)=>sum+x.qty*x.ratePKR,0);
+ return{d,area,per,wallArea,wallVol,slabVol,fillVol};
 }
-
+function table(rows,heads){return `<table><thead><tr>${heads.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table>`;}
 function recalc(){
-let s=compute();
-
-$('statCost').textContent='PKR '+fmt(total);
-$('statArea').textContent=s.area.toFixed(1)+' m²';
-$('statFloors').textContent=s.d.F;
-$('measureCost').textContent='PKR '+fmt(total);
-
-$('measureSummary').innerHTML=[
-['Total floor area',s.area.toFixed(2)+' m²'],
-['Building footprint',(s.d.L*s.d.W).toFixed(2)+' m²'],
-['Building volume',(s.area*s.d.H).toFixed(2)+' m³'],
-['External perimeter',s.per.toFixed(2)+' m'],
-['Estimated wall area',s.wallArea.toFixed(2)+' m²'],
-['Floors',s.d.F]
-].map(([a,b])=>`<div class="summaryrow"><span style="color:var(--muted)">${a}</span><b>${b}</b></div>`).join('');
-
-$('quantityTable').innerHTML=table(
-items.map(x=>[
-x.name,
-x.qty.toLocaleString('en-US',{maximumFractionDigits:1}),
-x.unit,
-'PKR '+fmt(x.qty*x.rate)
-]),
-['Material / service','Quantity','Unit','Estimated cost']
-);
-
-$('snapshot').innerHTML=items.slice(0,6).map(x=>
-`<div class="summaryrow"><span>${x.name}</span><b>PKR ${fmt(x.qty*x.rate)}</b></div>`
-).join('')+
-`<div class="summaryrow"><b>Current total</b><b>PKR ${fmt(total)}</b></div>`;
-
-report();
-if(scene)drawModel();
+ const s=calculateQuantities(),active=items.filter(x=>x.enabled);
+ $('statCost').textContent=money(currency,fromPKR(total));
+ $('statArea').textContent=s.area.toFixed(1)+' m²';
+ $('statFloors').textContent=s.d.F;
+ $('statItems').textContent=active.length;
+ $('measureCost').textContent=money(currency,fromPKR(total));
+ $('measureSummary').innerHTML=[['Total floor area',s.area.toFixed(2)+' m²'],['Building footprint',(s.d.L*s.d.W).toFixed(2)+' m²'],['Building volume',(s.area*s.d.H).toFixed(2)+' m³'],['External perimeter',s.per.toFixed(2)+' m'],['Estimated wall area',s.wallArea.toFixed(2)+' m²'],['Floors',s.d.F]].map(([a,b])=>`<div class="summaryrow"><span style="color:var(--muted)">${a}</span><b>${b}</b></div>`).join('');
+ $('quantityTable').innerHTML=active.length?table(active.map(x=>[safe(x.name),fmt(x.qty),safe(x.unit),money(currency,fromPKR(x.qty*x.ratePKR))]),['Included material / service','Quantity','Unit','Estimated cost']):'<p class="note">No materials are included yet. Open Material pricing and tick the items required for this project.</p>';
+ $('snapshot').innerHTML=(active.slice(0,6).map(x=>`<div class="summaryrow"><span>${safe(x.name)}</span><b>${money(currency,fromPKR(x.qty*x.ratePKR))}</b></div>`).join('')||'<p class="note">No items included.</p>')+`<div class="summaryrow"><b>Current total</b><b>${money(currency,fromPKR(total))}</b></div>`;
+ report();
+ if(scene&&group)drawModel();
 }
-
-function table(rows,heads){
-return `<table><thead><tr>${heads.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
-}
-
+function safe(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function renderRates(){
-$('rateTable').innerHTML=`
-<table>
-<thead><tr><th>Material / service</th><th>Pricing unit</th><th>Custom rate (PKR)</th><th>Estimated quantity</th></tr></thead>
-<tbody>
-${items.map(x=>`
-<tr>
-<td><b>${x.name}</b></td>
-<td>${x.unit}</td>
-<td><input type="number" min="0" step="any" value="${x.rate}" onchange="rate('${x.id}',this.value)"></td>
-<td>${x.qty.toFixed(1)}</td>
-</tr>`).join('')}
-</tbody>
-</table>`;
+ $('currencySelect').value=currency;
+ $('rateTable').innerHTML=`<table><thead><tr><th>Include</th><th>Material / service</th><th>Unit</th><th>Quantity</th><th>Unit price (${currency})</th><th>Action</th></tr></thead><tbody>${items.map(x=>`<tr><td><input class="include-check" aria-label="Include ${safe(x.name)}" type="checkbox" ${x.enabled?'checked':''} onchange="setEnabled('${x.id}',this.checked)"></td><td><input class="item-name" aria-label="Item name" value="${safe(x.name)}" onchange="editItem('${x.id}','name',this.value)"></td><td><input aria-label="Unit" value="${safe(x.unit)}" onchange="editItem('${x.id}','unit',this.value)"></td><td><input type="number" min="0" step="any" aria-label="Quantity" value="${fmt(x.qty)}" onchange="editItem('${x.id}','qty',this.value)"></td><td><input class="rate-input" type="number" min="0" step="any" aria-label="Unit price in ${currency}" value="${fmt(fromPKR(x.ratePKR))}" onchange="editRate('${x.id}',this.value)"></td><td>${x.kind==='custom'?`<button class="tiny-btn" onclick="deleteItem('${x.id}')">DELETE</button>`:'<span class="sub">Default</span>'}</td></tr>`).join('')}</tbody></table>`;
 }
-
-function rate(id,v){
-let x=items.find(a=>a.id===id);
-x.rate=Math.max(0,Number(v)||0);
-recalc();
-renderRates();
-}
-
-function renderFX(){
-$('fxFields').innerHTML=Object.entries(fx).map(([c,v])=>`
-<div class="field">
-<label>1 ${c} = how many PKR?</label>
-<input type="number" min=".01" step=".01" value="${v}" onchange="fx['${c}']=Math.max(.01,Number(this.value)||1);report()">
-<small class="sub">Editable conversion rate</small>
-</div>`).join('');
-}
-
+function setCurrency(next){if(!['PKR','USD','EUR','GBP'].includes(next))return;currency=next;renderRates();recalc();}
+function editRate(id,value){const x=items.find(a=>a.id===id);if(!x)return;x.ratePKR=Math.max(0,Number(value)||0)*rateToPKR();recalc();renderRates();}
+function setEnabled(id,on){const x=items.find(a=>a.id===id);if(!x)return;x.enabled=!!on;recalc();renderRates();}
+function editItem(id,key,value){const x=items.find(a=>a.id===id);if(!x)return;if(key==='name'||key==='unit')x[key]=String(value).trim()||(key==='name'?'Custom item':'unit');if(key==='qty'){x.qty=Math.max(0,Number(value)||0);x.qtyOverride=true;}recalc();renderRates();}
+function addItem(){const id='custom_'+(nextId++);items.push({id,name:'New material / service',unit:'unit',ratePKR:0,qty:1,enabled:true,kind:'custom'});renderRates();recalc();notify('Custom item added. Edit its name, unit, quantity and price.');}
+function deleteItem(id){items=items.filter(x=>x.id!==id);renderRates();recalc();}
+function renderFX(){$('fxFields').innerHTML=Object.entries(fx).map(([c,v])=>`<div class="field"><label>1 ${c} = how many PKR?</label><input type="number" min=".01" step=".01" value="${v}" onchange="updateFX('${c}',this.value)"><small class="sub">Manual exchange-rate setting</small></div>`).join('');}
+function updateFX(c,v){fx[c]=Math.max(.01,Number(v)||1);renderRates();recalc();}
 function report(){
-let d=dimensions();
-$('reportPKR').textContent='PKR '+fmt(total);
-$('reportName').textContent=($('project').value||'Preliminary construction estimate')+' · '+d.F+' floor(s)';
-
-$('currencyTotals').innerHTML=[
-['PKR',total],
-['USD',total/fx.USD],
-['EUR',total/fx.EUR],
-['GBP',total/fx.GBP]
-].map(([c,v])=>`
-<div class="currency">
-<small>${c} ESTIMATED TOTAL</small>
-<b>${c} ${fmt(v)}</b>
-</div>`).join('');
-
-$('reportTable').innerHTML=table(
-items.map(x=>[
-x.name,
-x.qty.toLocaleString('en-US',{maximumFractionDigits:1}),
-x.unit,
-fmt(x.rate),
-fmt(x.qty*x.rate)
-]),
-['Material / service','Quantity','Unit','Rate (PKR)','Amount (PKR)']
-);
-
-$('grand').textContent='Grand total: PKR '+fmt(total);
-
-$('reportDims').innerHTML=`
-<p class="sub" style="line-height:2">
-Floor area: <b>${(d.L*d.W*d.F).toFixed(2)} m²</b> ·
-Dimensions: <b>${d.L.toFixed(2)} × ${d.W.toFixed(2)} m</b> ·
-Floors: <b>${d.F}</b> ·
-Height: <b>${d.H.toFixed(2)} m</b>
-</p>`;
+ const d=dimensions(),active=items.filter(x=>x.enabled);
+ $('reportPKR').textContent=money(currency,fromPKR(total));
+ $('reportName').textContent=($('project').value||'Preliminary construction estimate')+' · '+d.F+' floor(s)';
+ $('currencyTotals').innerHTML=[['PKR',total],['USD',total/fx.USD],['EUR',total/fx.EUR],['GBP',total/fx.GBP]].map(([c,v])=>`<div class="currency"><small>${c} ESTIMATED TOTAL</small><b>${money(c,v)}</b></div>`).join('');
+ $('reportTable').innerHTML=active.length?table(active.map(x=>[safe(x.name),fmt(x.qty),safe(x.unit),fmt(fromPKR(x.ratePKR)),fmt(fromPKR(x.qty*x.ratePKR))]),['Included item','Quantity','Unit','Rate ('+currency+')','Amount ('+currency+')']):'<p class="note">No items included in this estimate.</p>';
+ $('grand').textContent='Grand total: '+money(currency,fromPKR(total));
+ $('reportDims').innerHTML=`<p class="sub" style="line-height:2">Floor area: <b>${(d.L*d.W*d.F).toFixed(2)} m²</b> · Dimensions: <b>${d.L.toFixed(2)} × ${d.W.toFixed(2)} m</b> · Floors: <b>${d.F}</b> · Height: <b>${d.H.toFixed(2)} m</b></p>`;
 }
-
 function save(){
-try{
-localStorage.setItem('bc_rates',JSON.stringify(items.map(x=>[x.id,x.rate])));
-localStorage.setItem('bc_fx',JSON.stringify(fx));
-notify('Rates saved in this browser.');
-}catch(e){
-notify('Browser storage unavailable.');
+ try{localStorage.setItem('bc_items_v2',JSON.stringify(items));localStorage.setItem('bc_fx',JSON.stringify(fx));localStorage.setItem('bc_currency',currency);notify('Project rates and materials saved on this device.');}
+ catch(e){notify('Browser storage unavailable.');}
 }
-}
-
-function resetRates(){
-items.forEach((x,i)=>x.rate=baseRates[i]);
-renderRates();
-recalc();
-notify('Sample rates restored.');
-}
-
+function resetRates(){if(!confirm('Restore the original sample materials and rates? Custom items will be removed.'))return;items=defaults.map(x=>({...x}));currency='PKR';renderRates();recalc();notify('Sample material list restored.');}
 function load(){
-try{
-JSON.parse(localStorage.getItem('bc_rates')||'[]').forEach(([id,r])=>{
-let x=items.find(y=>y.id===id);
-if(x)x.rate=Number(r)||x.rate;
-});
-fx={...fx,...JSON.parse(localStorage.getItem('bc_fx')||'{}')};
-let t=localStorage.getItem('bc_theme');
-if(t)document.documentElement.dataset.theme=t;
-}catch(e){}
+ try{
+  const saved=JSON.parse(localStorage.getItem('bc_items_v2')||'null');
+  if(Array.isArray(saved)&&saved.length)items=saved.map(x=>({...x,ratePKR:Number(x.ratePKR)||0,qty:Math.max(0,Number(x.qty)||0),enabled:!!x.enabled}));
+  else{const old=JSON.parse(localStorage.getItem('bc_rates')||'[]');old.forEach(([id,r])=>{const x=items.find(y=>y.id===id);if(x)x.ratePKR=Number(r)||x.ratePKR;});}
+  fx={...fx,...JSON.parse(localStorage.getItem('bc_fx')||'{}')};
+  const c=localStorage.getItem('bc_currency');if(['PKR','USD','EUR','GBP'].includes(c))currency=c;
+  nextId=items.filter(x=>x.kind==='custom').length+1;
+  const t=localStorage.getItem('bc_theme');if(t)document.documentElement.dataset.theme=t;
+ }catch(e){console.warn('Could not restore saved project settings',e);}
 }
-
 function go(id){
-document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));
-document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===id));
-if(id==='visual')init3D();
-if(id==='report')report();
-scrollTo({top:0,behavior:'smooth'});
+ document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));
+ document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===id));
+ if(id==='visual')requestAnimationFrame(()=>init3D());
+ if(id==='report')report();
+ scrollTo({top:0,behavior:'smooth'});
 }
-
-function openApp(){
-$('landing').style.display='none';
-$('app').style.display='block';
-recalc();
-renderRates();
-renderFX();
-scrollTo(0,0);
-}
-
-function showLanding(){
-$('app').style.display='none';
-$('landing').style.display='block';
-scrollTo(0,0);
-}
-
-function toggleTheme(){
-let t=document.documentElement.dataset.theme==='dark'?'light':'dark';
-document.documentElement.dataset.theme=t;
-try{localStorage.setItem('bc_theme',t)}catch(e){}
-}
-
-function notify(s){
-let t=$('toast');
-t.textContent=s;
-t.style.display='block';
-setTimeout(()=>t.style.display='none',2400);
-}
-
+function openApp(){$('landing').style.display='none';$('app').style.display='block';renderRates();renderFX();recalc();scrollTo(0,0);}
+function showLanding(){$('app').style.display='none';$('landing').style.display='block';scrollTo(0,0);}
+function toggleTheme(){const t=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=t;try{localStorage.setItem('bc_theme',t);}catch(e){}}
+function notify(message){const el=$('toast');el.textContent=message;el.style.display='block';clearTimeout(notify.timer);notify.timer=setTimeout(()=>el.style.display='none',2600);}
 function modal(type){
-let c={
-terms:`<h2>Terms of Use</h2>
-<p>BuildCalc Pro is a preliminary planning and estimation tool. You are responsible for checking dimensions, assumptions, rates and outputs. Estimates are not professional architectural drawings, structural calculations, bills of quantities, contractor quotations or guarantees of actual cost.</p>
-<p>Do not use this tool instead of a qualified architect, engineer, quantity surveyor, contractor or local building authority. Sample prices and formulas are illustrative and must be verified for your project.</p>`,
-
-privacy:`<h2>Privacy Policy</h2>
-<p>This demo calculates in your browser. Material rates, exchange settings and theme preference may be stored locally on this device. It has no account system or payment processing. Avoid entering sensitive personal or financial information.</p>
-<p>External photography, fonts and the optional 3D library load from third-party services. A commercial launch should update this policy to accurately describe its hosting, analytics, cookies and data practices.</p>`,
-
-contact:`<h2>Contact Us</h2>
-<p>For BuildCalc Pro enquiries, reach us on WhatsApp:</p>
-<p style="font-size:22px;color:var(--gold);font-weight:700">+92 308 9423733</p>
-<a class="btn primary" href="https://wa.me/923089423733" target="_blank" rel="noopener">CHAT ON WHATSAPP ↗</a>
-<p>Do not send passwords or payment details through this demo contact link.</p>`
-};
-$('modalText').innerHTML=c[type];
-$('modal').classList.add('open');
+ const content={
+ terms:`<h2>Terms of Use</h2><p>BuildCalc Pro is a preliminary planning and estimation tool. You are responsible for checking dimensions, assumptions, rates and outputs. Estimates are not professional architectural drawings, structural calculations, bills of quantities, contractor quotations or guarantees of actual cost.</p><p>Do not use this tool instead of a qualified architect, engineer, quantity surveyor, contractor or local building authority. Sample prices and formulas are illustrative and must be verified for your project.</p>`,
+ privacy:`<h2>Privacy Policy</h2><p>This demo calculates in your browser. Material rates, exchange settings, selected currency, project items and theme preference may be stored locally on this device. It has no account system or payment processing. Avoid entering sensitive personal or financial information.</p><p>External photography, fonts and the optional 3D library load from third-party services. A commercial launch should update this policy to accurately describe its hosting, analytics, cookies and data practices.</p>`,
+ contact:`<h2>Contact Us</h2><p>For BuildCalc Pro enquiries, reach us on WhatsApp:</p><p style="font-size:22px;color:var(--gold);font-weight:700">+92 308 9423733</p><a class="btn primary" href="https://wa.me/923089423733" target="_blank" rel="noopener">CHAT ON WHATSAPP ↗</a><p>Do not send passwords or payment details through this demo contact link.</p>`
+ };
+ $('modalText').innerHTML=content[type]||'';$('modal').classList.add('open');
 }
+function closeModal(){$('modal').classList.remove('open');}
 
-function closeModal(){
-$('modal').classList.remove('open');
+// Three.js initialization with retry and responsive resizing.
+async function init3D(force=false){
+ if(renderer&&!force){resize3D();return;}
+ if(loading3d)return;
+ loading3d=true;
+ const el=$('model');
+ el.innerHTML='<div style="padding:25px;color:#24352c;font-size:13px">Loading 3D engine…</div>';
+ try{
+  if(!window.WebGLRenderingContext)throw new Error('WebGL is not supported by this browser.');
+  const T=await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+  const orbit=await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js');
+  THREE=T;
+  if(renderer){renderer.dispose();renderer=null;}
+  scene=new T.Scene();
+  scene.background=new T.Color(0xe0e7e1);
+  const width=Math.max(el.clientWidth,320),height=Math.max(el.clientHeight,280);
+  camera=new T.PerspectiveCamera(42,width/height,.1,2000);
+  camera.position.set(18,15,20);
+  renderer=new T.WebGLRenderer({antialias:true,alpha:false});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.setSize(width,height);
+  renderer.shadowMap.enabled=true;
+  el.innerHTML='';
+  el.appendChild(renderer.domElement);
+  controls=new orbit.OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true;
+  controls.dampingFactor=.06;
+  scene.add(new T.HemisphereLight(0xffffff,0x87948b,2));
+  const light=new T.DirectionalLight(0xffffff,2);
+  light.position.set(12,20,10);
+  light.castShadow=true;
+  scene.add(light);
+  const floor=new T.Mesh(new T.PlaneGeometry(300,300),new T.MeshStandardMaterial({color:0xcbd4cd}));
+  floor.rotation.x=-Math.PI/2;
+  floor.position.y=-.13;
+  scene.add(floor);
+  group=new T.Group();
+  scene.add(group);
+  drawModel();
+  if(resizeObserver)resizeObserver.disconnect();
+  if('ResizeObserver' in window){
+   resizeObserver=new ResizeObserver(resize3D);
+   resizeObserver.observe(el);
+  }else{
+   window.addEventListener('resize',resize3D);
+  }
+  if(animationId)cancelAnimationFrame(animationId);
+  const animate=()=>{
+   if(!renderer)return;
+   animationId=requestAnimationFrame(animate);
+   controls?.update();
+   renderer.render(scene,camera);
+  };
+  animate();
+ }catch(err){
+  console.error('3D initialization failed:',err);
+  renderer=null;scene=null;camera=null;controls=null;group=null;
+  el.innerHTML=`<div style="padding:24px;color:#26372e;font-size:13px;line-height:1.7"><b>3D preview could not start.</b><br>${safe(err?.message||'Check your connection and browser support.')}<br><br><button class="btn outline" onclick="init3D(true)">TRY AGAIN</button><p style="margin:12px 0 0">The 3D preview needs an internet connection to load Three.js and a browser/device with WebGL enabled.</p></div>`;
+ }finally{
+  loading3d=false;
+ }
 }
-
-function init3D(){
-if(renderer||window.loading3d)return;
-window.loading3d=true;
-
-import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js')
-.then(async T=>{
-THREE=T;
-let {OrbitControls}=await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js');
-let el=$('model');
-el.innerHTML='';
-scene=new T.Scene();
-scene.background=new T.Color(0xe0e7e1);
-camera=new T.PerspectiveCamera(42,el.clientWidth/el.clientHeight,.1,1000);
-camera.position.set(18,15,20);
-
-renderer=new T.WebGLRenderer({antialias:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-renderer.setSize(el.clientWidth,el.clientHeight);
-renderer.shadowMap.enabled=true;
-el.appendChild(renderer.domElement);
-
-controls=new OrbitControls(camera,renderer.domElement);
-controls.enableDamping=true;
-
-scene.add(new T.HemisphereLight(0xffffff,0x87948b,2));
-let light=new T.DirectionalLight(0xffffff,2);
-light.position.set(12,20,10);
-light.castShadow=true;
-scene.add(light);
-
-let floor=new T.Mesh(
-new T.PlaneGeometry(100,100),
-new T.MeshStandardMaterial({color:0xcbd4cd})
-);
-floor.rotation.x=-Math.PI/2;
-floor.position.y=-.12;
-scene.add(floor);
-
-group=new T.Group();
-scene.add(group);
-drawModel();
-
-(function loop(){
-if(!renderer)return;
-requestAnimationFrame(loop);
-controls.update();
-renderer.render(scene,camera);
-})();
-
-addEventListener('resize',()=>{
-if(!renderer)return;
-camera.aspect=el.clientWidth/el.clientHeight;
-camera.updateProjectionMatrix();
-renderer.setSize(el.clientWidth,el.clientHeight);
-});
-
-})
-.catch(()=>{
-$('model').innerHTML='<div style="padding:25px;color:#24352c;font-size:13px">3D preview could not load. Check your internet connection or try a modern browser. All other calculator features remain available.</div>';
-});
+function resize3D(){
+ if(!renderer||!camera)return;
+ const el=$('model'),w=Math.max(el.clientWidth,1),h=Math.max(el.clientHeight,1);
+ camera.aspect=w/h;
+ camera.updateProjectionMatrix();
+ renderer.setSize(w,h);
 }
-
 function drawModel(){
-if(!THREE||!group)return;
-group.clear();
-
-let d=dimensions(),
-L=d.L,
-W=d.W,
-H=d.H*d.F,
-wall=.18,
-mat=new THREE.MeshStandardMaterial({color:0xe9e7df,roughness:.8}),
-glass=new THREE.MeshStandardMaterial({color:0x719aa0,roughness:.25,transparent:true,opacity:.7}),
-roof=new THREE.MeshStandardMaterial({color:0x56625b});
-
-function box(x,y,z,a,b,c,m){
-let o=new THREE.Mesh(new THREE.BoxGeometry(a,b,c),m);
-o.position.set(x,y,z);
-o.castShadow=true;
-o.receiveShadow=true;
-group.add(o);
+ if(!THREE||!group||!camera||!controls)return;
+ group.children.forEach(obj=>{
+  obj.geometry?.dispose?.();
+  if(Array.isArray(obj.material))obj.material.forEach(m=>m.dispose?.());
+  else obj.material?.dispose?.();
+ });
+ group.clear();
+ const d=dimensions(),L=Math.max(d.L,.5),W=Math.max(d.W,.5),H=Math.max(d.H*d.F,.5);
+ const wall=Math.min(.18,Math.min(L,W)*.04);
+ const mat=new THREE.MeshStandardMaterial({color:0xe9e7df,roughness:.8});
+ const glass=new THREE.MeshStandardMaterial({color:0x719aa0,roughness:.25,transparent:true,opacity:.72});
+ const roof=new THREE.MeshStandardMaterial({color:0x56625b});
+ function box(x,y,z,a,b,c,m){
+  const o=new THREE.Mesh(new THREE.BoxGeometry(Math.max(a,.02),Math.max(b,.02),Math.max(c,.02)),m);
+  o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;group.add(o);
+ }
+ box(0,.05,0,L,.1,W,roof);
+ box(0,H/2,-W/2,L,H,wall,mat);
+ box(-L/2,H/2,0,wall,H,W,mat);
+ box(L/2,H/2,0,wall,H,W,mat);
+ box(0,H/2,W/2,L,H,wall,mat);
+ box(0,H+.1,0,L+.2,.2,W+.2,roof);
+ for(let y=H*.35;y<H;y+=Math.max(H*.48,.5)){
+  box(0,y,-W/2-.02,L*.3,H*.17,.035,glass);
+  box(L/2+.02,y,0,.035,H*.17,W*.3,glass);
+ }
+ for(let i=1;i<d.F;i++)box(0,i*d.H,0,L,.1,W,roof);
+ const grid=new THREE.GridHelper(Math.max(L,W)*2,20,0x84948a,0xb5c0b8);
+ grid.position.y=-.1;group.add(grid);
+ controls.target.set(0,H*.4,0);
+ camera.position.set(L*1.5,H*1.35,W*1.7);
+ camera.near=.1;camera.far=Math.max(2000,L*W*10);
+ camera.updateProjectionMatrix();controls.update();
 }
-
-box(0,.05,0,L,.1,W,roof);
-box(0,H/2,-W/2,L,H,wall,mat);
-box(-L/2,H/2,0,wall,H,W,mat);
-box(L/2,H/2,0,wall,H,W,mat);
-box(0,H/2,W/2,L,H,wall,mat);
-box(0,H+.1,0,L+.2,.2,W+.2,roof);
-
-for(let y=H*.35;y<H;y+=H*.48){
-box(0,y,-W/2-.1,L*.3,H*.17,.03,glass);
-box(L/2+.1,y,0,.03,H*.17,W*.3,glass);
+function view3d(view){
+ if(!renderer||!camera||!controls){init3D();return;}
+ const d=dimensions(),L=Math.max(d.L,.5),W=Math.max(d.W,.5),H=Math.max(d.H*d.F,.5);
+ controls.target.set(0,H*.4,0);
+ if(view==='top')camera.position.set(0,Math.max(L,W)*2.2,.01);
+ else camera.position.set(L*1.5,H*1.35,W*1.7);
+ camera.lookAt(controls.target);controls.update();
 }
-
-for(let i=1;i<d.F;i++){
-box(0,i*d.H,0,L,.1,W,roof);
-}
-
-let grid=new THREE.GridHelper(Math.max(L,W)*2,20,0x84948a,0xb5c0b8);
-grid.position.y=-.1;
-group.add(grid);
-
-controls.target.set(0,H*.4,0);
-camera.position.set(L*1.4,H*1.5,W*1.6);
-}
-
-function view3d(v){
-if(!camera||!controls)return;
-let d=dimensions();
-camera.position.set(
-v==='top'?0:d.L*1.4,
-v==='top'?Math.max(d.L,d.W)*2.2:d.H*d.F*1.5,
-v==='top'?.01:d.W*1.6
-);
-controls.target.set(0,d.H*d.F*.4,0);
-}
-
-load();
-recalc();
-renderRates();
-renderFX();
+load();renderRates();renderFX();recalc();
 </script>
 </body>
 </html>
