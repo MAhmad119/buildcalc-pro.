@@ -10,7 +10,7 @@
 <meta property="og:description" content="Estimate construction materials and project costs from your building measurements.">
 <meta property="og:type" content="website">
 
-<!-- AdSense: after approval, replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID and uncomment this script.
+<!-- AdSense: after approval, replace the publisher ID and uncomment this script.
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 -->
 
@@ -19,8 +19,16 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root{--bg:#f1f3f0;--paper:#fff;--soft:#f7f8f6;--ink:#18221e;--muted:#78837c;--line:#e1e6e1;--gold:#b77a45;--dark:#15201b;--shadow:0 14px 40px #15201b0c}
-[data-theme=dark]{--bg:#111815;--paper:#1a241f;--soft:#222d27;--ink:#edf2ed;--muted:#a0aca4;--line:#344139;--gold:#d49b68;--dark:#0c120f;--shadow:0 14px 40px #0003}
+:root{
+--bg:#f1f3f0;--paper:#fff;--soft:#f7f8f6;--ink:#18221e;
+--muted:#78837c;--line:#e1e6e1;--gold:#b77a45;
+--dark:#15201b;--shadow:0 14px 40px #15201b0c
+}
+[data-theme=dark]{
+--bg:#111815;--paper:#1a241f;--soft:#222d27;--ink:#edf2ed;
+--muted:#a0aca4;--line:#344139;--gold:#d49b68;
+--dark:#0c120f;--shadow:0 14px 40px #0003
+}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif}
 button,input,select{font:inherit}
@@ -119,7 +127,6 @@ footer button{background:none;border:0;color:var(--muted);text-decoration:underl
 .ad-slot strong{font-size:9px;letter-spacing:.16em}
 .ad-slot ins{display:block;width:100%;min-height:90px}
 .toast{display:none;position:fixed;bottom:20px;right:20px;background:var(--dark);color:white;padding:13px 17px;z-index:30;font-size:11px}
-
 @media(max-width:850px){
 .app-layout{grid-template-columns:1fr}
 aside{position:sticky;top:70px;z-index:4;flex-direction:row;overflow:auto;padding:7px}
@@ -140,29 +147,21 @@ aside{position:sticky;top:70px;z-index:4;flex-direction:row;overflow:auto;paddin
 .intro{padding:55px 20px}
 .intro-head,.cta{display:block}
 .photos{grid-template-columns:1fr}
-.photo,.photo:first-child{height:225px}
-.cta{padding:38px 22px}
-.cta button{margin-top:15px}
-.appbar{padding:0 12px}
-.appbar .brand{font-size:12px}
-.main{padding:23px 12px}
-.head{align-items:start;flex-direction:column}
-.panel{padding:15px}
+.photo,.photo:first-child{height:230px}
 .form{grid-template-columns:1fr}
-.full{grid-column:auto}
 .currencies{grid-template-columns:repeat(2,1fr)}
-.nav{font-size:10px}
-.stats{gap:9px}
-.stat{font-size:20px}
+.appbar{padding:0 14px}
+.head{align-items:start;flex-direction:column}
 }
 @media print{
-.appbar,aside,.noprint,.ad-slot,footer{display:none!important}
+body{background:white;color:#111}
+#landing,.appbar,aside,footer,.noprint{display:none!important}
+#app{display:block!important}
 .app-layout{display:block}
-.main{padding:0}
+.main{padding:0;max-width:none}
 .page{display:none!important}
 #report{display:block!important}
 .panel,.totalbox{box-shadow:none;break-inside:avoid}
-body{background:white;color:#111}
 }
 </style>
 </head>
@@ -172,89 +171,89 @@ body{background:white;color:#111}
 <header class="top">
 <div class="brand"><span class="mark">BC</span> BUILDCALC PRO</div>
 <nav>
-<a href="#features">CAPABILITIES</a>
-<a href="#approach">APPROACH</a>
-<button class="btn primary" onclick="openApp()">OPEN STUDIO ↗</button>
+<a href="#features">FEATURES</a>
+<a href="#about">ABOUT</a>
+<button class="btn primary" onclick="openApp()">OPEN CALCULATOR ↗</button>
 </nav>
 </header>
 
-<div class="hero">
+<section class="hero">
 <div class="hero-content">
 <div class="eyebrow">CONSTRUCTION PLANNING STUDIO</div>
-<h1>Build smarter.<br>See the whole picture.</h1>
-<p>A considered workspace for construction measurements, material quantities and project budgeting. Bring your dimensions and supplier rates together in one clear planning environment.</p>
+<h1>Build with<br>better numbers.</h1>
+<p>Estimate building materials, review project costs and organize your construction plan with one simple workspace.</p>
 <div class="actions">
-<button class="btn primary" onclick="openApp()">START YOUR PROJECT ↗</button>
-<a class="btn outline" href="#features" style="text-decoration:none">EXPLORE THE PLATFORM</a>
+<button class="btn primary" onclick="openApp()">START YOUR ESTIMATE ↗</button>
+<a class="btn outline" href="#features" style="text-decoration:none;display:inline-flex;align-items:center">EXPLORE FEATURES</a>
 </div>
 <div class="metrics">
 <div><b>01</b><span>Measure</span></div>
-<div><b>02</b><span>Estimate</span></div>
-<div><b>03</b><span>Calculate</span></div>
-<div><b>04</b><span>Review</span></div>
+<div><b>02</b><span>Calculate</span></div>
+<div><b>03</b><span>Plan</span></div>
 </div>
-</div>
-</div>
-
-<section class="intro" id="features">
-<div class="intro-head">
-<div><div class="eyebrow">A CLEARER WAY TO PLAN</div><h2>From site dimensions<br>to a considered budget.</h2></div>
-<p>Organize early project planning with editable local rates, preliminary quantity estimates and flexible material selection.</p>
-</div>
-<div class="photos">
-<div class="photo"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85" alt="Modern residential architecture"><label>Architecture &amp; space</label></div> 
-<div class="photo"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=85" alt="Construction work"><label>Materials &amp; costs</label></div>
-<div class="photo"><img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=85" alt="Contemporary building"><label>Built environment</label></div>
-<div class="photo"><img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=900&q=85" alt="Modern building exterior"><label>Design perspective</label></div>
 </div>
 </section>
 
-<div class="ad-slot">
-<strong>ADVERTISEMENT</strong>
-<span>Ad placement · ads display only after AdSense approval and code insertion.</span>
-</div>
-
-<div class="cta" id="approach">
+<section class="intro" id="features">
+<div class="intro-head">
 <div>
-<div class="eyebrow">BUILDCALC PRO WORKSPACE</div>
-<h2>Plan with more confidence.</h2>
-<p>Set your own material prices, compare estimates in four currencies and prepare a clear preliminary report. Brick count uses your brick dimensions and mortar joint. Cement, sand and aggregate use stated nominal mortar/concrete assumptions. Results are planning estimates—not a substitute for drawings, professional engineering or supplier quotations.</p>
+<div class="eyebrow">A CLEARER WAY TO PLAN</div>
+<h2>Everything starts<br>with an estimate.</h2>
 </div>
-<button class="btn primary" onclick="openApp()">OPEN CONSTRUCTION STUDIO ↗</button>
+<p>Enter your dimensions, select the materials you need, adjust local rates and create a printable project summary.</p>
 </div>
+<div class="photos">
+<div class="photo"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85" alt="Modern residential building"><label>Project planning</label></div>
+<div class="photo"><img src="https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&w=700&q=85" alt="Architectural drawings"><label>Measurements</label></div>
+<div class="photo"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=700&q=85" alt="Construction work"><label>Material estimates</label></div>
+<div class="photo"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=700&q=85" alt="Interior project"><label>Cost overview</label></div>
+<div class="photo"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=85" alt="Modern home"><label>Project reports</label></div>
+</div>
+</section>
+
+<section class="cta" id="about">
+<div>
+<div class="eyebrow">BUILDCALC PRO</div>
+<h2>Plan first. Build smarter.</h2>
+<p>A practical construction planning calculator for early-stage estimates. Review every assumption and verify quantities with qualified professionals before purchasing materials.</p>
+</div>
+<button class="btn primary" onclick="openApp()">OPEN WORKSPACE ↗</button>
+</section>
 </section>
 
 <section id="app">
 <header class="appbar">
-<div class="brand"><span class="mark" style="border-color:var(--line)">BC</span> BUILDCALC <span style="color:var(--gold)">PRO</span></div>
-<div style="display:flex;gap:8px;align-items:center">
-<button class="btn outline" onclick="toggleTheme()">◐ THEME</button>
-<button class="btn outline" onclick="showLanding()">← HOME</button>
+<div class="brand"><span class="mark">BC</span> BUILDCALC PRO</div>
+<div class="actions" style="margin:0">
+<button class="btn outline" onclick="toggleTheme()">TOGGLE THEME</button>
+<button class="btn outline" onclick="showLanding()">HOME</button>
 </div>
 </header>
 
 <div class="app-layout">
 <aside>
-<div class="navlabel">PROJECT WORKSPACE</div>
-<button class="nav active" data-page="overview" onclick="go('overview')">▦ &nbsp; Overview</button>
+<div class="navlabel">WORKSPACE</div>
+<button class="nav active" data-page="dashboard" onclick="go('dashboard')">◫ &nbsp; Dashboard</button>
 <button class="nav" data-page="measurements" onclick="go('measurements')">⌗ &nbsp; Measurements</button>
-<button class="nav" data-page="pricing" onclick="go('pricing')">₨ &nbsp; Material pricing</button>
-<button class="nav" data-page="report" onclick="go('report')">▤ &nbsp; Cost report</button>
-<div class="sidehint">PRELIMINARY PLANNING TOOL<br>All material prices are editable. Quantity estimates use simplified assumptions; verify measurements and supplier rates before purchasing.</div>
+<button class="nav" data-page="pricing" onclick="go('pricing')">▤ &nbsp; Material pricing</button>
+<button class="nav" data-page="report" onclick="go('report')">▧ &nbsp; Project report</button>
+<div class="sidehint">Planning estimates only. Confirm final quantities and structural details with qualified professionals.</div>
 </aside>
 
 <main class="main">
-<section class="page active" id="overview">
+<section class="page active" id="dashboard">
 <div class="head">
-<div><div class="eyebrow">PROJECT DASHBOARD</div><h1>Project overview</h1><p>Your construction plan, at a glance.</p></div>
-<button class="btn primary" onclick="go('measurements')">EDIT DIMENSIONS ↗</button>
+<div><div class="eyebrow">PROJECT OVERVIEW</div><h1>Your workspace.</h1><p>Review your project estimate and manage materials.</p></div>
+<button class="btn primary" onclick="go('measurements')">NEW ESTIMATE ↗</button>
 </div>
+
 <div class="grid stats">
-<div class="panel"><div class="statlabel">Estimated project cost</div><div class="stat" id="statCost">PKR 0</div><p class="sub">Based on your current rates</p></div>
-<div class="panel"><div class="statlabel">Total floor area</div><div class="stat" id="statArea">0 m²</div><p class="sub">All floors combined</p></div>
-<div class="panel"><div class="statlabel">Building floors</div><div class="stat" id="statFloors">1</div><p class="sub">Configured levels</p></div>
+<div class="panel"><div class="statlabel">Estimated project cost</div><div class="stat" id="statCost">PKR 0</div><p class="sub">Based on included items</p></div>
+<div class="panel"><div class="statlabel">Floor area</div><div class="stat" id="statArea">0 m²</div><p class="sub">Across all floors</p></div>
+<div class="panel"><div class="statlabel">Floors</div><div class="stat" id="statFloors">1</div><p class="sub">Project configuration</p></div>
 <div class="panel"><div class="statlabel">Included items</div><div class="stat" id="statItems">6</div><p class="sub">Only selected items are counted</p></div>
 </div>
+
 <div class="grid two">
 <div class="panel photo-panel">
 <div class="eyebrow" style="color:#edc49e">PROJECT PLANNING</div>
@@ -263,17 +262,15 @@ body{background:white;color:#111}
 <button class="btn primary" onclick="go('pricing')">MANAGE MATERIALS ↗</button>
 </div>
 <div class="panel">
-<h3>Cost snapshot</h3><p class="sub">Current estimated material and service costs.</p>
+<h3>Cost snapshot</h3>
+<p class="sub">Current estimated material and service costs.</p>
 <div id="snapshot"></div>
 <button class="btn outline" style="margin-top:15px" onclick="go('report')">VIEW FULL REPORT →</button>
 </div>
 </div>
 </section>
 
-<div class="ad-slot noprint">
-<strong>ADVERTISEMENT</strong>
-<span>Responsive ad placement · add an approved AdSense ad unit here.</span>
-</div>
+<div class="ad-slot noprint"><strong>ADVERTISEMENT</strong><span>Responsive ad placement · add an approved AdSense ad unit here.</span></div>
 
 <section class="page" id="measurements">
 <div class="head">
@@ -304,7 +301,6 @@ body{background:white;color:#111}
 <div class="field"><label>Mortar cement : sand ratio</label><select id="mortarRatio" onchange="recalc()"><option value="1:4">1 : 4</option><option value="1:5" selected>1 : 5</option><option value="1:6">1 : 6</option></select></div>
 <div class="field full"><label>Project / client name</label><input id="project" type="text" placeholder="e.g. Family Residence — Phase 1" oninput="report()"></div>
 </div>
-
 <div class="actions">
 <button class="btn primary" onclick="recalc();notify('Estimate updated')">UPDATE ESTIMATE</button>
 <button class="btn outline" onclick="go('pricing')">MANAGE MATERIALS →</button>
@@ -349,6 +345,7 @@ body{background:white;color:#111}
 </select>
 </div>
 </div>
+
 <div class="tablewrap" id="rateTable" style="margin-top:16px"></div>
 <div class="actions">
 <button class="btn primary" onclick="addItem()">+ ADD CUSTOM ITEM</button>
@@ -364,10 +361,7 @@ body{background:white;color:#111}
 </div>
 </section>
 
-<div class="ad-slot noprint">
-<strong>ADVERTISEMENT</strong>
-<span>Responsive ad placement · add an approved AdSense ad unit here.</span>
-</div>
+<div class="ad-slot noprint"><strong>ADVERTISEMENT</strong><span>Responsive ad placement · add an approved AdSense ad unit here.</span></div>
 
 <section class="page" id="report">
 <div class="head">
@@ -422,263 +416,233 @@ body{background:white;color:#111}
 
 <script>
 // BuildCalc Pro — client-side construction planning calculator.
-// Internal money values are stored in PKR; the selected currency is the input/display currency.
+// Internal money values are stored in PKR.
+// The selected currency controls the rate input and display.
 
-const $ = id => document.getElementById(id);
-const n = id => Math.max(0, Number($(id)?.value) || 0);
-const fmt = value => new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(Number(value)||0);
-const money = (code,value) => `${code} ${fmt(value)}`;
+const $=id=>document.getElementById(id);
+const n=id=>Math.max(0,Number($(id)?.value)||0);
+const fmt=x=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(Number(x)||0);
+const money=(c,v)=>`${c} ${fmt(v)}`;
 
-let fx = {USD:278,EUR:300,GBP:360};
-let currency = 'PKR';
-let total = 0;
-let nextId = 1;
+let fx={USD:278,EUR:300,GBP:360};
+let currency='PKR';
+let total=0;
+let nextId=1;
 
-const defaults = [
- {id:'cement',name:'Cement',unit:'50 kg bag',ratePKR:1250,qty:1,enabled:true,kind:'auto'},
- {id:'bricks',name:'Bricks',unit:'piece',ratePKR:18,qty:1,enabled:true,kind:'auto'},
- {id:'sand',name:'Sand',unit:'cubic ft',ratePKR:65,qty:1,enabled:true,kind:'auto'},
- {id:'crush',name:'Crush / aggregate',unit:'cubic ft',ratePKR:95,qty:1,enabled:true,kind:'auto'},
- {id:'steel',name:'Reinforcement steel (enter from structural BOQ)',unit:'kg',ratePKR:285,qty:0,enabled:false,kind:'auto'},
- {id:'tiles',name:'Floor tiles',unit:'sq ft',ratePKR:180,qty:1,enabled:false,kind:'auto'},
- {id:'paint',name:'Paint',unit:'litre',ratePKR:650,qty:1,enabled:false,kind:'auto'},
- {id:'plumbing',name:'Plumbing allowance',unit:'project',ratePKR:45000,qty:1,enabled:false,kind:'auto'},
- {id:'electrical',name:'Electrical allowance',unit:'project',ratePKR:55000,qty:1,enabled:false,kind:'auto'},
- {id:'labour',name:'Labour',unit:'sq ft',ratePKR:350,qty:1,enabled:true,kind:'auto'},
- {id:'misc',name:'Miscellaneous',unit:'project',ratePKR:25000,qty:1,enabled:false,kind:'auto'}
+const defaults=[
+{id:'cement',name:'Cement',unit:'50 kg bag',ratePKR:1250,qty:1,enabled:true,kind:'auto'},
+{id:'bricks',name:'Bricks',unit:'piece',ratePKR:18,qty:1,enabled:true,kind:'auto'},
+{id:'sand',name:'Sand',unit:'cubic ft',ratePKR:65,qty:1,enabled:true,kind:'auto'},
+{id:'crush',name:'Crush / aggregate',unit:'cubic ft',ratePKR:95,qty:1,enabled:true,kind:'auto'},
+{id:'steel',name:'Reinforcement steel (enter from structural BOQ)',unit:'kg',ratePKR:285,qty:0,enabled:false,kind:'auto'},
+{id:'tiles',name:'Floor tiles',unit:'sq ft',ratePKR:180,qty:1,enabled:false,kind:'auto'},
+{id:'paint',name:'Paint',unit:'litre',ratePKR:650,qty:1,enabled:false,kind:'auto'},
+{id:'plumbing',name:'Plumbing allowance',unit:'project',ratePKR:45000,qty:1,enabled:false,kind:'auto'},
+{id:'electrical',name:'Electrical allowance',unit:'project',ratePKR:35000,qty:1,enabled:false,kind:'auto'},
+{id:'labour',name:'Labour allowance',unit:'project',ratePKR:1,qty:1,enabled:false,kind:'auto'},
+{id:'plaster',name:'Plaster',unit:'sq ft',ratePKR:45,qty:1,enabled:false,kind:'auto'}
 ];
 
-let items = defaults.map(item => ({...item}));
+let items=defaults.map(x=>({...x}));
 
-const rateToPKR = () => currency === 'PKR' ? 1 : (fx[currency] || 1);
-const fromPKR = value => value / rateToPKR();
+// Currency conversion helpers.
+function rateToPKR(){return currency==='PKR'?1:fx[currency];}
+function fromPKR(value){return currency==='PKR'?value:value/fx[currency];}
 
-// Convert the entered building dimensions to metres.
+// Read dimensions and convert all measurements to metres.
 function dimensions(){
- const factor = $('unit').value === 'ft' ? 0.3048 : 1;
-
- return {
-  L:n('length')*factor,
-  W:n('width')*factor,
-  H:n('height')*factor,
-  F:Math.max(1,Math.round(n('floors'))),
-  wall:n('wall')*.0254,
-  slab:n('slab')*.0254,
-  fill:n('fill')*.0254,
-  part:Number($('partitions').value)||.8,
-  waste:Math.min(30,n('waste'))/100
+ const unit=$('unit').value;
+ const factor=unit==='ft'?0.3048:1;
+ return{
+ L:n('length')*factor,
+ W:n('width')*factor,
+ H:n('height')*factor,
+ F:Math.max(1,n('floors')),
+ wall:n('wall')*0.0254,
+ slab:n('slab')*0.0254,
+ fill:n('fill')*0.0254,
+ partitions:n('partitions'),
+ waste:n('waste')/100,
+ opening:n('openingPct')/100,
+ brickL:n('brickL')*0.0254,
+ brickW:n('brickW')*0.0254,
+ brickH:n('brickH')*0.0254,
+ joint:n('joint')*0.0254,
+ mortarRatio:$('mortarRatio').value
  };
 }
 
-// Estimate material quantities using editable nominal assumptions.
-// This is not a structural design or a measured bill of quantities.
+// Preliminary quantity estimates. Verify against drawings and site conditions.
 function calculateQuantities(){
- const d = dimensions();
- const area = d.L*d.W*d.F;
- const perimeter = 2*(d.L+d.W);
- const openingPct = Math.min(50,n('openingPct'))/100;
-
- // Exterior wall volume plus a configurable internal-partition allowance.
- const grossWallArea = perimeter*d.H*d.F*(1+(d.part*.55));
- const netWallArea = grossWallArea*(1-openingPct);
- const wallVol = netWallArea*d.wall;
-
- const slabVol = d.L*d.W*d.slab*d.F;
- const fillVol = d.L*d.W*d.fill;
-
- // Brick volume includes the mortar joint in each nominal dimension.
- const brickL = n('brickL')*.0254;
- const brickW = n('brickW')*.0254;
- const brickH = n('brickH')*.0254;
- const joint = n('joint')*.0254;
- const nominalBrickVol = (brickL+joint)*(brickW+joint)*(brickH+joint);
-
- const brickCount = nominalBrickVol > 0
-  ? Math.ceil((wallVol/nominalBrickVol)*(1+d.waste))
-  : 0;
-
- const actualBrickVol = brickCount*brickL*brickW*brickH;
- const wetMortar = Math.max(0,wallVol-actualBrickVol);
- const dryMortar = wetMortar*1.33;
-
- const ratio = ($('mortarRatio')?.value||'1:5').split(':').map(Number);
- const mortarParts = ratio[0]+ratio[1];
-
- const mortarCementM3 = dryMortar*(ratio[0]/mortarParts);
- const mortarSandM3 = dryMortar*(ratio[1]/mortarParts);
-
- const concreteDry = slabVol*1.54;
-
- // Nominal 1:2:4 concrete planning mix for slab quantity only; not structural design.
- const concreteCementM3 = concreteDry/7;
- const concreteSandM3 = concreteDry*2/7;
- const concreteAggregateM3 = concreteDry*4/7;
-
- const cementBags = (mortarCementM3+concreteCementM3)*1440/50;
- const sandCft = (mortarSandM3+concreteSandM3)*35.3147;
- const crushCft = concreteAggregateM3*35.3147;
-
- // Nominal 12 mm plaster allowance on both sides of estimated wall area.
- const plasterArea = netWallArea*2;
- const plasterWet = plasterArea*.012;
- const plasterDry = plasterWet*1.33;
- const plasterCementBags = (plasterDry/6)*1440/50;
- const plasterSandCft = (plasterDry*5/6)*35.3147;
-
- const tileArea = area*10.7639;
- const paintLitres = (plasterArea*2)/10;
-
- const q = {
-  cement:Math.ceil((cementBags+plasterCementBags)*(1+d.waste)*100)/100,
-  bricks:Math.ceil(brickCount),
-  sand:(sandCft+plasterSandCft)*(1+d.waste),
-  crush:crushCft*(1+d.waste),
-  steel:0, // Use structural drawings / BOQ for reinforcement.
-  tiles:tileArea*(1+d.waste),
-  paint:paintLitres*(1+d.waste),
-  plumbing:1,
-  electrical:1,
-  labour:area*10.7639,
-  misc:1
+ const d=dimensions();
+ const area=d.L*d.W*d.F;
+ const perimeter=2*(d.L+d.W);
+ const grossWallArea=perimeter*d.H*d.F*(1+d.partitions);
+ const wallArea=grossWallArea*(1-d.opening);
+ const brickModule=(d.brickL+d.joint)*(d.brickH+d.joint);
+ const bricksPerM2=brickModule>0?1/brickModule:0;
+ const brickCount=Math.ceil(wallArea*bricksPerM2*(1+d.waste));
+ const brickVolume=brickCount*d.brickL*d.brickW*d.brickH;
+ const wallVolume=wallArea*d.wall;
+ const mortarWet=Math.max(0,wallVolume-brickVolume);
+ const mortarDry=mortarWet*1.33;
+ const ratioParts=Number(d.mortarRatio.split(':')[1])+1;
+ const mortarCementM3=mortarDry/ratioParts;
+ const mortarSandM3=mortarDry*(ratioParts-1)/ratioParts;
+ const slabVolume=area*d.slab;
+ const concreteDry=slabVolume*1.54;
+ const concreteCementM3=concreteDry/5.5;
+ const concreteSandM3=concreteDry*2/5.5;
+ const concreteCrushM3=concreteDry*2.5/5.5;
+ const plasterArea=wallArea*2;
+ const plasterWet=plasterArea*0.012;
+ const plasterDry=plasterWet*1.33;
+ const plasterCementM3=plasterDry/6;
+ const plasterSandM3=plasterDry*5/6;
+ const cementM3=mortarCementM3+concreteCementM3+plasterCementM3;
+ const cementBags=cementM3*1440/50*(1+d.waste);
+ const sandM3=(mortarSandM3+concreteSandM3+plasterSandM3)*(1+d.waste);
+ const crushM3=concreteCrushM3*(1+d.waste);
+ const toCft=x=>x*35.3147;
+ return{
+ d,area,per:perimeter,wallArea,brickCount,
+ cementBags,sandCft:toCft(sandM3),crushCft:toCft(crushM3),
+ plasterArea,slabVolume
  };
+}
 
- items.forEach(item => {
-  if(item.kind==='auto' && !item.qtyOverride && Object.prototype.hasOwnProperty.call(q,item.id)){
-   item.qty = q[item.id];
+// Update calculated quantities without replacing the active input element.
+function syncAutomaticQuantities(s){
+ const values={
+ bricks:s.brickCount,
+ cement:Math.ceil(s.cementBags),
+ sand:s.sandCft,
+ crush:s.crushCft,
+ plaster:s.plasterArea*10.7639
+ };
+ items.forEach(item=>{
+  if(item.kind==='auto'&&!item.qtyOverride&&values[item.id]!==undefined){
+   item.qty=values[item.id];
   }
  });
-
- total = items
-  .filter(item=>item.enabled)
-  .reduce((sum,item)=>sum+item.qty*item.ratePKR,0);
-
- return {
-  d,area,per:perimeter,wallArea:netWallArea,wallVol,slabVol,fillVol,
-  brickCount,wetMortar,cementBags,sandCft,crushCft,plasterArea
- };
 }
 
-function table(rows,heads){
- return `<table>
- <thead><tr>${heads.map(head=>`<th>${head}</th>`).join('')}</tr></thead>
- <tbody>${rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody>
- </table>`;
+// Build table HTML for read-only reports.
+function table(rows,headers){
+ return `<table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 }
 
+function safe(value){
+ return String(value??'').replace(/[&<>"']/g,c=>({
+ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ }[c]));
+}
+
+// Main calculator refresh.
 function recalc(){
- const s = calculateQuantities();
- const active = items.filter(item=>item.enabled);
+ const s=calculateQuantities();
+ syncAutomaticQuantities(s);
 
- $('statCost').textContent = money(currency,fromPKR(total));
- $('statArea').textContent = s.area.toFixed(1)+' m²';
- $('statFloors').textContent = s.d.F;
- $('statItems').textContent = active.length;
- $('measureCost').textContent = money(currency,fromPKR(total));
+ total=items.filter(x=>x.enabled).reduce((sum,x)=>sum+x.qty*x.ratePKR,0);
 
- const summary = [
-  ['Total floor area',s.area.toFixed(2)+' m²'],
-  ['Building footprint',(s.d.L*s.d.W).toFixed(2)+' m²'],
-  ['Building volume',(s.area*s.d.H).toFixed(2)+' m³'],
-  ['External perimeter',s.per.toFixed(2)+' m'],
-  ['Estimated net wall area',s.wallArea.toFixed(2)+' m²'],
-  ['Estimated brick count',fmt(s.brickCount)+' pieces'],
-  ['Estimated cement',fmt(s.cementBags)+' bags (50 kg)'],
-  ['Estimated sand',fmt(s.sandCft)+' ft³'],
-  ['Estimated crush',fmt(s.crushCft)+' ft³'],
-  ['Floors',s.d.F]
- ];
+ const active=items.filter(x=>x.enabled);
+ $('statCost').textContent=money(currency,fromPKR(total));
+ $('statArea').textContent=s.area.toFixed(1)+' m²';
+ $('statFloors').textContent=s.d.F;
+ $('statItems').textContent=active.length;
+ $('measureCost').textContent=money(currency,fromPKR(total));
 
- $('measureSummary').innerHTML = summary.map(([label,value])=>
-  `<div class="summaryrow"><span style="color:var(--muted)">${label}</span><b>${value}</b></div>`
- ).join('');
+ $('measureSummary').innerHTML=[
+ ['Total floor area',s.area.toFixed(2)+' m²'],
+ ['Building footprint',(s.d.L*s.d.W).toFixed(2)+' m²'],
+ ['Building volume',(s.area*s.d.H).toFixed(2)+' m³'],
+ ['External perimeter',s.per.toFixed(2)+' m'],
+ ['Estimated net wall area',s.wallArea.toFixed(2)+' m²'],
+ ['Estimated brick count',fmt(s.brickCount)+' pieces'],
+ ['Estimated cement',fmt(s.cementBags)+' bags (50 kg)'],
+ ['Estimated sand',fmt(s.sandCft)+' ft³'],
+ ['Estimated crush',fmt(s.crushCft)+' ft³'],
+ ['Floors',s.d.F]
+ ].map(([label,value])=>`<div class="summaryrow"><span style="color:var(--muted)">${label}</span><b>${value}</b></div>`).join('');
 
- $('quantityTable').innerHTML = active.length
-  ? table(active.map(item=>[
-    safe(item.name),fmt(item.qty),safe(item.unit),
-    money(currency,fromPKR(item.qty*item.ratePKR))
-   ]),['Included material / service','Quantity','Unit','Estimated cost'])
-  : '<p class="note">No materials are included yet. Open Material pricing and tick the items required for this project.</p>';
+ $('quantityTable').innerHTML=active.length
+ ?table(active.map(x=>[safe(x.name),fmt(x.qty),safe(x.unit),money(currency,fromPKR(x.qty*x.ratePKR))]),['Included material / service','Quantity','Unit','Estimated cost'])
+ :'<p class="note">No materials are included yet. Open Material pricing and tick the items required for this project.</p>';
 
- $('snapshot').innerHTML =
-  (active.slice(0,6).map(item=>
-   `<div class="summaryrow"><span>${safe(item.name)}</span><b>${money(currency,fromPKR(item.qty*item.ratePKR))}</b></div>`
-  ).join('')||'<p class="note">No items included.</p>')+
-  `<div class="summaryrow"><b>Current total</b><b>${money(currency,fromPKR(total))}</b></div>`;
+ $('snapshot').innerHTML=(active.slice(0,6).map(x=>`<div class="summaryrow"><span>${safe(x.name)}</span><b>${money(currency,fromPKR(x.qty*x.ratePKR))}</b></div>`).join('')||'<p class="note">No items included.</p>')+
+ `<div class="summaryrow"><b>Current total</b><b>${money(currency,fromPKR(total))}</b></div>`;
 
  report();
 }
 
-function safe(value){
- return String(value??'').replace(/[&<>"']/g,char=>({
-  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
- }[char]));
-}
-
+// Render the pricing table once, not on every keystroke.
 function renderRates(){
- $('currencySelect').value = currency;
-
- $('rateTable').innerHTML = `
- <table>
+ $('currencySelect').value=currency;
+ $('rateTable').innerHTML=`<table>
  <thead><tr>
  <th>Include</th><th>Material / service</th><th>Unit</th>
  <th>Quantity</th><th>Unit price (${currency})</th><th>Action</th>
  </tr></thead>
- <tbody>
- ${items.map(item=>`
- <tr>
- <td><input class="include-check" aria-label="Include ${safe(item.name)}" type="checkbox" ${item.enabled?'checked':''} onchange="setEnabled('${item.id}',this.checked)"></td>
- <td><input class="item-name" aria-label="Item name" value="${safe(item.name)}" onchange="editItem('${item.id}','name',this.value)"></td>
- <td><input aria-label="Unit" value="${safe(item.unit)}" onchange="editItem('${item.id}','unit',this.value)"></td>
- <td><input type="number" min="0" step="any" aria-label="Quantity" value="${fmt(item.qty)}" onchange="editItem('${item.id}','qty',this.value)"></td>
- <td><input class="rate-input" type="number" min="0" step="any" aria-label="Unit price in ${currency}" value="${fmt(fromPKR(item.ratePKR))}" onchange="editRate('${item.id}',this.value)"></td>
- <td>${item.kind==='custom'?`<button class="tiny-btn" onclick="deleteItem('${item.id}')">DELETE</button>`:'<span class="sub">Default</span>'}</td>
- </tr>`).join('')}
- </tbody>
- </table>`;
+ <tbody>${items.map(x=>`<tr>
+ <td><input class="include-check" aria-label="Include ${safe(x.name)}" type="checkbox" ${x.enabled?'checked':''} onchange="setEnabled('${x.id}',this.checked)"></td>
+ <td><input class="item-name" aria-label="Item name" value="${safe(x.name)}" onchange="editItem('${x.id}','name',this.value)"></td>
+ <td><input aria-label="Unit" value="${safe(x.unit)}" onchange="editItem('${x.id}','unit',this.value)"></td>
+ <td><input type="number" min="0" step="any" aria-label="Quantity" value="${fmt(x.qty)}" onchange="editItem('${x.id}','qty',this.value)"></td>
+ <td><input class="rate-input" type="number" min="0" step="any" aria-label="Unit price in ${currency}" value="${fmt(fromPKR(x.ratePKR))}" oninput="editRateLive('${x.id}',this.value)" onchange="editRate('${x.id}',this.value)"></td>
+ <td>${x.kind==='custom'?`<button class="tiny-btn" onclick="deleteItem('${x.id}')">DELETE</button>`:'<span class="sub">Default</span>'}</td>
+ </tr>`).join('')}</tbody></table>`;
 }
 
-function setCurrency(next){
- if(!['PKR','USD','EUR','GBP'].includes(next))return;
- currency = next;
- renderRates();
+// The price input handler only updates data and report values.
+// It never rebuilds the pricing table, so the input keeps focus while typing.
+function editRateLive(id,value){
+ const item=items.find(x=>x.id===id);
+ if(!item||value==='')return;
+ const number=Number(value);
+ if(!Number.isFinite(number)||number<0)return;
+ item.ratePKR=number*rateToPKR();
  recalc();
 }
 
 function editRate(id,value){
- const item = items.find(entry=>entry.id===id);
+ const item=items.find(x=>x.id===id);
  if(!item)return;
- item.ratePKR = Math.max(0,Number(value)||0)*rateToPKR();
+ const number=value===''?0:Number(value);
+ item.ratePKR=(Number.isFinite(number)&&number>=0?number:0)*rateToPKR();
  recalc();
- renderRates();
 }
 
-function setEnabled(id,on){
- const item = items.find(entry=>entry.id===id);
+function setCurrency(next){
+ if(!['PKR','USD','EUR','GBP'].includes(next))return;
+ currency=next;
+ renderRates();
+ recalc();
+}
+
+function setEnabled(id,enabled){
+ const item=items.find(x=>x.id===id);
  if(!item)return;
- item.enabled = !!on;
+ item.enabled=!!enabled;
  recalc();
  renderRates();
 }
 
 function editItem(id,key,value){
- const item = items.find(entry=>entry.id===id);
+ const item=items.find(x=>x.id===id);
  if(!item)return;
-
  if(key==='name'||key==='unit'){
-  item[key] = String(value).trim() || (key==='name'?'Custom item':'unit');
+  item[key]=String(value).trim()||(key==='name'?'Custom item':'unit');
  }
-
  if(key==='qty'){
-  item.qty = Math.max(0,Number(value)||0);
-  item.qtyOverride = true;
+  item.qty=Math.max(0,Number(value)||0);
+  item.qtyOverride=true;
  }
-
  recalc();
  renderRates();
 }
 
 function addItem(){
- const id = 'custom_'+(nextId++);
+ const id='custom_'+(nextId++);
  items.push({
   id,name:'New material / service',unit:'unit',
   ratePKR:0,qty:1,enabled:true,kind:'custom'
@@ -689,13 +653,13 @@ function addItem(){
 }
 
 function deleteItem(id){
- items = items.filter(item=>item.id!==id);
+ items=items.filter(x=>x.id!==id);
  renderRates();
  recalc();
 }
 
 function renderFX(){
- $('fxFields').innerHTML = Object.entries(fx).map(([code,value])=>`
+ $('fxFields').innerHTML=Object.entries(fx).map(([code,value])=>`
  <div class="field">
  <label>1 ${code} = how many PKR?</label>
  <input type="number" min=".01" step=".01" value="${value}" onchange="updateFX('${code}',this.value)">
@@ -704,46 +668,39 @@ function renderFX(){
 }
 
 function updateFX(code,value){
- fx[code] = Math.max(.01,Number(value)||1);
+ fx[code]=Math.max(.01,Number(value)||1);
  renderRates();
  recalc();
 }
 
 function report(){
- const d = dimensions();
- const active = items.filter(item=>item.enabled);
+ const d=dimensions();
+ const active=items.filter(x=>x.enabled);
 
- $('reportCurrencyLabel').textContent = currency;
- $('reportPKR').textContent = money(currency,fromPKR(total));
- $('reportName').textContent = ($('project').value||'Preliminary construction estimate')+' · '+d.F+' floor(s)';
+ $('reportCurrencyLabel').textContent=currency;
+ $('reportPKR').textContent=money(currency,fromPKR(total));
+ $('reportName').textContent=($('project').value||'Preliminary construction estimate')+' · '+d.F+' floor(s)';
 
- $('currencyTotals').innerHTML = [
-  ['PKR',total],
-  ['USD',total/fx.USD],
-  ['EUR',total/fx.EUR],
-  ['GBP',total/fx.GBP]
- ].map(([code,value])=>`
- <div class="currency">
- <small>${code} ESTIMATED TOTAL</small>
- <b>${money(code,value)}</b>
- </div>`).join('');
+ $('currencyTotals').innerHTML=[
+ ['PKR',total],
+ ['USD',total/fx.USD],
+ ['EUR',total/fx.EUR],
+ ['GBP',total/fx.GBP]
+ ].map(([code,value])=>`<div class="currency"><small>${code} ESTIMATED TOTAL</small><b>${money(code,value)}</b></div>`).join('');
 
- $('reportTable').innerHTML = active.length
-  ? table(active.map(item=>[
-    safe(item.name),fmt(item.qty),safe(item.unit),
-    money(currency,fromPKR(item.ratePKR)),
-    money(currency,fromPKR(item.qty*item.ratePKR))
-   ]),['Included item','Quantity','Unit','Rate ('+currency+')','Amount ('+currency+')'])
-  : '<p class="note">No items included in this estimate.</p>';
+ $('reportTable').innerHTML=active.length
+ ?table(active.map(x=>[
+  safe(x.name),fmt(x.qty),safe(x.unit),
+  money(currency,fromPKR(x.ratePKR)),
+  money(currency,fromPKR(x.qty*x.ratePKR))
+ ]),['Included item','Quantity','Unit','Rate ('+currency+')','Amount ('+currency+')'])
+ :'<p class="note">No items included in this estimate.</p>';
 
- $('grand').textContent = 'Grand total: '+money(currency,fromPKR(total));
-
- $('reportDims').innerHTML = `
- <p class="sub" style="line-height:2">
+ $('grand').textContent='Grand total: '+money(currency,fromPKR(total));
+ $('reportDims').innerHTML=`<p class="sub" style="line-height:2">
  Floor area: <b>${(d.L*d.W*d.F).toFixed(2)} m²</b> ·
  Dimensions: <b>${d.L.toFixed(2)} × ${d.W.toFixed(2)} m</b> ·
- Floors: <b>${d.F}</b> ·
- Height: <b>${d.H.toFixed(2)} m</b>
+ Floors: <b>${d.F}</b> · Height: <b>${d.H.toFixed(2)} m</b>
  </p>`;
 }
 
@@ -760,8 +717,8 @@ function save(){
 
 function resetRates(){
  if(!confirm('Restore the original sample materials and rates? Custom items will be removed.'))return;
- items = defaults.map(item=>({...item}));
- currency = 'PKR';
+ items=defaults.map(x=>({...x}));
+ currency='PKR';
  renderRates();
  recalc();
  notify('Sample material list restored.');
@@ -769,56 +726,37 @@ function resetRates(){
 
 function load(){
  try{
-  const saved = JSON.parse(localStorage.getItem('bc_items_v2')||'null');
-
+  const saved=JSON.parse(localStorage.getItem('bc_items_v2')||'null');
   if(Array.isArray(saved)&&saved.length){
-   items = saved.map(item=>({
-    ...item,
-    ratePKR:Number(item.ratePKR)||0,
-    qty:Math.max(0,Number(item.qty)||0),
-    enabled:!!item.enabled
-   }));
+   items=saved.map(x=>({...x,ratePKR:Number(x.ratePKR)||0,qty:Math.max(0,Number(x.qty)||0),enabled:!!x.enabled}));
   }else{
-   const old = JSON.parse(localStorage.getItem('bc_rates')||'[]');
+   const old=JSON.parse(localStorage.getItem('bc_rates')||'[]');
    old.forEach(([id,rate])=>{
-    const item = items.find(entry=>entry.id===id);
-    if(item)item.ratePKR = Number(rate)||item.ratePKR;
+    const item=items.find(x=>x.id===id);
+    if(item)item.ratePKR=Number(rate)||item.ratePKR;
    });
   }
-
-  fx = {...fx,...JSON.parse(localStorage.getItem('bc_fx')||'{}')};
-
-  const savedCurrency = localStorage.getItem('bc_currency');
-  if(['PKR','USD','EUR','GBP'].includes(savedCurrency)){
-   currency = savedCurrency;
-  }
-
-  nextId = items.filter(item=>item.kind==='custom').length+1;
-
-  const theme = localStorage.getItem('bc_theme');
-  if(theme)document.documentElement.dataset.theme = theme;
-
+  fx={...fx,...JSON.parse(localStorage.getItem('bc_fx')||'{}')};
+  const savedCurrency=localStorage.getItem('bc_currency');
+  if(['PKR','USD','EUR','GBP'].includes(savedCurrency))currency=savedCurrency;
+  nextId=items.filter(x=>x.kind==='custom').length+1;
+  const savedTheme=localStorage.getItem('bc_theme');
+  if(savedTheme)document.documentElement.dataset.theme=savedTheme;
  }catch(error){
   console.warn('Could not restore saved project settings',error);
  }
 }
 
 function go(id){
- document.querySelectorAll('.page').forEach(page=>{
-  page.classList.toggle('active',page.id===id);
- });
-
- document.querySelectorAll('.nav').forEach(button=>{
-  button.classList.toggle('active',button.dataset.page===id);
- });
-
+ document.querySelectorAll('.page').forEach(page=>page.classList.toggle('active',page.id===id));
+ document.querySelectorAll('.nav').forEach(button=>button.classList.toggle('active',button.dataset.page===id));
  if(id==='report')report();
  scrollTo({top:0,behavior:'smooth'});
 }
 
 function openApp(){
- $('landing').style.display = 'none';
- $('app').style.display = 'block';
+ $('landing').style.display='none';
+ $('app').style.display='block';
  renderRates();
  renderFX();
  recalc();
@@ -826,51 +764,40 @@ function openApp(){
 }
 
 function showLanding(){
- $('app').style.display = 'none';
- $('landing').style.display = 'block';
+ $('app').style.display='none';
+ $('landing').style.display='block';
  scrollTo(0,0);
 }
 
 function toggleTheme(){
- const theme = document.documentElement.dataset.theme==='dark'?'light':'dark';
- document.documentElement.dataset.theme = theme;
-
- try{
-  localStorage.setItem('bc_theme',theme);
- }catch(error){}
+ const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';
+ document.documentElement.dataset.theme=theme;
+ try{localStorage.setItem('bc_theme',theme)}catch(error){}
 }
 
 function notify(message){
- const element = $('toast');
- element.textContent = message;
- element.style.display = 'block';
-
+ const element=$('toast');
+ element.textContent=message;
+ element.style.display='block';
  clearTimeout(notify.timer);
- notify.timer = setTimeout(()=>element.style.display='none',2600);
+ notify.timer=setTimeout(()=>element.style.display='none',2600);
 }
 
 function modal(type){
- const content = {
-  terms:`
-   <h2>Terms of Use</h2>
-   <p>BuildCalc Pro is a preliminary planning and estimation tool. You are responsible for checking dimensions, assumptions, rates and outputs. Estimates are not professional architectural drawings, structural calculations, bills of quantities, contractor quotations or guarantees of actual cost.</p>
-   <p>Do not use this tool instead of a qualified architect, engineer, quantity surveyor, contractor or local building authority. Sample prices and formulas are illustrative and must be verified for your project.</p>
-  `,
-  privacy:`
-   <h2>Privacy Policy</h2>
-   <p>BuildCalc Pro stores project dimensions, selected materials, custom rates, currency and theme locally in your browser where supported. The site may use third-party hosting, fonts, images, analytics and advertising services. If Google AdSense is enabled, Google and its partners may use cookies or similar technologies to serve and measure ads, subject to your consent and applicable regional requirements. See Google advertising and privacy disclosures for details. Do not enter sensitive personal or financial information.</p>
-   <p>External photography, fonts and the optional 3D library load from third-party services. Before publishing, replace this template with your real operator identity, contact details, data retention practices, analytics/advertising vendors, cookie-consent process and applicable legal disclosures. This template is not legal advice.</p>
-  `,
-  contact:`
-   <h2>Contact Us</h2>
-   <p>For BuildCalc Pro enquiries, contact the site operator:</p>
-   <p>Replace this section with a monitored business email address before launch.</p>
-   <a class="btn primary" href="mailto:contact@yourdomain.com">EMAIL SUPPORT ↗</a>
-   <p>Do not send passwords or payment details through this demo contact link.</p>
-  `
+ const content={
+ terms:`<h2>Terms of Use</h2>
+ <p>BuildCalc Pro is a preliminary planning and estimation tool. You are responsible for checking dimensions, assumptions, rates and outputs. Estimates are not professional architectural drawings, structural calculations, bills of quantities, contractor quotations or guarantees of actual cost.</p>
+ <p>Do not use this tool instead of a qualified architect, engineer, quantity surveyor, contractor or local building authority. Sample prices and formulas are illustrative and must be verified for your project.</p>`,
+ privacy:`<h2>Privacy Policy</h2>
+ <p>BuildCalc Pro stores project dimensions, selected materials, custom rates, currency and theme locally in your browser where supported. The site may use third-party hosting, fonts, images, analytics and advertising services. If Google AdSense is enabled, Google and its partners may use cookies or similar technologies to serve and measure ads, subject to your consent and applicable regional requirements. See Google's advertising and privacy disclosures for details. Do not enter sensitive personal or financial information.</p>
+ <p>Before publishing, replace this template with your real operator identity, contact details, data retention practices, analytics/advertising vendors, cookie-consent process and applicable legal disclosures. This template is not legal advice.</p>`,
+ contact:`<h2>Contact Us</h2>
+ <p>For BuildCalc Pro enquiries, contact the site operator.</p>
+ <p>Replace this section with a monitored business email address before launch.</p>
+ <a class="btn primary" href="mailto:contact@yourdomain.com">EMAIL SUPPORT ↗</a>
+ <p>Do not send passwords or payment details through this demo contact link.</p>`
  };
-
- $('modalText').innerHTML = content[type]||'';
+ $('modalText').innerHTML=content[type]||'';
  $('modal').classList.add('open');
 }
 
@@ -878,12 +805,16 @@ function closeModal(){
  $('modal').classList.remove('open');
 }
 
+// Restore saved settings and initialize the calculator.
 load();
 renderRates();
 renderFX();
 recalc();
 </script>
 
-<!-- AdSense launch checklist: add /ads.txt containing your exact Google-provided publisher record after approval. Never invent the pub ID or ads.txt line. -->
+<!-- AdSense launch checklist:
+     Add /ads.txt containing your exact Google-provided publisher record after approval.
+     Never invent the publisher ID or ads.txt line.
+-->
 </body>
 </html>
