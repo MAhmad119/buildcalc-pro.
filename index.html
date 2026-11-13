@@ -2,703 +2,458 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="Discover premium Micro-SaaS tools and digital utilities by Ahmad Mughal.">
-    <meta name="theme-color" content="#090d16">
-
-    <title>SaaS Tools Hub | Ahmad Mughal</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-dark: #090d16;
-            --card-bg: #111827;
-            --card-border: #1f2937;
-            --primary: #3b82f6;
-            --primary-hover: #2563eb;
-            --accent: #10b981;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d18">
+  <title>SaaS Tools Hub | Ahmad Mughal</title>
+  <meta name="description" content="Explore professional micro-SaaS tools and digital utilities built by Ahmad Mughal.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui']
+          }
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        a {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Navbar */
-        header {
-            background: #111827;
-            border-bottom: 1px solid var(--card-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #60a5fa;
-            white-space: nowrap;
-        }
-
-        .nav-cta {
-            background: var(--primary);
-            color: #fff;
-            text-decoration: none;
-            padding: 0.65rem 1.1rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.2s;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .nav-cta:hover {
-            background: var(--primary-hover);
-        }
-
-        /* Hero */
-        .hero {
-            text-align: center;
-            padding: 5rem 5% 3.5rem;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .badge {
-            display: inline-block;
-            background: rgba(59, 130, 246, 0.15);
-            color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            padding: 0.35rem 1rem;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.2rem;
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 5% 5rem;
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary);
-            padding-left: 12px;
-        }
-
-        /* Tools Grid */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-            gap: 1.8rem;
-        }
-
-        .tool-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.8rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-width: 0;
-            transition: transform 0.25s ease, border-color 0.25s ease;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .card-tag {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .tool-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.6rem;
-        }
-
-        .tool-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .price-tag {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 1rem;
-        }
-
-        .price-tag span {
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: var(--text-muted);
-        }
-
-        /* Buttons */
-        .card-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-height: 45px;
-            text-align: center;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: background 0.2s, border-color 0.2s;
-            cursor: pointer;
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-demo {
-            background: #1f2937;
-            color: #fff;
-            border: 1px solid #374151;
-        }
-
-        .btn-demo:hover {
-            background: #374151;
-        }
-
-        .btn-pay {
-            background: var(--primary);
-            color: #fff;
-            border: 1px solid var(--primary);
-        }
-
-        .btn-pay:hover {
-            background: var(--primary-hover);
-            border-color: var(--primary-hover);
-        }
-
-        .btn-whatsapp {
-            background: rgba(16, 185, 129, 0.15);
-            color: #34d399;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-whatsapp:hover {
-            background: rgba(16, 185, 129, 0.25);
-        }
-
-        /* Custom SaaS Banner */
-        .custom-banner {
-            margin-top: 4rem;
-            background: #111827;
-            border: 1px solid #334155;
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .custom-banner h2 {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .custom-banner p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 1.5rem;
-        }
-
-        .custom-btn {
-            display: inline-flex;
-            width: auto;
-            padding: 0.9rem 2rem;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--card-border);
-            text-align: center;
-            padding: 2.5rem 5%;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: #60a5fa;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Mobile */
-        @media (max-width: 600px) {
-            header {
-                padding: 0.9rem 4%;
-            }
-
-            .logo {
-                font-size: 1.05rem;
-            }
-
-            .nav-cta {
-                font-size: 0.75rem;
-                padding: 0.6rem 0.7rem;
-            }
-
-            .hero {
-                padding: 3.5rem 5% 2.5rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 0.95rem;
-            }
-
-            .tools-grid {
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-            }
-
-            .tool-card {
-                padding: 1.4rem;
-            }
-
-            .custom-banner {
-                padding: 2rem 1.2rem;
-            }
-
-            .custom-banner h2 {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* Accessibility */
-        a:focus-visible {
-            outline: 2px solid #60a5fa;
-            outline-offset: 4px;
-        }
-    </style>
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; }
+    .dark body { background: #080d18; color: #e5e7eb; }
+    body { background: #f8fafc; color: #0f172a; }
+    .dark .surface { background: #101827; border-color: #263449; }
+    .surface { background: #ffffff; border: 1px solid #e2e8f0; }
+    .dark .muted { color: #94a3b8; }
+    .muted { color: #64748b; }
+    .tool-card { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .tool-card:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 18px 45px rgba(37,99,235,.10); }
+    .primary-btn { background: #2563eb; color: white; transition: .2s; }
+    .primary-btn:hover { background: #1d4ed8; }
+    .secondary-btn { border: 1px solid #cbd5e1; transition: .2s; }
+    .dark .secondary-btn { border-color: #334155; }
+    .secondary-btn:hover { border-color: #3b82f6; color: #3b82f6; }
+    .disabled-btn { opacity: .55; cursor: not-allowed; }
+    .modal-backdrop { background: rgba(2,6,23,.78); backdrop-filter: blur(5px); }
+    .modal-panel { max-height: 85vh; overflow-y: auto; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+  </style>
 </head>
 
-<body>
+<body class="min-h-screen">
 
-    <!-- Navigation -->
-    <header>
-        <div class="logo">SaaS Tools Hub ⚡</div>
+  <!-- Navigation -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-[#080d18]/90 backdrop-blur-xl">
+    <nav class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-xl">A</div>
+        <div>
+          <div class="font-extrabold tracking-tight text-lg">AHMAD <span class="text-blue-500">BUILDS</span></div>
+          <div class="text-[10px] muted tracking-[2px] uppercase">SaaS Tools Hub</div>
+        </div>
+      </a>
 
-        <a
-            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20visited%20your%20SaaS%20Tools%20Hub!"
-            class="nav-cta"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            WhatsApp Support
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+        <a href="#tools" class="hover:text-blue-500">Explore Tools</a>
+        <a href="#about" class="hover:text-blue-500">About</a>
+        <a href="#contact" class="hover:text-blue-500">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button id="themeToggle" class="w-10 h-10 rounded-xl surface flex items-center justify-center" aria-label="Toggle theme">
+          <span id="themeIcon">☾</span>
+        </button>
+        <a href="https://wa.me/923089427333" target="_blank" rel="noopener noreferrer"
+           class="hidden sm:inline-flex primary-btn px-4 py-2.5 rounded-xl text-sm font-bold">
+          Contact Us
         </a>
-    </header>
+      </div>
+    </nav>
+  </header>
 
+  <main>
     <!-- Hero -->
-    <section class="hero">
-        <div class="badge">
-            Production-Ready Web Utilities by Ahmad Mughal
+    <section class="relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-5 pt-20 pb-16 md:pt-28 md:pb-24 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full surface text-xs font-bold mb-7">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          INDEPENDENT DIGITAL PRODUCTS
         </div>
 
-        <h1>Launch Your Own Micro-SaaS Tools in Minutes</h1>
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight leading-tight max-w-5xl mx-auto">
+          Launch Your Next
+          <span class="text-blue-500">Digital Advantage.</span>
+        </h1>
 
-        <p>
-            High-converting, modern web utilities built for creators
-            and indie hackers. One-time purchase with full source code
-            and commercial license.
+        <p class="muted max-w-2xl mx-auto mt-7 text-base md:text-lg leading-8">
+          Discover practical web tools and digital utilities built to simplify everyday tasks.
+          Explore our collection of independent micro-SaaS projects.
         </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-3 mt-9">
+          <a href="#tools" class="primary-btn px-7 py-3.5 rounded-xl font-bold">
+            Explore All Tools →
+          </a>
+          <a href="https://wa.me/923089427333" target="_blank" rel="noopener noreferrer"
+             class="secondary-btn px-7 py-3.5 rounded-xl font-bold">
+            Get in Touch
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 max-w-xl mx-auto mt-16">
+          <div class="surface rounded-2xl p-4">
+            <div class="text-2xl md:text-3xl font-black text-blue-500">05</div>
+            <div class="muted text-xs mt-1">Digital Tools</div>
+          </div>
+          <div class="surface rounded-2xl p-4">
+            <div class="text-2xl md:text-3xl font-black text-blue-500">24/7</div>
+            <div class="muted text-xs mt-1">Online Access</div>
+          </div>
+          <div class="surface rounded-2xl p-4">
+            <div class="text-2xl md:text-3xl font-black text-blue-500">2026</div>
+            <div class="muted text-xs mt-1">Building Year</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="container">
+    <!-- Tools -->
+    <section id="tools" class="max-w-7xl mx-auto px-5 py-16 md:py-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10">
+        <div>
+          <div class="text-blue-500 text-xs font-extrabold tracking-[3px] uppercase mb-3">OUR COLLECTION</div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight">Featured Micro-SaaS Tools</h2>
+          <p class="muted mt-3">Explore our digital products and their live demonstrations.</p>
+        </div>
+        <div class="text-sm muted">05 Products Available</div>
+      </div>
 
-        <h2 class="section-title">Featured Micro-SaaS Tools</h2>
+      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
 
-        <div class="tools-grid">
+        <!-- OutreachAI -->
+        <article class="tool-card surface rounded-3xl p-6 flex flex-col">
+          <div class="flex items-start justify-between">
+            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center text-3xl">✉️</div>
+            <span class="text-[10px] font-extrabold tracking-wider bg-blue-500/10 text-blue-500 px-3 py-1.5 rounded-full">AI & OUTREACH</span>
+          </div>
+          <h3 class="text-xl font-extrabold mt-6">OutreachAI</h3>
+          <p class="muted text-sm mt-3 leading-6 flex-grow">
+            Create personalized cold emails, freelance pitches and professional outreach message drafts using built-in templates.
+          </p>
+          <div class="border-t border-slate-200 dark:border-slate-700 mt-6 pt-5">
+            <div class="flex items-center justify-between mb-5">
+              <span class="muted text-xs">Full Source Code</span>
+              <span class="text-2xl font-black">$299</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <a href="https://ai-outreach-web-blue.vercel.app/" target="_blank" rel="noopener noreferrer"
+                 class="primary-btn text-center rounded-xl py-3 text-sm font-bold">Live Demo ↗</a>
+              <a href="https://link.payoneer.com/Token?t=BCF33367AACD45248CC2E3D60535E5FA&src=mobile"
+                 target="_blank" rel="noopener noreferrer"
+                 class="secondary-btn text-center rounded-xl py-3 text-sm font-bold">Purchase ↗</a>
+            </div>
+          </div>
+        </article>
 
-            <!-- TOOL 1: Outreach AI -->
-            <article class="tool-card">
+        <!-- BuildCalc -->
+        <article class="tool-card surface rounded-3xl p-6 flex flex-col">
+          <div class="flex items-start justify-between">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-3xl">🏗️</div>
+            <span class="text-[10px] font-extrabold tracking-wider bg-amber-500/10 text-amber-500 px-3 py-1.5 rounded-full">CONSTRUCTION</span>
+          </div>
+          <h3 class="text-xl font-extrabold mt-6">BuildCalc Pro</h3>
+          <p class="muted text-sm mt-3 leading-6 flex-grow">
+            Construction material estimation tool for calculating bricks, cement, sand and other building materials.
+          </p>
+          <div class="border-t border-slate-200 dark:border-slate-700 mt-6 pt-5">
+            <div class="flex items-center justify-between mb-5">
+              <span class="muted text-xs">Full Source Code</span>
+              <span class="text-2xl font-black">$150</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <button type="button" disabled title="Demo URL needs to be corrected"
+                class="disabled-btn bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-xl py-3 text-sm font-bold">
+                Demo Unavailable
+              </button>
+              <a href="https://link.payoneer.com/Token?t=643EFDDA78B04EEB981C84597A039214&src=mobile"
+                 target="_blank" rel="noopener noreferrer"
+                 class="secondary-btn text-center rounded-xl py-3 text-sm font-bold">Purchase ↗</a>
+            </div>
+            <p class="text-xs text-amber-600 dark:text-amber-400 mt-3">Demo link needs correction before publishing.</p>
+          </div>
+        </article>
 
-                <div>
-                    <div class="card-tag">AI & Lead Generation</div>
+        <!-- Agency Proposal Builder -->
+        <article class="tool-card surface rounded-3xl p-6 flex flex-col">
+          <div class="flex items-start justify-between">
+            <div class="w-14 h-14 rounded-2xl bg-purple-500/10 text-purple-500 flex items-center justify-center text-3xl">📄</div>
+            <span class="text-[10px] font-extrabold tracking-wider bg-purple-500/10 text-purple-500 px-3 py-1.5 rounded-full">BUSINESS</span>
+          </div>
+          <h3 class="text-xl font-extrabold mt-6">Agency Proposal Builder</h3>
+          <p class="muted text-sm mt-3 leading-6 flex-grow">
+            Build professional client proposals with pricing calculations and exportable PDF summaries.
+          </p>
+          <div class="border-t border-slate-200 dark:border-slate-700 mt-6 pt-5">
+            <div class="flex items-center justify-between mb-5">
+              <span class="muted text-xs">Full Source Code</span>
+              <span class="text-2xl font-black">$99</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <a href="https://agency-proposal-builder.vercel.app/" target="_blank" rel="noopener noreferrer"
+                 class="primary-btn text-center rounded-xl py-3 text-sm font-bold">Live Demo ↗</a>
+              <a href="https://link.payoneer.com/Token?t=336317ACB9E74DE6A25C9350A6391816&src=mobile"
+                 target="_blank" rel="noopener noreferrer"
+                 class="secondary-btn text-center rounded-xl py-3 text-sm font-bold">Purchase ↗</a>
+            </div>
+          </div>
+        </article>
 
-                    <h3>OutreachAI: Cold Messaging Tool</h3>
+        <!-- Image Resizer -->
+        <article class="tool-card surface rounded-3xl p-6 flex flex-col">
+          <div class="flex items-start justify-between">
+            <div class="w-14 h-14 rounded-2xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-3xl">🖼️</div>
+            <span class="text-[10px] font-extrabold tracking-wider bg-pink-500/10 text-pink-500 px-3 py-1.5 rounded-full">MEDIA TOOLS</span>
+          </div>
+          <h3 class="text-xl font-extrabold mt-6">Image Resizer Pro</h3>
+          <p class="muted text-sm mt-3 leading-6 flex-grow">
+            Resize and compress images, adjust dimensions and convert image formats through a simple interface.
+          </p>
+          <div class="border-t border-slate-200 dark:border-slate-700 mt-6 pt-5">
+            <div class="flex items-center justify-between mb-5">
+              <span class="muted text-xs">Full Source Code</span>
+              <span class="text-2xl font-black">$49</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <a href="https://image-resizer-tool-one.vercel.app/" target="_blank" rel="noopener noreferrer"
+                 class="primary-btn text-center rounded-xl py-3 text-sm font-bold">Live Demo ↗</a>
+              <a href="https://link.payoneer.com/Token?t=3128A10E961E4C11A96D1589FC704E15&src=mobile"
+                 target="_blank" rel="noopener noreferrer"
+                 class="secondary-btn text-center rounded-xl py-3 text-sm font-bold">Purchase ↗</a>
+            </div>
+          </div>
+        </article>
 
-                    <p>
-                        Automate and optimize personalized cold outreach
-                        messages for LinkedIn, WhatsApp, and SMS with
-                        high conversion templates.
-                    </p>
-                </div>
+        <!-- StudyMate -->
+        <article class="tool-card surface rounded-3xl p-6 flex flex-col">
+          <div class="flex items-start justify-between">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-3xl">📚</div>
+            <span class="text-[10px] font-extrabold tracking-wider bg-emerald-500/10 text-emerald-500 px-3 py-1.5 rounded-full">EDTECH</span>
+          </div>
+          <h3 class="text-xl font-extrabold mt-6">StudyMate Student Planner</h3>
+          <p class="muted text-sm mt-3 leading-6 flex-grow">
+            Organize study sessions with exam countdowns, a Pomodoro focus timer and subject progress tracking.
+          </p>
+          <div class="border-t border-slate-200 dark:border-slate-700 mt-6 pt-5">
+            <div class="flex items-center justify-between mb-5">
+              <span class="muted text-xs">Full Source Code</span>
+              <span class="text-2xl font-black">$25</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <a href="https://studymate-student-planner-ctlw.vercel.app/" target="_blank" rel="noopener noreferrer"
+                 class="primary-btn text-center rounded-xl py-3 text-sm font-bold">Live Demo ↗</a>
+              <a href="https://link.payoneer.com/Token?t=F75B09F66E3B4DA2B9BBB475C43E9CD9&src=mobile"
+                 target="_blank" rel="noopener noreferrer"
+                 class="secondary-btn text-center rounded-xl py-3 text-sm font-bold">Purchase ↗</a>
+            </div>
+          </div>
+        </article>
 
-                <div>
-                    <div class="price-tag">
-                        $299 <span>/ Full Source Code</span>
-                    </div>
+      </div>
+    </section>
 
-                    <div class="card-links">
+    <!-- About -->
+    <section id="about" class="max-w-7xl mx-auto px-5 py-16">
+      <div class="surface rounded-3xl p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <div class="text-blue-500 text-xs font-extrabold tracking-[3px] uppercase mb-3">ABOUT THE BUILDER</div>
+          <h2 class="text-3xl md:text-4xl font-black">Built with Purpose.<br><span class="text-blue-500">Designed for Utility.</span></h2>
+          <p class="muted leading-7 mt-5">
+            Ahmad Builds is an independent digital product initiative focused on creating practical,
+            accessible and easy-to-use web utilities.
+          </p>
+          <p class="muted leading-7 mt-3">
+            Each project is developed with a focus on usability, simple workflows and clean interfaces.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-blue-500/10 rounded-2xl p-6">
+            <div class="text-3xl mb-3">⚡</div>
+            <h3 class="font-extrabold">Simple</h3>
+            <p class="muted text-sm mt-2">Straightforward user experiences.</p>
+          </div>
+          <div class="bg-emerald-500/10 rounded-2xl p-6">
+            <div class="text-3xl mb-3">🛠️</div>
+            <h3 class="font-extrabold">Practical</h3>
+            <p class="muted text-sm mt-2">Tools focused on real tasks.</p>
+          </div>
+          <div class="bg-purple-500/10 rounded-2xl p-6">
+            <div class="text-3xl mb-3">💡</div>
+            <h3 class="font-extrabold">Creative</h3>
+            <p class="muted text-sm mt-2">Ideas turned into web projects.</p>
+          </div>
+          <div class="bg-amber-500/10 rounded-2xl p-6">
+            <div class="text-3xl mb-3">🌐</div>
+            <h3 class="font-extrabold">Accessible</h3>
+            <p class="muted text-sm mt-2">Web-based digital experiences.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                        <a
-                            href="https://ai-outreach-web.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-demo"
-                        >
-                            Live Demo
-                        </a>
+    <!-- Contact -->
+    <section id="contact" class="max-w-7xl mx-auto px-5 py-16">
+      <div class="bg-blue-600 rounded-3xl p-8 md:p-14 text-white text-center">
+        <div class="text-xs font-extrabold tracking-[3px] uppercase text-blue-100">HAVE A QUESTION?</div>
+        <h2 class="text-3xl md:text-5xl font-black mt-4">Let's Connect.</h2>
+        <p class="text-blue-100 max-w-xl mx-auto mt-4 leading-7">
+          Need product information or have a question about one of our tools?
+          Get in touch through WhatsApp.
+        </p>
+        <a href="https://wa.me/923089427333" target="_blank" rel="noopener noreferrer"
+           class="inline-flex mt-8 bg-white text-blue-700 font-extrabold px-8 py-4 rounded-xl hover:bg-blue-50 transition">
+          Chat on WhatsApp ↗
+        </a>
+      </div>
+    </section>
+  </main>
 
-                        <a
-                            href="https://link.payoneer.com/Token?t=BCF33367AACD45248CC2E3D60535E5FA&src=mobile"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-pay"
-                        >
-                            Pay with Payoneer ($299)
-                        </a>
-
-                        <a
-                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%24299%20via%20Payoneer%20for%20OutreachAI%20source%20code."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-whatsapp"
-                        >
-                            WhatsApp Support
-                        </a>
-
-                    </div>
-                </div>
-
-            </article>
-
-            <!-- TOOL 2: BuildCalc Pro -->
-            <article class="tool-card">
-
-                <div>
-                    <div class="card-tag">Construction & Estimation</div>
-
-                    <h3>BuildCalc Pro: Construction Calculator</h3>
-
-                    <p>
-                        Instant material estimator for bricks, cement,
-                        sand, and rebar with real-time cost projections
-                        and dark Neumorphic UI.
-                    </p>
-                </div>
-
-                <div>
-                    <div class="price-tag">
-                        $150 <span>/ Full Source Code</span>
-                    </div>
-
-                    <div class="card-links">
-
-                        <a
-                            href="https://buildcalc-pro-pz6x.vercel.app"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-demo"
-                        >
-                            Live Demo
-                        </a>
-
-                        <a
-                            href="https://link.payoneer.com/Token?t=643EFDDA78B04EEB981C84597A039214&src=mobile"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-pay"
-                        >
-                            Pay with Payoneer ($150)
-                        </a>
-
-                        <a
-                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%24150%20via%20Payoneer%20for%20BuildCalc%20Pro%20source%20code."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-whatsapp"
-                        >
-                            WhatsApp Support
-                        </a>
-
-                    </div>
-                </div>
-
-            </article>
-
-            <!-- TOOL 3: Agency Proposal Builder -->
-            <article class="tool-card">
-
-                <div>
-                    <div class="card-tag">Business & Agencies</div>
-
-                    <h3>Agency Proposal Builder</h3>
-
-                    <p>
-                        Create sleek, interactive client proposals with
-                        instant pricing calculators and exportable PDF
-                        summaries in seconds.
-                    </p>
-                </div>
-
-                <div>
-                    <div class="price-tag">
-                        $99 <span>/ Full Source Code</span>
-                    </div>
-
-                    <div class="card-links">
-
-                        <a
-                            href="https://agency-proposal-builder.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-demo"
-                        >
-                            Live Demo
-                        </a>
-
-                        <a
-                            href="https://link.payoneer.com/Token?t=336317ACB9E74DE6A25C9350A6391816&src=mobile"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-pay"
-                        >
-                            Pay with Payoneer ($99)
-                        </a>
-
-                        <a
-                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%2499%20via%20Payoneer%20for%20Agency%20Proposal%20Builder%20source%20code."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-whatsapp"
-                        >
-                            WhatsApp Support
-                        </a>
-
-                    </div>
-                </div>
-
-            </article>
-
-            <!-- TOOL 4: Image Resizer Pro -->
-            <article class="tool-card">
-
-                <div>
-                    <div class="card-tag">Media & Utilities</div>
-
-                    <h3>Image Resizer Pro</h3>
-
-                    <p>
-                        Instant batch image resizing, compression
-                        (up to 90%), and format conversion with zero
-                        recurring server costs.
-                    </p>
-                </div>
-
-                <div>
-                    <div class="price-tag">
-                        $49 <span>/ Full Source Code</span>
-                    </div>
-
-                    <div class="card-links">
-
-                        <a
-                            href="https://image-resizer-tool-one.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-demo"
-                        >
-                            Live Demo
-                        </a>
-
-                        <a
-                            href="https://link.payoneer.com/Token?t=3128A10E961E4C11A96D1589FC704E15&src=mobile"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-pay"
-                        >
-                            Pay with Payoneer ($49)
-                        </a>
-
-                        <a
-                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%2449%20via%20Payoneer%20for%20Image%20Resizer%20Pro%20source%20code."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-whatsapp"
-                        >
-                            WhatsApp Support
-                        </a>
-
-                    </div>
-                </div>
-
-            </article>
-
-            <!-- TOOL 5: StudyMate -->
-            <article class="tool-card">
-
-                <div>
-                    <div class="card-tag">Productivity & EdTech</div>
-
-                    <h3>StudyMate Student Planner</h3>
-
-                    <p>
-                        Smart exam countdown, Pomodoro focus timer,
-                        and subject progress tracker built for
-                        students and self-learners.
-                    </p>
-                </div>
-
-                <div>
-                    <div class="price-tag">
-                        $25 <span>/ Full Source Code</span>
-                    </div>
-
-                    <div class="card-links">
-
-                        <a
-                            href="https://studymate-student-planner-ctlw.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-demo"
-                        >
-                            Live Demo
-                        </a>
-
-                        <a
-                            href="https://link.payoneer.com/Token?t=F75B09F66E3B4DA2B9BBB475C43E9CD9&src=mobile"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-pay"
-                        >
-                            Pay with Payoneer ($25)
-                        </a>
-
-                        <a
-                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%2425%20via%20Payoneer%20for%20StudyMate%20source%20code."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-whatsapp"
-                        >
-                            WhatsApp Support
-                        </a>
-
-                    </div>
-                </div>
-
-            </article>
-
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 mt-10">
+    <div class="max-w-7xl mx-auto px-5 py-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="text-center md:text-left">
+          <div class="font-black text-xl">AHMAD <span class="text-blue-500">BUILDS</span></div>
+          <p class="muted text-sm mt-2">Independent Micro-SaaS & Digital Utilities.</p>
         </div>
 
-        <!-- Custom SaaS Section -->
-        <section class="custom-banner">
+        <div class="flex flex-wrap justify-center gap-5 text-sm font-semibold">
+          <button class="footer-modal-btn hover:text-blue-500" data-modal="aboutModal">About Us</button>
+          <button class="footer-modal-btn hover:text-blue-500" data-modal="privacyModal">Privacy Policy</button>
+          <button class="footer-modal-btn hover:text-blue-500" data-modal="termsModal">Terms of Use</button>
+        </div>
+      </div>
 
-            <h2>Need a Custom Micro-SaaS Tool Built From Scratch?</h2>
+      <div class="border-t border-slate-200 dark:border-slate-800 mt-8 pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs muted text-center">
+        <p>© <span id="year"></span> Ahmad Mughal. All rights reserved.</p>
+        <p>Designed & Built by Ahmad Builds.</p>
+      </div>
+    </div>
+  </footer>
 
-            <p>
-                Get a fully self-hosted, modern dark-UI web utility
-                tailored to your exact business idea—delivered fast
-                with complete source code.
-            </p>
+  <!-- About Modal -->
+  <div id="aboutModal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+    <div class="modal-panel surface rounded-2xl p-7 max-w-lg w-full">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-xl font-black">About Ahmad Builds</h3>
+        <button class="close-modal text-2xl muted" aria-label="Close">&times;</button>
+      </div>
+      <p class="muted text-sm leading-7">
+        Ahmad Builds is an independent digital product initiative creating practical web tools
+        and micro-SaaS projects. Our goal is to make useful digital experiences accessible through
+        simple interfaces and focused functionality.
+      </p>
+    </div>
+  </div>
 
-            <a
-                href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20want%20to%20discuss%20a%20custom%20SaaS%20tool."
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-pay custom-btn"
-            >
-                Request Custom Build on WhatsApp
-            </a>
+  <!-- Privacy Modal -->
+  <div id="privacyModal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+    <div class="modal-panel surface rounded-2xl p-7 max-w-lg w-full">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-xl font-black">Privacy Policy</h3>
+        <button class="close-modal text-2xl muted" aria-label="Close">&times;</button>
+      </div>
+      <div class="muted text-sm leading-7 space-y-3">
+        <p><strong>Information:</strong> This hub does not provide a customer account or directly collect payment details.</p>
+        <p><strong>External links:</strong> Demo websites, payment providers and WhatsApp are third-party services. Their own privacy policies apply when you visit them.</p>
+        <p><strong>Payments:</strong> Payments are handled by the linked payment provider, not by this website.</p>
+        <p><strong>Contact:</strong> Contact us through the WhatsApp link for questions about this website.</p>
+      </div>
+    </div>
+  </div>
 
-        </section>
+  <!-- Terms Modal -->
+  <div id="termsModal" class="hidden fixed inset-0 z-50 modal-backdrop items-center justify-center p-4">
+    <div class="modal-panel surface rounded-2xl p-7 max-w-lg w-full">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-xl font-black">Terms of Use</h3>
+        <button class="close-modal text-2xl muted" aria-label="Close">&times;</button>
+      </div>
+      <div class="muted text-sm leading-7 space-y-3">
+        <p><strong>1. Website use:</strong> Use this website lawfully and respectfully.</p>
+        <p><strong>2. Product information:</strong> Product descriptions and features are provided for general information. Check the relevant product before making a decision.</p>
+        <p><strong>3. External services:</strong> Third-party websites and payment providers operate under their own terms.</p>
+        <p><strong>4. Availability:</strong> Product demos and website features may change or become temporarily unavailable.</p>
+        <p><strong>5. Contact:</strong> Contact us if you have questions about a listed product.</p>
+      </div>
+    </div>
+  </div>
 
-    </main>
+  <script>
+    // Theme handling
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const savedTheme = localStorage.getItem('ahmad-builds-theme');
 
-    <!-- Footer -->
-    <footer>
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+      themeIcon.textContent = '☀';
+    } else {
+      document.documentElement.classList.add('dark');
+      themeIcon.textContent = '☾';
+    }
 
-        <p>
-            © 2026 <strong>Ahmad Mughal</strong>
-            (Indie Hacker & SaaS Builder)
-            | Global Checkout via Payoneer
-        </p>
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      themeIcon.textContent = isDark ? '☾' : '☀';
+      localStorage.setItem('ahmad-builds-theme', isDark ? 'dark' : 'light');
+    });
 
-        <p style="margin-top: 0.5rem;">
-            WhatsApp:
-            <a
-                href="https://wa.me/923089423733"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                +92 308 9423733
-            </a>
-        </p>
+    // Footer modal handling
+    const modalButtons = document.querySelectorAll('.footer-modal-btn');
+    const modals = document.querySelectorAll('.modal-backdrop');
 
-    </footer>
+    modalButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modal = document.getElementById(button.dataset.modal);
+        if (modal) {
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        }
+      });
+    });
 
+    function closeModal(modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.querySelectorAll('.close-modal').forEach(button => {
+      button.addEventListener('click', () => {
+        closeModal(button.closest('.modal-backdrop'));
+      });
+    });
+
+    modals.forEach(modal => {
+      modal.addEventListener('click', event => {
+        if (event.target === modal) closeModal(modal);
+      });
+    });
+
+    // Escape key closes open modal
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        modals.forEach(modal => closeModal(modal));
+      }
+    });
+
+    // Dynamic copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
