@@ -1,10 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaaS Tools Hub | Micro-SaaS & Digital Utilities by Ahmad Mughal</title>
+
+    <meta name="description" content="Discover premium Micro-SaaS tools and digital utilities by Ahmad Mughal.">
+    <meta name="theme-color" content="#090d16">
+
+    <title>SaaS Tools Hub | Ahmad Mughal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg-dark: #090d16;
@@ -24,16 +33,24 @@
             font-family: 'Inter', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: var(--bg-dark);
+            background: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* Navbar */
         header {
-            background: rgba(17, 24, 39, 0.85);
-            backdrop-filter: blur(12px);
+            background: #111827;
             border-bottom: 1px solid var(--card-border);
             position: sticky;
             top: 0;
@@ -42,32 +59,34 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 15px;
         }
 
         .logo {
             font-size: 1.4rem;
             font-weight: 800;
-            background: linear-gradient(90deg, #60a5fa, #34d399);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #60a5fa;
+            white-space: nowrap;
         }
 
         .nav-cta {
             background: var(--primary);
             color: #fff;
             text-decoration: none;
-            padding: 0.6rem 1.2rem;
+            padding: 0.65rem 1.1rem;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: 0.2s;
+            display: inline-block;
+            text-align: center;
         }
 
         .nav-cta:hover {
             background: var(--primary-hover);
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             text-align: center;
             padding: 5rem 5% 3.5rem;
@@ -96,11 +115,11 @@
 
         .hero p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin-bottom: 2rem;
         }
 
-        /* Tools Grid */
+        /* Main Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -115,9 +134,10 @@
             padding-left: 12px;
         }
 
+        /* Tools Grid */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
             gap: 1.8rem;
         }
 
@@ -129,6 +149,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            min-width: 0;
             transition: transform 0.25s ease, border-color 0.25s ease;
         }
 
@@ -169,21 +190,29 @@
             color: var(--text-muted);
         }
 
+        /* Buttons */
         .card-links {
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
+            gap: 0.7rem;
         }
 
         .btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 45px;
             text-align: center;
-            padding: 0.7rem 1rem;
+            padding: 0.75rem 1rem;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.9rem;
             text-decoration: none;
-            transition: 0.2s;
+            transition: background 0.2s, border-color 0.2s;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
         }
 
         .btn-demo {
@@ -199,10 +228,12 @@
         .btn-pay {
             background: var(--primary);
             color: #fff;
+            border: 1px solid var(--primary);
         }
 
         .btn-pay:hover {
             background: var(--primary-hover);
+            border-color: var(--primary-hover);
         }
 
         .btn-whatsapp {
@@ -218,7 +249,7 @@
         /* Custom SaaS Banner */
         .custom-banner {
             margin-top: 4rem;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background: #111827;
             border: 1px solid #334155;
             border-radius: 20px;
             padding: 3rem 2rem;
@@ -236,6 +267,12 @@
             margin: 0 auto 1.5rem;
         }
 
+        .custom-btn {
+            display: inline-flex;
+            width: auto;
+            padding: 0.9rem 2rem;
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid var(--card-border);
@@ -250,127 +287,417 @@
             text-decoration: none;
         }
 
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile */
         @media (max-width: 600px) {
-            .hero h1 { font-size: 2rem; }
+            header {
+                padding: 0.9rem 4%;
+            }
+
+            .logo {
+                font-size: 1.05rem;
+            }
+
+            .nav-cta {
+                font-size: 0.75rem;
+                padding: 0.6rem 0.7rem;
+            }
+
+            .hero {
+                padding: 3.5rem 5% 2.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .tool-card {
+                padding: 1.4rem;
+            }
+
+            .custom-banner {
+                padding: 2rem 1.2rem;
+            }
+
+            .custom-banner h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Accessibility */
+        a:focus-visible {
+            outline: 2px solid #60a5fa;
+            outline-offset: 4px;
         }
     </style>
 </head>
+
 <body>
 
+    <!-- Navigation -->
     <header>
         <div class="logo">SaaS Tools Hub ⚡</div>
-        <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20visited%20your%20SaaS%20Tools%20Hub!" target="_blank" class="nav-cta">WhatsApp Support</a>
+
+        <a
+            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20visited%20your%20SaaS%20Tools%20Hub!"
+            class="nav-cta"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            WhatsApp Support
+        </a>
     </header>
 
+    <!-- Hero -->
     <section class="hero">
-        <div class="badge">Production-Ready Web Utilities by Ahmad Mughal</div>
+        <div class="badge">
+            Production-Ready Web Utilities by Ahmad Mughal
+        </div>
+
         <h1>Launch Your Own Micro-SaaS Tools in Minutes</h1>
-        <p>High-converting, modern web utilities built for creators and indie hackers. One-time purchase with full source code & commercial license.</p>
+
+        <p>
+            High-converting, modern web utilities built for creators
+            and indie hackers. One-time purchase with full source code
+            and commercial license.
+        </p>
     </section>
 
+    <!-- Main Content -->
     <main class="container">
+
         <h2 class="section-title">Featured Micro-SaaS Tools</h2>
 
         <div class="tools-grid">
 
-            <!-- Tool 1: Outreach AI ($299) -->
-            <div class="tool-card">
+            <!-- TOOL 1: Outreach AI -->
+            <article class="tool-card">
+
                 <div>
                     <div class="card-tag">AI & Lead Generation</div>
+
                     <h3>OutreachAI: Cold Messaging Tool</h3>
-                    <p>Automate and optimize personalized cold outreach messages for LinkedIn, WhatsApp, and SMS with high conversion templates.</p>
+
+                    <p>
+                        Automate and optimize personalized cold outreach
+                        messages for LinkedIn, WhatsApp, and SMS with
+                        high conversion templates.
+                    </p>
                 </div>
+
                 <div>
-                    <div class="price-tag">$299 <span>/ Full Source Code</span></div>
+                    <div class="price-tag">
+                        $299 <span>/ Full Source Code</span>
+                    </div>
+
                     <div class="card-links">
-                        <a href="https://ai-outreach-web.vercel.app/" target="_blank" class="btn btn-demo">Live Demo</a>
-                        <a href="https://link.payoneer.com/Token?t=BCF33367AACD45248CC2E3D60535E5FA&src=mobile" target="_blank" class="btn btn-pay">Pay with Payoneer ($299)</a>
-                        <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20have%20paid%20$299%20via%20Payoneer%20for%20OutreachAI%20source%20code." target="_blank" class="btn btn-whatsapp">WhatsApp Support</a>
+
+                        <a
+                            href="https://ai-outreach-web.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-demo"
+                        >
+                            Live Demo
+                        </a>
+
+                        <a
+                            href="https://link.payoneer.com/Token?t=BCF33367AACD45248CC2E3D60535E5FA&src=mobile"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-pay"
+                        >
+                            Pay with Payoneer ($299)
+                        </a>
+
+                        <a
+                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%24299%20via%20Payoneer%20for%20OutreachAI%20source%20code."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-whatsapp"
+                        >
+                            WhatsApp Support
+                        </a>
+
                     </div>
                 </div>
-            </div>
 
-            <!-- Tool 2: BuildCalc Pro ($150) -->
-            <div class="tool-card">
+            </article>
+
+            <!-- TOOL 2: BuildCalc Pro -->
+            <article class="tool-card">
+
                 <div>
                     <div class="card-tag">Construction & Estimation</div>
+
                     <h3>BuildCalc Pro: Construction Calculator</h3>
-                    <p>Instant material estimator for bricks, cement, sand, and rebar with real-time cost projections and dark Neumorphic UI.</p>
+
+                    <p>
+                        Instant material estimator for bricks, cement,
+                        sand, and rebar with real-time cost projections
+                        and dark Neumorphic UI.
+                    </p>
                 </div>
+
                 <div>
-                    <div class="price-tag">$150 <span>/ Full Source Code</span></div>
+                    <div class="price-tag">
+                        $150 <span>/ Full Source Code</span>
+                    </div>
+
                     <div class="card-links">
-                        <a href="https://buildcalc-pro-pz6x.vercel.app" target="_blank" class="btn btn-demo">Live Demo</a>
-                        <a href="https://link.payoneer.com/Token?t=643EFDDA78B04EEB981C84597A039214&src=mobile" target="_blank" class="btn btn-pay">Pay with Payoneer ($150)</a>
-                        <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20have%20paid%20$150%20via%20Payoneer%20for%20BuildCalc%20Pro%20source%20code." target="_blank" class="btn btn-whatsapp">WhatsApp Support</a>
+
+                        <a
+                            href="https://buildcalc-pro-pz6x.vercel.app"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-demo"
+                        >
+                            Live Demo
+                        </a>
+
+                        <a
+                            href="https://link.payoneer.com/Token?t=643EFDDA78B04EEB981C84597A039214&src=mobile"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-pay"
+                        >
+                            Pay with Payoneer ($150)
+                        </a>
+
+                        <a
+                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%24150%20via%20Payoneer%20for%20BuildCalc%20Pro%20source%20code."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-whatsapp"
+                        >
+                            WhatsApp Support
+                        </a>
+
                     </div>
                 </div>
-            </div>
 
-            <!-- Tool 3: Agency Proposal Builder ($99) -->
-            <div class="tool-card">
+            </article>
+
+            <!-- TOOL 3: Agency Proposal Builder -->
+            <article class="tool-card">
+
                 <div>
                     <div class="card-tag">Business & Agencies</div>
+
                     <h3>Agency Proposal Builder</h3>
-                    <p>Create sleek, interactive client proposals with instant pricing calculators and exportable PDF summaries in seconds.</p>
+
+                    <p>
+                        Create sleek, interactive client proposals with
+                        instant pricing calculators and exportable PDF
+                        summaries in seconds.
+                    </p>
                 </div>
+
                 <div>
-                    <div class="price-tag">$99 <span>/ Full Source Code</span></div>
+                    <div class="price-tag">
+                        $99 <span>/ Full Source Code</span>
+                    </div>
+
                     <div class="card-links">
-                        <a href="https://agency-proposal-builder.vercel.app/" target="_blank" class="btn btn-demo">Live Demo</a>
-                        <a href="https://link.payoneer.com/Token?t=336317ACB9E74DE6A25C9350A6391816&src=mobile" target="_blank" class="btn btn-pay">Pay with Payoneer ($99)</a>
-                        <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20have%20paid%20$99%20via%20Payoneer%20for%20Agency%20Proposal%20Builder%20source%20code." target="_blank" class="btn btn-whatsapp">WhatsApp Support</a>
+
+                        <a
+                            href="https://agency-proposal-builder.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-demo"
+                        >
+                            Live Demo
+                        </a>
+
+                        <a
+                            href="https://link.payoneer.com/Token?t=336317ACB9E74DE6A25C9350A6391816&src=mobile"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-pay"
+                        >
+                            Pay with Payoneer ($99)
+                        </a>
+
+                        <a
+                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%2499%20via%20Payoneer%20for%20Agency%20Proposal%20Builder%20source%20code."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-whatsapp"
+                        >
+                            WhatsApp Support
+                        </a>
+
                     </div>
                 </div>
-            </div>
 
-            <!-- Tool 4: Image Resizer Pro ($49) -->
-            <div class="tool-card">
+            </article>
+
+            <!-- TOOL 4: Image Resizer Pro -->
+            <article class="tool-card">
+
                 <div>
                     <div class="card-tag">Media & Utilities</div>
+
                     <h3>Image Resizer Pro</h3>
-                    <p>Instant batch image resizing, compression (up to 90%), and format conversion with zero recurring server costs.</p>
+
+                    <p>
+                        Instant batch image resizing, compression
+                        (up to 90%), and format conversion with zero
+                        recurring server costs.
+                    </p>
                 </div>
+
                 <div>
-                    <div class="price-tag">$49 <span>/ Full Source Code</span></div>
+                    <div class="price-tag">
+                        $49 <span>/ Full Source Code</span>
+                    </div>
+
                     <div class="card-links">
-                        <a href="https://image-resizer-tool-one.vercel.app/" target="_blank" class="btn btn-demo">Live Demo</a>
-                        <a href="https://link.payoneer.com/Token?t=3128A10E961E4C11A96D1589FC704E15&src=mobile" target="_blank" class="btn btn-pay">Pay with Payoneer ($49)</a>
-                        <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20have%20paid%20$49%20via%20Payoneer%20for%20Image%20Resizer%20Pro%20source%20code." target="_blank" class="btn btn-whatsapp">WhatsApp Support</a>
+
+                        <a
+                            href="https://image-resizer-tool-one.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-demo"
+                        >
+                            Live Demo
+                        </a>
+
+                        <a
+                            href="https://link.payoneer.com/Token?t=3128A10E961E4C11A96D1589FC704E15&src=mobile"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-pay"
+                        >
+                            Pay with Payoneer ($49)
+                        </a>
+
+                        <a
+                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%2449%20via%20Payoneer%20for%20Image%20Resizer%20Pro%20source%20code."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-whatsapp"
+                        >
+                            WhatsApp Support
+                        </a>
+
                     </div>
                 </div>
-            </div>
 
-            <!-- Tool 5: StudyMate Student Planner ($25) -->
-            <div class="tool-card">
+            </article>
+
+            <!-- TOOL 5: StudyMate -->
+            <article class="tool-card">
+
                 <div>
                     <div class="card-tag">Productivity & EdTech</div>
+
                     <h3>StudyMate Student Planner</h3>
-                    <p>Smart exam countdown, Pomodoro focus timer, and subject progress tracker built for students and self-learners.</p>
+
+                    <p>
+                        Smart exam countdown, Pomodoro focus timer,
+                        and subject progress tracker built for
+                        students and self-learners.
+                    </p>
                 </div>
+
                 <div>
-                    <div class="price-tag">$25 <span>/ Full Source Code</span></div>
+                    <div class="price-tag">
+                        $25 <span>/ Full Source Code</span>
+                    </div>
+
                     <div class="card-links">
-                        <a href="https://studymate-student-planner-ctlw.vercel.app/" target="_blank" class="btn btn-demo">Live Demo</a>
-                        <a href="https://link.payoneer.com/Token?t=F75B09F66E3B4DA2B9BBB475C43E9CD9&src=mobile" target="_blank" class="btn btn-pay">Pay with Payoneer ($25)</a>
-                        <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20have%20paid%20$25%20via%20Payoneer%20for%20StudyMate%20source%20code." target="_blank" class="btn btn-whatsapp">WhatsApp Support</a>
+
+                        <a
+                            href="https://studymate-student-planner-ctlw.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-demo"
+                        >
+                            Live Demo
+                        </a>
+
+                        <a
+                            href="https://link.payoneer.com/Token?t=F75B09F66E3B4DA2B9BBB475C43E9CD9&src=mobile"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-pay"
+                        >
+                            Pay with Payoneer ($25)
+                        </a>
+
+                        <a
+                            href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20have%20paid%20%2425%20via%20Payoneer%20for%20StudyMate%20source%20code."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-whatsapp"
+                        >
+                            WhatsApp Support
+                        </a>
+
                     </div>
                 </div>
-            </div>
+
+            </article>
 
         </div>
 
-        <!-- Custom Tool Section -->
+        <!-- Custom SaaS Section -->
         <section class="custom-banner">
+
             <h2>Need a Custom Micro-SaaS Tool Built From Scratch?</h2>
-            <p>Get a fully self-hosted, modern dark-UI web utility tailored to your exact business idea—delivered fast with complete source code.</p>
-            <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20want%20to%20discuss%20a%20custom%20SaaS%20tool." target="_blank" class="btn btn-pay" style="display:inline-block; width:auto; padding: 0.9rem 2rem;">Request Custom Build on WhatsApp</a>
+
+            <p>
+                Get a fully self-hosted, modern dark-UI web utility
+                tailored to your exact business idea—delivered fast
+                with complete source code.
+            </p>
+
+            <a
+                href="https://wa.me/923089423733?text=Hi%20Ahmad%2C%20I%20want%20to%20discuss%20a%20custom%20SaaS%20tool."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-pay custom-btn"
+            >
+                Request Custom Build on WhatsApp
+            </a>
+
         </section>
+
     </main>
 
+    <!-- Footer -->
     <footer>
-        <p>© 2026 <strong>Ahmad Mughal</strong> (Indie Hacker & SaaS Builder) | Secure Global Checkout via Payoneer</p>
-        <p style="margin-top: 0.5rem;">WhatsApp: <a href="https://wa.me/923089423733" target="_blank">+92 308 9423733</a></p>
+
+        <p>
+            © 2026 <strong>Ahmad Mughal</strong>
+            (Indie Hacker & SaaS Builder)
+            | Global Checkout via Payoneer
+        </p>
+
+        <p style="margin-top: 0.5rem;">
+            WhatsApp:
+            <a
+                href="https://wa.me/923089423733"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                +92 308 9423733
+            </a>
+        </p>
+
     </footer>
 
 </body>
