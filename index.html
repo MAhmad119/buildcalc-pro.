@@ -184,9 +184,6 @@
             font-size: 0.9rem;
             text-decoration: none;
             transition: 0.2s;
-            cursor: pointer;
-            border: none;
-            width: 100%;
         }
 
         .btn-demo {
@@ -216,77 +213,6 @@
 
         .btn-whatsapp:hover {
             background: rgba(16, 185, 129, 0.25);
-        }
-
-        /* Demo Modal Styles */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(6px);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        .modal-box {
-            background: var(--card-bg);
-            border: 1px solid #374151;
-            border-radius: 16px;
-            max-width: 550px;
-            width: 100%;
-            padding: 2rem;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1.2rem;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .close-modal:hover {
-            color: #fff;
-        }
-
-        .demo-preview-box {
-            background: #090d16;
-            border: 1px solid #1f2937;
-            border-radius: 10px;
-            padding: 1.2rem;
-            margin: 1rem 0 1.5rem;
-        }
-
-        .demo-input {
-            width: 100%;
-            padding: 0.65rem;
-            background: #111827;
-            border: 1px solid #374151;
-            border-radius: 6px;
-            color: #fff;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
-
-        .demo-output {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #34d399;
-            padding: 0.8rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            margin-top: 0.8rem;
         }
 
         /* Custom SaaS Banner */
@@ -357,7 +283,7 @@
                 <div>
                     <div class="price-tag">$299 <span>/ Full Source Code</span></div>
                     <div class="card-links">
-                        <button onclick="openDemo('outreach')" class="btn btn-demo">Live Demo</button>
+                        <a href="https://ai-outreach-web.vercel.app/" target="_blank" class="btn btn-demo">Live Demo</a>
                         <a href="https://link.payoneer.com/Token?t=BCF33367AACD45248CC2E3D60535E5FA&src=mobile" target="_blank" class="btn btn-pay">Pay with Payoneer ($299)</a>
                         <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20have%20paid%20$299%20via%20Payoneer%20for%20OutreachAI%20source%20code." target="_blank" class="btn btn-whatsapp">WhatsApp Support</a>
                     </div>
@@ -391,7 +317,7 @@
                 <div>
                     <div class="price-tag">$99 <span>/ Full Source Code</span></div>
                     <div class="card-links">
-                        <button onclick="openDemo('agency')" class="btn btn-demo">Live Demo</button>
+                        <a href="https://agency-proposal-builder.vercel.app/" target="_blank" class="btn btn-demo">Live Demo</a>
                         <a href="https://link.payoneer.com/Token?t=336317ACB9E74DE6A25C9350A6391816&src=mobile" target="_blank" class="btn btn-pay">Pay with Payoneer ($99)</a>
                         <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20have%20paid%20$99%20via%20Payoneer%20for%20Agency%20Proposal%20Builder%20source%20code." target="_blank" class="btn btn-whatsapp">WhatsApp Support</a>
                     </div>
@@ -408,7 +334,7 @@
                 <div>
                     <div class="price-tag">$49 <span>/ Full Source Code</span></div>
                     <div class="card-links">
-                        <button onclick="openDemo('resizer')" class="btn btn-demo">Live Demo</button>
+                        <a href="https://image-resizer-tool-one.vercel.app/" target="_blank" class="btn btn-demo">Live Demo</a>
                         <a href="https://link.payoneer.com/Token?t=3128A10E961E4C11A96D1589FC704E15&src=mobile" target="_blank" class="btn btn-pay">Pay with Payoneer ($49)</a>
                         <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20have%20paid%20$49%20via%20Payoneer%20for%20Image%20Resizer%20Pro%20source%20code." target="_blank" class="btn btn-whatsapp">WhatsApp Support</a>
                     </div>
@@ -425,7 +351,7 @@
                 <div>
                     <div class="price-tag">$25 <span>/ Full Source Code</span></div>
                     <div class="card-links">
-                        <button onclick="openDemo('studymate')" class="btn btn-demo">Live Demo</button>
+                        <a href="https://studymate-student-planner-ctlw.vercel.app/" target="_blank" class="btn btn-demo">Live Demo</a>
                         <a href="https://link.payoneer.com/Token?t=F75B09F66E3B4DA2B9BBB475C43E9CD9&src=mobile" target="_blank" class="btn btn-pay">Pay with Payoneer ($25)</a>
                         <a href="https://wa.me/923089423733?text=Hi%20Ahmad,%20I%20have%20paid%20$25%20via%20Payoneer%20for%20StudyMate%20source%20code." target="_blank" class="btn btn-whatsapp">WhatsApp Support</a>
                     </div>
@@ -442,89 +368,10 @@
         </section>
     </main>
 
-    <!-- Interactive Demo Modal -->
-    <div id="demoModal" class="modal-overlay" onclick="if(event.target === this) closeDemo()">
-        <div class="modal-box">
-            <button class="close-modal" onclick="closeDemo()">&times;</button>
-            <h3 id="modalTitle" style="font-size: 1.4rem; margin-bottom: 0.4rem;">Tool Live Preview</h3>
-            <p id="modalDesc" style="color: var(--text-muted); font-size: 0.9rem;">Interactive preview of the source code UI.</p>
-            <div id="modalBody" class="demo-preview-box"></div>
-            <a id="modalBuyBtn" href="#" target="_blank" class="btn btn-pay">Buy Full Source Code Now</a>
-        </div>
-    </div>
-
     <footer>
         <p>© 2026 <strong>Ahmad Mughal</strong> (Indie Hacker & SaaS Builder) | Secure Global Checkout via Payoneer</p>
         <p style="margin-top: 0.5rem;">WhatsApp: <a href="https://wa.me/923089423733" target="_blank">+92 308 9423733</a></p>
     </footer>
-
-    <script>
-        const demos = {
-            outreach: {
-                title: "OutreachAI — Live Preview",
-                desc: "Test instant cold message generation for LinkedIn & WhatsApp.",
-                payLink: "https://link.payoneer.com/Token?t=BCF33367AACD45248CC2E3D60535E5FA&src=mobile",
-                price: "$299",
-                html: `
-                    <input type="text" id="leadName" class="demo-input" placeholder="Prospect Name (e.g. Alex)" value="Alex">
-                    <input type="text" id="leadNiche" class="demo-input" placeholder="Niche (e.g. SaaS Founder)" value="SaaS Founder">
-                    <button onclick="document.getElementById('outreachRes').innerText = 'Hi ' + document.getElementById('leadName').value + ', saw your work as a ' + document.getElementById('leadNiche').value + '. Built a quick automation that saves 5 hrs/week—open to a 2-min look?'" class="btn btn-demo">Generate Hook</button>
-                    <div id="outreachRes" class="demo-output">Hi Alex, saw your work as a SaaS Founder. Built a quick automation that saves 5 hrs/week—open to a 2-min look?</div>
-                `
-            },
-            agency: {
-                title: "Agency Proposal Builder — Live Preview",
-                desc: "Instant project quote calculator for client proposals.",
-                payLink: "https://link.payoneer.com/Token?t=336317ACB9E74DE6A25C9350A6391816&src=mobile",
-                price: "$99",
-                html: `
-                    <input type="number" id="pagesCount" class="demo-input" placeholder="Number of Pages" value="5">
-                    <button onclick="document.getElementById('agencyRes').innerText = 'Estimated Proposal Total: $' + (document.getElementById('pagesCount').value * 150) + ' (Includes UI/UX + SEO)'" class="btn btn-demo">Calculate Proposal</button>
-                    <div id="agencyRes" class="demo-output">Estimated Proposal Total: $750 (Includes UI/UX + SEO)</div>
-                `
-            },
-            resizer: {
-                title: "Image Resizer Pro — Live Preview",
-                desc: "Client-side compression & dimension calculator.",
-                payLink: "https://link.payoneer.com/Token?t=3128A10E961E4C11A96D1589FC704E15&src=mobile",
-                price: "$49",
-                html: `
-                    <div style="font-size: 0.9rem; margin-bottom: 0.6rem;">Original: <strong>4000 x 3000 px (8.2 MB)</strong></div>
-                    <button onclick="document.getElementById('resizerRes').innerText = 'Optimized Output: 800 x 600 px WEBP (124 KB) — 98% Size Saved!'" class="btn btn-demo">Simulate Instant Compress</button>
-                    <div id="resizerRes" class="demo-output">Ready to compress JPG, PNG, and WEBP in browser with zero server upload.</div>
-                `
-            },
-            studymate: {
-                title: "StudyMate Student Planner — Live Preview",
-                desc: "Interactive Pomodoro timer & exam tracker preview.",
-                payLink: "https://link.payoneer.com/Token?t=F75B09F66E3B4DA2B9BBB475C43E9CD9&src=mobile",
-                price: "$25",
-                html: `
-                    <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; font-size:0.9rem;">
-                        <span>⏱️ Focus Timer: <strong>25:00</strong></span>
-                        <span>🎯 Exam Countdown: <strong>14 Days</strong></span>
-                    </div>
-                    <button onclick="document.getElementById('studyRes').innerText = '✅ Focus Session Started! Subject: Computer Science (ICS)'" class="btn btn-demo">Start Focus Session</button>
-                    <div id="studyRes" class="demo-output">Daily Goal: 4/5 Pomodoro Sessions Completed (80%)</div>
-                `
-            }
-        };
-
-        function openDemo(key) {
-            const data = demos[key];
-            document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalDesc').innerText = data.desc;
-            document.getElementById('modalBody').innerHTML = data.html;
-            const buyBtn = document.getElementById('modalBuyBtn');
-            buyBtn.href = data.payLink;
-            buyBtn.innerText = `Buy Full Source Code (${data.price})`;
-            document.getElementById('demoModal').style.display = 'flex';
-        }
-
-        function closeDemo() {
-            document.getElementById('demoModal').style.display = 'none';
-        }
-    </script>
 
 </body>
 </html>
